@@ -1,4 +1,5 @@
 import { NumberField } from "../";
+import { Utils } from "../../utils";
 import { Attack } from "./Attack.js";
 import "./Attacks.scss";
 
@@ -19,6 +20,12 @@ export class Attacks extends Base {
 		attackDesc.text = Locale.gen("attacks-desc");
 		this.addChild(attackDesc);
 
+		this.swatch = new Base();
+		this.swatch.make('swatch');
+		this.swatch.addListener(MouseEvent.CLICK, this.onSwatchChange, this);
+		this.addChild(this.swatch);
+		this.onSwatchChange();
+
 		this.unitName = new Input();
 		this.unitName.obj.placeholder = Locale.gen("attacks-unit");
 		this.unitName.addClass("unit");
@@ -26,6 +33,13 @@ export class Attacks extends Base {
 
 		this.attacks = [];
 		this.add();
+
+		this.onChange();
+	}
+
+	onSwatchChange() {
+		this.color = Utils.generateRandomColor();
+		this.swatch.style.backgroundColor = this.color;
 	}
 
 	add() {
@@ -51,12 +65,21 @@ export class Attacks extends Base {
 		} else if(e.target !== this.attacks[this.attacks.length - 1] && !e.target.active) {
 			this.remove(e.target);
 		}
-		console.log(this.value);
+		this.onChange();
+	}
+
+	onChange(e) {
+		if(this.valid) {
+			this.removeClass("error");
+		} else {
+			this.addClass("error");
+		}
 	}
 
 	get value() {
 		return {
 			name: this.unitName.value,
+			color: this.color,
 			attacks: this.attacks
 					.filter((item) => { return item.active && item.valid })
 					.map((item) => { return item.value }),			

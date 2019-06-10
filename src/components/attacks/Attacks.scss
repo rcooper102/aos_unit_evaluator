@@ -1,9 +1,30 @@
-attack.inactive {
-	opacity: 0.3;
-}
-
 attacks {
+	display: block;
+
+	&.error {
+		border: 1px solid #f00;
+	}
+
+	swatch {
+		display: block;
+		width: 30px;
+		height: 30px;
+	}
+
 	.unit {
 		display: block;
 	}
+
+	attack {
+		display: block;
+
+		&.inactive {
+			opacity: 0.3;
+		}
+
+		&.error {
+			border: 2px solid #f00;
+		}
+	}
 }
+	

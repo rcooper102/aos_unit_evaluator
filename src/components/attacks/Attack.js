@@ -33,6 +33,11 @@ export class Attack extends Base {
 		} else {
 			this.addClass("inactive");
 		}
+		if(this.valid) {
+			this.removeClass("error");
+		} else {
+			this.addClass("error");
+		}
 	}
 
 	get active () {
