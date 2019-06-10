@@ -14,17 +14,5 @@ unit {
 	.unit {
 		display: block;
 	}
-
-	attack {
-		display: block;
-
-		&.inactive {
-			opacity: 0.3;
-		}
-
-		&.error {
-			border: 2px solid #f00;
-		}
-	}
 }
 	

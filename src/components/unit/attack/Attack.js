@@ -1,5 +1,5 @@
-import { NumberField } from "../";
-import "./Unit.scss";
+import { NumberField } from "../../";
+import "./Attack.scss";
 
 export class Attack extends Base {
 

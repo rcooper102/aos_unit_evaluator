@@ -1,6 +1,6 @@
 import { NumberField } from "../";
 import { Utils } from "../../utils";
-import { Attack } from "./Attack.js";
+import { Attack } from "./attack/Attack.js";
 import "./Unit.scss";
 
 export class Unit extends Base {
