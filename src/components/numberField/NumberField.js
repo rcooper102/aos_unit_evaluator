@@ -31,6 +31,11 @@ export class NumberField extends Base {
 		return this.input.value;
 	}
 
+	set value(target) {
+		this.input.value = target;
+		this.onChange(null);
+	}
+
 	get valid() {
 		if(!this.allowDice) {
 			return Utils.isInteger(this.input.value);

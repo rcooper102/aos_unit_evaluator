@@ -29,23 +29,31 @@ export class Attacks extends Base {
 		this.unitName = new Input();
 		this.unitName.obj.placeholder = Locale.gen("attacks-unit");
 		this.unitName.addClass("unit");
+		this.unitName.addListener(InputEvent.CHANGE, this.onChange, this);
 		this.addChild(this.unitName);
 
 		this.attacks = [];
-		this.add();
-
-		this.onChange();
 	}
 
 	onSwatchChange() {
 		this.color = Utils.generateRandomColor();
-		this.swatch.style.backgroundColor = this.color;
+		this.dispatch(new Event(Event.CHANGE, this));
 	}
 
-	add() {
+	get color() {
+		return this._color;
+	}
+
+	set color(target) {
+		this._color = target;
+		this.swatch.style.backgroundColor = this._color;
+	}
+
+	add(value) {
 		const attack = new Attack();
 		this.addChild(attack);
 		this.attacks.push(attack);
+		attack.value = value;
 		attack.addListener(Event.CHANGE, this.onAttackChange, this);
 		return attack;
 	}
@@ -74,6 +82,7 @@ export class Attacks extends Base {
 		} else {
 			this.addClass("error");
 		}
+		this.dispatch(new Event(Event.CHANGE, this));
 	}
 
 	get value() {
@@ -86,10 +95,25 @@ export class Attacks extends Base {
 		}
 	}
 
+	set value(target) {
+		this.color = target.color;
+		this.unitName.value = target.name || "";
+		if(!target) {
+			this.add();
+		} else {
+			target.attacks.forEach((item) => {
+				this.add(item);
+			});
+			this.add();
+		}
+
+		this.onChange();
+	}
+
 	get valid () {
 		let ret = true;
 		Object.keys(this.attacks).forEach((i) => { 
-			if(!this.attacks[i].valid) {
+			if(!this.attacks[i].valid && this.attacks[i].active) {
 				ret = false;
 			}
 		});

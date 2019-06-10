@@ -35,7 +35,7 @@ export class Attack extends Base {
 		}
 		if(this.valid) {
 			this.removeClass("error");
-		} else {
+		} else if(this.active) {
 			this.addClass("error");
 		}
 	}
@@ -70,6 +70,16 @@ export class Attack extends Base {
 			}
 		});
 		return ret;
+	}
+
+	set value(target) {
+		if(target) {
+			Object.keys(this.fields).forEach((i) => {
+				if(target[i]) {
+					this.fields[i].value = target[i];
+				}
+			});
+		}
 	}
 
 	shutDown() {
