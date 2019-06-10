@@ -33,12 +33,3 @@ Builds the css and js files into an compressed state
 ```
 npm run build
 ```
-
-### Application Structure
-
-The velocity framework contains the structure a Javascript driven Single Page Application that uses a PHP/MySQL back end. The backend files are all stored with /application and should be edited therein with the exception of the user interface which is compiled via webpack and stored within /src. By default, the webpack UI files are compiled into the /application directory in project/ui/assets/Application.js and project/ui/assets/Application.css respectively. The names of these files can be adjusted within via webpack config. 
-
-Because the Osiris framework is loaded seperately from its own CDN everything within it is globally accessibly within the scope of the project without the need to import. 
-
-Velocity specific JS files are stored outside the src folder in /velocity. These should not be altered. 
-
