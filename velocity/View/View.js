@@ -1,9 +1,10 @@
 import "./View.scss";
 
-export class View extends Section {
+export class View extends Base {
 
-	constructor(params) {
+	constructor(params, name = "view") {
 		super();
+		this.make(name);
 		this.addClass("View");
 	}
 

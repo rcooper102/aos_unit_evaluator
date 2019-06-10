@@ -1,13 +1,6 @@
 .View {
-	transition: opacity 0.5s;
 	display: block;
-	animation: ViewFadeIn 0.5s;
 	position: absolute;
 	top: 0px;
 	left: 0px;
-}
-
-@keyframes ViewFadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
 }

@@ -1,12 +1,13 @@
-import { View } from "../velocity/View/View.js";
+import { Combat } from "./views/combat/Combat.js";
 
 export let config = {
+	"container": "unit-evaluator",
 	"locales": ["en"],
 	"routes": [
 		{
 			path: "",
 			depth: [0,1],
-			view: View
+			view: Combat
 		}
 	]
 };
