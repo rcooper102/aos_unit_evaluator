@@ -1,0 +1,11 @@
+node_modules/
+temp
+*.log
+.idea
+bundle/
+*.lock
+.nyc_output/
+coverage/
+.DS_Store
+.vscode
+docs/

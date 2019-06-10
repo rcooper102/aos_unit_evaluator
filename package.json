@@ -1,0 +1,23 @@
+{
+	"name": "VelocityProject",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"start": "webpack-dev-server --mode none --open",
+		"build": "webpack --mode production",
+		"build-dev": "webpack --mode none"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"css-loader": "^0.28.11",
+		"extract-text-webpack-plugin": "^4.0.0-beta.0",
+		"node-sass": "^4.9.0",
+		"sass-loader": "^7.0.1",
+		"style-loader": "^0.21.0",
+		"webpack": "^4.26.1",
+		"webpack-cli": "^3.1.2",
+		"webpack-dev-server": "^3.1.4"
+	}
+}
