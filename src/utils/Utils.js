@@ -5,7 +5,7 @@ export class Utils {
 	}
 
 	static isDiceNotation(target) {
-		if (/^[\d+]?d\d+[\+|\-]?\d*$/.test(target)) {
+		if (/^[\d+]?d\d+[\+|\-]?\d*$/.test(target.toLowerCase())) {
 	        return true;
 	    }
 	    return false;
