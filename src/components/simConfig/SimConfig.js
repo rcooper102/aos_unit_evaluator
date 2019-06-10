@@ -1,4 +1,4 @@
-import { Attacks } from "../";
+import { Unit } from "../";
 import "./SimConfig.scss";
 
 export class SimConfig extends Base {
@@ -44,12 +44,12 @@ export class SimConfig extends Base {
 	}
 
 	addUnit(value = null) {
-		const attacks = new Attacks();
-		this.addChild(attacks);
-		this.units.push(attacks);
-		attacks.value = value;
-		attacks.addListener(Event.CHANGE, this.onUnitChange, this);
-		return attacks;
+		const unit = new Unit();
+		this.addChild(unit);
+		this.units.push(unit);
+		unit.value = value;
+		unit.addListener(Event.CHANGE, this.onUnitChange, this);
+		return unit;
 	}
 
 	onUnitChange(e) {

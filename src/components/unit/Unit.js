@@ -1,23 +1,23 @@
 import { NumberField } from "../";
 import { Utils } from "../../utils";
 import { Attack } from "./Attack.js";
-import "./Attacks.scss";
+import "./Unit.scss";
 
-export class Attacks extends Base {
+export class Unit extends Base {
 
 	constructor() {
 		super();
-		this.make("attacks");
+		this.make("unit");
 		this.build();
 	}
 
 	build() {
 		const appName = new Header(3);
-		appName.text = Locale.gen("attacks-title");
+		appName.text = Locale.gen("unit-title");
 		this.addChild(appName);
 
 		const attackDesc = new Paragraph();
-		attackDesc.text = Locale.gen("attacks-desc");
+		attackDesc.text = Locale.gen("unit-desc");
 		this.addChild(attackDesc);
 
 		this.swatch = new Base();
@@ -27,7 +27,7 @@ export class Attacks extends Base {
 		this.onSwatchChange();
 
 		this.unitName = new Input();
-		this.unitName.obj.placeholder = Locale.gen("attacks-unit");
+		this.unitName.obj.placeholder = Locale.gen("unit-unit");
 		this.unitName.addClass("unit");
 		this.unitName.addListener(InputEvent.CHANGE, this.onChange, this);
 		this.addChild(this.unitName);
