@@ -20,6 +20,11 @@ export class NumberField extends Base {
 
 	onChange(e) {
 		this.dispatch(new Event(Event.CHANGE, this));
+		if(this.valid) {
+			this.input.removeClass("error");
+		} else {
+			this.input.addClass("error");
+		}
 	}
 
 	get value() {
