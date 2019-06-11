@@ -47,7 +47,7 @@ export class Utils {
 
 	static generateRandomColor() {
 		// NOTE extremely low and high values are not present to avoid extreme values
-		const letters = '456789ABC';
+		const letters = '23456789ABC';
 		let color = '#';
 		for (let i = 0; i < 3; i++) {
 			color += letters[Math.floor(Math.random() * letters.length)];
