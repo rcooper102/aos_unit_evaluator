@@ -3,17 +3,26 @@ import "./NumberField.scss";
 
 export class NumberField extends Base {
 
-	constructor(label,allowDice) {
+	static get TYPES() {
+		return {
+			DICE_NOTATION: "DICE_NOTATION",
+			ROLL_VALUE: "ROLL_VALUE",
+			INTEGER: "INTEGER",
+		};	
+	}
+
+	constructor(label,type, maxLength) {
 		super();
 		this.make("number-field");
-		this.build(label);
-		this.allowDice = true
+		this.maxLength = maxLength;
+		this.type = type;
+		this.build(label);	
 	}
 
 	build(label) {
 		this.input = new Input();
 		this.input.obj.placeholder = label;
-		this.input.maxLength = 8;
+		this.input.maxLength = this.maxLength;
 		this.addChild(this.input);
 		this.input.addListener(InputEvent.CHANGE, this.onChange, this);
 	}
@@ -37,11 +46,19 @@ export class NumberField extends Base {
 	}
 
 	get valid() {
-		if(!this.allowDice) {
-			return Utils.isInteger(this.input.value);
-		} else {
-			return Utils.isInteger(this.input.value) || Utils.isDiceNotation(this.input.value);
-		}
+		switch(this.type) {
+			case NumberField.TYPES.DICE_NOTATION:
+				return Utils.isInteger(this.input.value) || Utils.isDiceNotation(this.input.value);
+				break;
+			case NumberField.TYPES.ROLL_VALUE:
+				return Utils.isInteger(this.input.value) && Number(this.input.value) <= 6;
+				break;
+			case NumberField.TYPES.INTEGER:
+				return Utils.isInteger(this.input.value);
+				break;
+			default:
+				return true;
+		};
 	}
 
 }

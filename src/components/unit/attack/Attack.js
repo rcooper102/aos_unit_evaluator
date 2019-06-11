@@ -11,11 +11,11 @@ export class Attack extends Base {
 
 	build() {
 		this.fields = {
-			number: new NumberField(Locale.gen("attacks-number"), true),
-			hit: new NumberField(Locale.gen("attacks-hit")),
-			wound: new NumberField(Locale.gen("attacks-wound")),
-			rend: new NumberField(Locale.gen("attacks-rend")),
-			damage: new NumberField(Locale.gen("attacks-damage"), true),
+			number: new NumberField(Locale.gen("attacks-number"), NumberField.TYPES.DICE_NOTATION, 5),
+			hit: new NumberField(Locale.gen("attacks-hit"), NumberField.TYPES.ROLL_VALUE, 1),
+			wound: new NumberField(Locale.gen("attacks-wound"), NumberField.TYPES.ROLL_VALUE, 1),
+			rend: new NumberField(Locale.gen("attacks-rend"), NumberField.TYPES.INTEGER, 1),
+			damage: new NumberField(Locale.gen("attacks-damage"), NumberField.TYPES.DICE_NOTATION, 5),
 		};
 
 		Object.keys(this.fields).forEach((i) => { 
