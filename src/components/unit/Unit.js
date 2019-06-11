@@ -42,7 +42,7 @@ export class Unit extends Base {
 	}
 
 	onDelete() {
-		this.dispatch(new Event(Event.DELETE, this));		
+		this.dispatch(new Event(Event.REMOVE, this));		
 	}
 
 	onSwatchChange() {
@@ -69,12 +69,8 @@ export class Unit extends Base {
 	}
 
 	remove(target) {
-		this.attacks.forEach((item, i) => {
-			if(item === target) {
-				item.shutDown();
-				this.attacks.splice(i, 1);
-			}
-		});
+		target.shutDown();
+		this.attacks.filter((item) => item !== target);
 	}
 
 	onAttackChange(e) {
@@ -83,7 +79,6 @@ export class Unit extends Base {
 		} else if(e.target !== this.attacks[this.attacks.length - 1] && !e.target.active) {
 			this.remove(e.target);
 		}
-		this.onChange();
 	}
 
 	onChange(e) {

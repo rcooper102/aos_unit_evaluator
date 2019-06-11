@@ -60,7 +60,7 @@ export class SimConfig extends Base {
 		this.units.push(unit);
 		unit.value = value;
 		unit.addListener(Event.CHANGE, this.onUnitChange, this);
-		unit.addListener(Event.DELETE, this.onUnitDelete, this);
+		unit.addListener(Event.REMOVE, this.onUnitDelete, this);
 
 		if(this.units.length > config['max-units'] - 1) {
 			if(this.createButton.obj.parentNode) {
