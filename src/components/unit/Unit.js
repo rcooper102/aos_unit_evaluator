@@ -12,14 +12,6 @@ export class Unit extends Base {
 	}
 
 	build() {
-		const title = new Header(3);
-		title.text = Locale.gen("unit-title");
-		this.addChild(title);
-
-		const unitDesc = new Paragraph();
-		unitDesc.text = Locale.gen("unit-desc");
-		this.addChild(unitDesc);
-
 		this.swatch = new Base();
 		this.swatch.make('swatch');
 		this.swatch.addListener(MouseEvent.CLICK, this.onSwatchChange, this);

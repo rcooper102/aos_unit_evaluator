@@ -1,3 +1,20 @@
 title {
 	display: block;
+	background: #333;
+	border-bottom: 2px solid #222;
+	border-top: 2px solid #222;
+	padding: 10px 20px;
+	height: 69px;
+	box-sizing: border-box;
+
+	h1 {
+		color: #FFF;
+		font-size: 24px;
+		margin-bottom: 5px;
+	}
+
+	h2 {
+		color: #cc0b0b;
+		font-size: 16px;		
+	}
 }

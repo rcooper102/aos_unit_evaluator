@@ -1,0 +1,15 @@
+sim-config {
+	display: block;
+	box-sizing: border-box;
+	padding: 20px;
+	border-right: 1px solid #999;
+	height: calc(100vh - 69px);
+	width: 50%;
+	float: left;
+
+	h3 {
+		color: #999;
+		font-size: 20px;
+		margin-bottom: 20px;
+	}
+}

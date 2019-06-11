@@ -11,9 +11,14 @@ export class SimConfig extends Base {
 	}
 
 	build() {
-		const appName = new Header(3);
-		appName.text = Locale.gen("sim-config-title");
-		this.addChild(appName);
+		const title = new Header(3);
+		title.text = Locale.gen("sim-config-title");
+		this.addChild(title);
+
+		const description = new Base();
+		description.make("description");
+		description.text = Locale.gen("sim-config-description");
+		this.addChild(description);
 
 		this.createButton = new Base();
 		this.createButton.make("button");
