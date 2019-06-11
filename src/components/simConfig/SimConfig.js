@@ -88,7 +88,7 @@ export class SimConfig extends Base {
 	onUnitChange(e) {
 		const data = this.value;
 		if(this.value.length > 0) {
-			window.location.hash = btoa(JSON.stringify(this.value));
+			history.pushState(null, null, `#${btoa(JSON.stringify(this.value))}`);
 		}
 		this.dispatch(new Event(Event.CHANGE, this));
 	}
