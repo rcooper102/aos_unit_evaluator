@@ -14,6 +14,11 @@ export class SimConfig extends Base {
 		appName.text = Locale.gen("sim-config-title");
 		this.addChild(appName);
 
+		this.createButton = new Base();
+		this.createButton.make("add-unit");
+		this.createButton.text = Locale.gen("sim-config-add-unit");
+		this.createButton.addListener(MouseEvent.CLICK, this.onAddUnit, this);
+
 		this.units = [];
 
 		if(this.data.length === 0) {
@@ -24,6 +29,11 @@ export class SimConfig extends Base {
 			});
 		}
 
+	}
+
+	onAddUnit() {
+		this.addUnit();
+		this.onUnitChange();
 	}
 
 	get data() {
@@ -49,6 +59,15 @@ export class SimConfig extends Base {
 		this.units.push(unit);
 		unit.value = value;
 		unit.addListener(Event.CHANGE, this.onUnitChange, this);
+
+		if(this.units.length > 3) {
+			if(this.createButton.obj.parentNode) {
+				this.removeChild(this.createButton)
+			}
+		} else {
+			this.addChild(this.createButton);
+		}
+
 		return unit;
 	}
 
