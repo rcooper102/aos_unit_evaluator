@@ -53,7 +53,7 @@ export class Attack extends Base {
 	get valid () {
 		let ret = true;
 		Object.keys(this.fields).forEach((i) => { 
-			if(!this.fields[i].valid || this.fields[i].value === "") {
+			if(!this.fields[i].valid) {
 				ret = false;
 			}
 		});

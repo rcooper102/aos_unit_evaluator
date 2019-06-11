@@ -110,6 +110,9 @@ export class Unit extends Base {
 
 	get valid () {
 		let ret = true;
+		if(this.attacks.length === 1) {
+			return false;
+		}
 		Object.keys(this.attacks).forEach((i) => { 
 			if(!this.attacks[i].valid && this.attacks[i].active) {
 				ret = false;

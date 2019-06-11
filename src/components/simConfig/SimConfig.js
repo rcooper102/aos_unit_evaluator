@@ -35,6 +35,7 @@ export class SimConfig extends Base {
 			});
 		}
 
+		this.onUnitChange();
 	}
 
 	onAddUnit() {
@@ -89,11 +90,22 @@ export class SimConfig extends Base {
 		if(this.value.length > 0) {
 			window.location.hash = btoa(JSON.stringify(this.value));
 		}
+		this.dispatch(new Event(Event.CHANGE, this));
 	}
 
 	get value() {
 		return this.units
 			.map((item) => item.value);
+	}
+
+	get valid() {
+		let valid = true;
+		this.units.forEach((item) => { 
+			if(!item.valid) {
+				valid = false;
+			}
+		});
+		return valid;
 	}
 
 }
