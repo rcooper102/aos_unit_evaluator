@@ -1,6 +1,6 @@
 import { UnitSimulator } from "./UnitSimulator.js";
 
-export class SaveSimulator extends EventDispatcher {
+export class SaveLevelSimulator extends EventDispatcher {
 
 	constructor(data, save = 4, iterations = 1) {
 		super();

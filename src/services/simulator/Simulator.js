@@ -1,5 +1,5 @@
 import { config } from "../../config.js";
-import { SaveSimulator } from "./SaveSimulator.js";
+import { SaveLevelSimulator } from "./SaveLevelSimulator.js";
 
 export class Simulator extends EventDispatcher {
 
@@ -10,7 +10,7 @@ export class Simulator extends EventDispatcher {
 		this.results = {};
 		this.completed = 0;
 		this.config.saves.forEach((item) => {
-			const save = new SaveSimulator(data, item, this.config.iterations);
+			const save = new SaveLevelSimulator(data, item, this.config.iterations);
 			save.addListener(Event.COMPLETE, this.onComplete, this);
 		});
 	}
