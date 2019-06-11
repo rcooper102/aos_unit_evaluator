@@ -11,9 +11,9 @@ export class Utils {
 		return false;
 	}
 
-	static rollDice(dice) {
+	static rollDice(dice = "d6") {
 		if (!Utils.isDiceNotation(dice)) { //Regex validate
-			return null; //Return if input invalid
+			return 0; //Return if input invalid
 		}
 
 		if(dice[0]=="d") { //If the first character is a d (dY)

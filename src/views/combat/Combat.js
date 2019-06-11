@@ -1,5 +1,6 @@
 import { View } from "../../../velocity/View/View.js";
 import { Title, SimConfig } from "../../components";
+import { Simulator } from "../../services";
 import "./Combat.scss";
 
 export class Combat extends View {
@@ -33,7 +34,8 @@ export class Combat extends View {
 	}
 
 	onReload() {
-		console.log("ding");
+		const sim = new Simulator(this.simConfig.data);
+		sim.addListener(Event.COMPLETE, (e) => { console.log(e.target); }, this);
 	}
 
 }

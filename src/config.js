@@ -11,4 +11,8 @@ export let config = {
 		}
 	],
 	"max-units": 3,
+	"simulator": {
+		saves: [2,3,4,5,6,7],
+		iterations: 10000,
+	},
 };
