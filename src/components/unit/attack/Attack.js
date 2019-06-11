@@ -63,11 +63,7 @@ export class Attack extends Base {
 	get value () {
 		const ret = {};
 		Object.keys(this.fields).forEach((i) => { 
-			if(this.fields[i].valid) {
-				ret[i] = this.fields[i].value;
-			} else {
-				return null;
-			}
+			ret[i] = this.fields[i].value;
 		});
 		return ret;
 	}

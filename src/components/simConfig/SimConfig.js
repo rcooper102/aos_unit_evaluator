@@ -88,7 +88,6 @@ export class SimConfig extends Base {
 
 	get value() {
 		return this.units
-			.filter((item) => item.valid)
 			.map((item) => item.value);
 	}
 

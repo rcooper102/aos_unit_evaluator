@@ -79,6 +79,7 @@ export class Unit extends Base {
 		} else if(e.target !== this.attacks[this.attacks.length - 1] && !e.target.active) {
 			this.remove(e.target);
 		}
+		this.onChange();
 	}
 
 	onChange(e) {
@@ -95,7 +96,7 @@ export class Unit extends Base {
 			name: this.unitName.value,
 			color: this.color,
 			attacks: this.attacks
-					.filter((item) => { return item.active && item.valid })
+					.filter((item) => { return item.active })
 					.map((item) => { return item.value }),			
 		}
 	}
