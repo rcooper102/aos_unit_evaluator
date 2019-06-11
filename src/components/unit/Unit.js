@@ -95,12 +95,12 @@ export class Unit extends Base {
 		}
 	}
 
-	set value(target) {
-		this.color = target.color;
-		this.unitName.value = target.name || "";
+	set value(target) {		
 		if(!target) {
 			this.add();
 		} else {
+			this.color = target.color;
+			this.unitName.value = target.name || "";
 			target.attacks.forEach((item) => {
 				this.add(item);
 			});
