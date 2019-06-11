@@ -10,21 +10,30 @@ export class Combat extends View {
 	}
 
 	build() {
+		this.appTitle = new Title();
+		this.appTitle.addListener(Event.RELOAD, this.onReload, this);
+
 		this.simConfig = new SimConfig();
 		this.simConfig.addListener(Event.CHANGE, this.onConfigChange, this);
 
 		const components = [
-			new Title(),
+			this.appTitle,
 			this.simConfig,
 		];
 
 		components.forEach((item) => {
 			this.addChild(item);
 		});
+
+		this.onConfigChange();
 	}
 
 	onConfigChange(e) {
-		console.log(this.simConfig.valid);
+		this.appTitle.buttonActive = this.simConfig.valid;
+	}
+
+	onReload() {
+		console.log("ding");
 	}
 
 }
