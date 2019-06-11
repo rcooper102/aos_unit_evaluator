@@ -1,36 +1,57 @@
 import { config } from "../../config.js";
+const Chart = require("chart.js");
 
 export class BellCurve extends Base {
 
 	constructor() {
 		super();
 		this.make("bell-curve");
+
+		this.container = new Base();
+		this.container.make("canvas");
+		this.addChild(this.container);
 	}
 
 	update(data) {
 		this.data = data;
-	}
 
-	get chartData() {
-		return {
-			series: this.series,
-			labels: Object.keys(this._labels),
-		}
+		console.log(this.series);
+
+		var myChart = new Chart(this.container.obj.getContext('2d'), {
+		    type: 'scatter',
+		    data: { 
+		    	datasets: this.series,
+		  	},
+		  	options: {
+		  		responsive: true,
+		  		fill: false,
+		  		tooltips: {
+		  			enabled: false,
+		  		},
+			    legend: {
+			    	display: false,
+			    }
+		    }
+		});	
 	}
 
 	get series() {
 		this._series = [];
-		this._labels = [];
 		this.data.forEach((unit) => {
 			const curve = [];
 			Object.keys(unit.curve).forEach((i) => {
 				curve.push({
-					x: i,
-					y: unit.curve[i],
+					x: Number(i),
+					y: Math.round(unit.curve[i] / config.simulator.iterations*100),
 				});
-				this._labels[i] = null;
 			});
-			this._series.push(curve);
+			this._series.push({ 
+				showLine: true,
+				label: unit.data.name,
+				data: curve,
+				backgroundColor: unit.data.color,
+				fill: false,
+				borderColor: unit.data.color });
 		});
 		return this._series;
 	}
