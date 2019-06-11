@@ -1,4 +1,5 @@
 import { Unit } from "../";
+import { config } from "../../config.js";
 import "./SimConfig.scss";
 
 export class SimConfig extends Base {
@@ -15,7 +16,7 @@ export class SimConfig extends Base {
 		this.addChild(appName);
 
 		this.createButton = new Base();
-		this.createButton.make("add-unit");
+		this.createButton.make("button");
 		this.createButton.text = Locale.gen("sim-config-add-unit");
 		this.createButton.addListener(MouseEvent.CLICK, this.onAddUnit, this);
 
@@ -59,8 +60,9 @@ export class SimConfig extends Base {
 		this.units.push(unit);
 		unit.value = value;
 		unit.addListener(Event.CHANGE, this.onUnitChange, this);
+		unit.addListener(Event.DELETE, this.onUnitDelete, this);
 
-		if(this.units.length > 3) {
+		if(this.units.length > config['max-units'] - 1) {
 			if(this.createButton.obj.parentNode) {
 				this.removeChild(this.createButton)
 			}
@@ -69,6 +71,12 @@ export class SimConfig extends Base {
 		}
 
 		return unit;
+	}
+
+	onUnitDelete(e) {
+		e.target.shutDown();
+		this.units = this.units.filter((item) => e.target !== item);
+		this.onUnitChange();	
 	}
 
 	onUnitChange(e) {

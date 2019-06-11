@@ -9,5 +9,6 @@ export let config = {
 			depth: [0,1],
 			view: Combat
 		}
-	]
+	],
+	"max-units": 3,
 };

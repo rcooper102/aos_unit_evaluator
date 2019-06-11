@@ -32,7 +32,17 @@ export class Unit extends Base {
 		this.unitName.addListener(InputEvent.CHANGE, this.onChange, this);
 		this.addChild(this.unitName);
 
+		this.delete = new Base();
+		this.delete.make("button");
+		this.delete.text = Locale.gen("unit-delete");
+		this.delete.addListener(MouseEvent.CLICK, this.onDelete, this);
+		this.addChild(this.delete);
+
 		this.attacks = [];
+	}
+
+	onDelete() {
+		this.dispatch(new Event(Event.DELETE, this));		
 	}
 
 	onSwatchChange() {
@@ -118,6 +128,13 @@ export class Unit extends Base {
 			}
 		});
 		return ret;
+	}
+
+	shutDown() {
+		this.clearListeners();
+		if(this.obj.parentNode) {
+			this.obj.parentNode.removeChild(this.obj);
+		}
 	}
 
 }
