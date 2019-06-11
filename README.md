@@ -1,9 +1,3 @@
-# Welcome to the Velocity
-
-The velocity application framework is designed as a structure for the development of a full stack single page application in a single repository using the Osiris Javascript Framework and a PHP/MySQL backend. In an effort to maximize performance Velocity does NOT use Babel to transpile ES6 into ES5. Thus it is important to write ES6 code that is supported by all browsers that are needed to be supported. This also means that applications developed using Velocity cannot support any version of Internet Explorer.
-
-Pro tip: As of writing this read me, Safari does NOT support the ES6 spread operator. eg: { ...myVar }
-
 ### Install
 
 ```
