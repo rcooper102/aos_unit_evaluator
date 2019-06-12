@@ -50,10 +50,14 @@ class BarGraphBar extends Base {
 		super();
 		this.make("bar");
 
+		const rail = new Base();
+		rail.make("rail");
+		this.addChild(rail);
+
 		const bar = new Base();
 		bar.make("fill");
-		this.addChild(bar);
-		bar.style.width = `calc(${data.value/max*100}% - 100px)`
+		rail.addChild(bar);
+		bar.style.width = `calc(${data.value/( data.scale ? data.scale : max )*100}%)`
 		bar.style.backgroundColor = `${data.color}`;
 
 		const value = new Label();

@@ -2,6 +2,8 @@ import { Utils } from "../../utils";
 import { Histogram } from "./Histogram.js";
 import { AverageGraph } from "./AverageGraph.js";
 import { SaveNavigation } from "./SaveNavigation.js";
+import { WhiffGraph } from "./WhiffGraph.js";
+import { ReliabilityGraph } from "./ReliabilityGraph.js";
 import "./Results.scss";
 
 export class Results extends Base {
@@ -20,6 +22,8 @@ export class Results extends Base {
 		this.components = [
 			new Histogram(iterations, highestDamage),
 			new AverageGraph(),
+			new ReliabilityGraph(),
+			new WhiffGraph(),
 		];
 
 		this.components.forEach((item) => {

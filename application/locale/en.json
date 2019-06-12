@@ -18,5 +18,9 @@
 	"loading-message": "{[progress]}",
 	"save-navigation-label": "Select target's save:",
 	"average-graph-title": "Average Damage",
-	"average-graph-sub-title": "The combined average damage output for all iterations of a respective unit's attack profile."
+	"average-graph-sub-title": "The combined average damage output for all iterations of a respective unit's attack profile.",
+	"whiff-graph-title": "Whiff Rate",
+	"whiff-graph-sub-title": "How often the unit does zero damage.",
+	"reliabiliy-graph-title": "Reliability Graph",
+	"reliabiliy-graph-sub-title": "How often the unit deals average data or better."
 }
