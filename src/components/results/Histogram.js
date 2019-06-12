@@ -14,7 +14,6 @@ export class Histogram extends Base {
 
 	update(data) {
 		this.data = data;
-
 		var myChart = new Chart(this.container.obj.getContext('2d'), {
 		    type: 'scatter',
 		    data: { 

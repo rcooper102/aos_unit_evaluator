@@ -1,5 +1,6 @@
 import { Utils } from "../../utils";
 import { Histogram } from "./Histogram.js";
+import { SaveNavigation } from "./SaveNavigation.js";
 import "./Results.scss";
 
 export class Results extends Base {
@@ -10,6 +11,10 @@ export class Results extends Base {
 		this.make("results");
 		this._save = null;
 		this.data = data;
+
+		this.saveNav = new SaveNavigation();
+		this.addChild(this.saveNav);
+		this.saveNav.addListener(Event.ACTIVATE, this.onChangeSave, this);
 
 		this.components = [
 			new Histogram(iterations),
@@ -27,10 +32,17 @@ export class Results extends Base {
 				item.update(this.data[target]);
 			});
 		}
+		this.saveNav.value = target;
 	}
 
 	get save() {
 		return this._save;
+	}
+
+	onChangeSave(e) {
+		if(e.target !== this.save) {
+			this.save = e.target;
+		}
 	}
 
 	shutDown() {

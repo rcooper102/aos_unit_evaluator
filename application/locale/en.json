@@ -15,6 +15,7 @@
 	"unit-name": "Unit Name",
 	"histogram-damage": "Total Damage",
 	"histogram-percentage": "Percentage of Attacks",
-	"loading-message": "{[progress]}"
+	"loading-message": "{[progress]}",
+	"save-navigation-label": "Select target's save:"
 
 }
