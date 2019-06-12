@@ -46,6 +46,7 @@ export class Histogram extends Base {
 						    callback: (value) => { 
 						        return `${value}%`;
 						    },
+						    beginAtZero: true
 						},
 				    }],
 				    xAxes: [{
