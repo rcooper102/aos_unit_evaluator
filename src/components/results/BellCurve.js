@@ -24,6 +24,7 @@ export class BellCurve extends Base {
 		  	},
 		  	options: {
 		  		responsive: true,
+		  		animation: false,
 		  		fill: false,
 		  		tooltips: {
 		  			enabled: false,

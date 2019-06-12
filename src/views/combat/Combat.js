@@ -34,7 +34,7 @@ export class Combat extends View {
 	}
 
 	onReload() {
-		const sim = new Simulator(this.simConfig.data);
+		const sim = new Simulator(this.simConfig.value);
 		sim.addListener(Event.COMPLETE, this.onSimulate, this);
 	}
 
