@@ -12,10 +12,10 @@ export let config = {
 			view: Combat
 		}
 	],
-	"max-units": 3,
+	"max-units": 4,
 	"simulator": {
 		saves: [2,3,4,5,6,7],
-		"default-save": 4,
+		"default-save": 5,
 		iterations: [30000, 10000, 5000, 1000],
 	},	
 };
