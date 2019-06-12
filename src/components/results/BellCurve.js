@@ -1,4 +1,5 @@
 const Chart = require("chart.js");
+const cloneDeep = require('clone-deep');
 
 export class BellCurve extends Base {
 
@@ -47,8 +48,13 @@ export class BellCurve extends Base {
 		});	
 	}
 
+	normalize(data) {
+		console.log(data);
+	}
+
 	get series() {
 		this._series = [];
+		this.normalize(this.data);
 		this.data.forEach((unit) => {
 			const curve = [];
 			Object.keys(unit.curve).forEach((i) => {

@@ -20,6 +20,7 @@ export class AttackSimulator {
 				}
 			}
 		}
+		this._damage = this._damage;
 	}
 
 	generateDamage() {
