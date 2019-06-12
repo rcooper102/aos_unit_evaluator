@@ -78,4 +78,8 @@ export class Utils {
 	    }
 	}
 
+	static formatPercent(target) {
+		return `${Math.round(target*10000)/100}%`;
+	}
+
 }

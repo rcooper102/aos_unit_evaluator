@@ -16,6 +16,7 @@
 	"histogram-damage": "Total Damage",
 	"histogram-percentage": "Percentage of Attacks",
 	"loading-message": "{[progress]}",
-	"save-navigation-label": "Select target's save:"
-
+	"save-navigation-label": "Select target's save:",
+	"average-graph-title": "Average Damage",
+	"average-graph-sub-title": "The combined average damage output for all iterations of a respective unit's attack profile."
 }

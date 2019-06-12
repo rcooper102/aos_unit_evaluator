@@ -19,12 +19,10 @@ export class BarGraph extends Base {
 		this.container.make("graph");
 		this.addChild(this.container);
 
-		this.updateD(data);
+		this.update(data);
 	}
 
-	update(data) {}
-
-	updateD(data) {
+	update(data) {
 		this.container.text = "";
 		let max = 0;
 		data.forEach((item) => {
@@ -35,6 +33,13 @@ export class BarGraph extends Base {
 			const bar = new BarGraphBar(item,max);
 			this.container.addChild(bar);
 		});
+	}
+
+	shutDown() {
+		this.clearListeners();
+		if(this.obj.parentNode) {
+			this.obj.parentNode.removeChild(this.obj);
+		}
 	}
 	
 }
