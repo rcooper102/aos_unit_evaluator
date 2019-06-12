@@ -66,4 +66,16 @@ export class Utils {
 		return x;
 	}
 
+	static hexToRGB(hex, alpha) {
+	    var r = parseInt(hex.substr(1, 1)+"0", 16),
+	        g = parseInt(hex.substr(2, 1)+"0", 16),
+	        b = parseInt(hex.substr(3, 1)+"0", 16);
+
+	    if (alpha) {
+	        return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+	    } else {
+	        return "rgb(" + r + ", " + g + ", " + b + ")";
+	    }
+	}
+
 }

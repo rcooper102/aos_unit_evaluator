@@ -1,3 +1,4 @@
+import { Utils } from "../../utils";
 const Chart = require("chart.js");
 const cloneDeep = require('clone-deep');
 
@@ -24,10 +25,10 @@ export class Histogram extends Base {
 		  		bezierCurve : false,
 		  		responsive: true,
 		  		animation: false,
-		  		fill: false,
+		  		fill: true,
 		  		elements: {
                     point:{
-                        radius: 2
+                        radius: 1
                     }
                 },
 		  		tooltips: {
@@ -108,8 +109,7 @@ export class Histogram extends Base {
 				showLine: true,
 				label: unit.data.name,
 				data: curve,
-				backgroundColor: unit.data.color,
-				fill: false,
+				backgroundColor: Utils.hexToRGB(unit.data.color, 0.2),
 				lineTension: 0.3,
 				borderWidth: 2,
 				borderColor: unit.data.color });
