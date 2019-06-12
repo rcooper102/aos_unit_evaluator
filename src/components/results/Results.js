@@ -11,8 +11,6 @@ export class Results extends Base {
 		this._save = null;
 		this.data = data;
 
-		console.log(data);
-
 		this.components = [
 			new BellCurve(iterations),
 		]
