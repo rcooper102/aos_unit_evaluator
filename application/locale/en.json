@@ -15,6 +15,6 @@
 	"unit-name": "Unit Name",
 	"histogram-damage": "Total Damage",
 	"histogram-percentage": "Percentage of Attacks",
-	"loading-message": "Patience! The Grots are hard at work!"
+	"loading-message": "{[progress]}"
 
 }

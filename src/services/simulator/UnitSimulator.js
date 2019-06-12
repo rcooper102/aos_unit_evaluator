@@ -2,9 +2,9 @@ import { AttackSimulator } from "./AttackSimulator.js";
 
 export class UnitSimulator extends EventDispatcher {
 
-	constructor(data, save, iterations) {
+	constructor(data, save, iterations, id) {
 		super();
-
+		this.id = id;
 		this.data = data;
 		this.results = [];
 		const thread = new Thread();
@@ -20,6 +20,7 @@ export class UnitSimulator extends EventDispatcher {
 				total,
 				list,
 			});
+			this.dispatch(new Event(Event.PROGRESS, { unit: id, progress: i/iterations }))
 		}, iterations);
 
 		thread.addListener(Event.COMPLETE, this.onComplete, this);

@@ -8,10 +8,22 @@ export class SaveLevelSimulator extends EventDispatcher {
 		this.save = save;
 
 		this.results = [];
-		this.data.forEach((unit) => {
-			const sim = new UnitSimulator(unit, save, iterations);
+		this.progress = {};
+		this.data.forEach((unit, i) => {
+			const sim = new UnitSimulator(unit, save, iterations, i);
 			sim.addListener(Event.COMPLETE, this.onComplete, this);
+			sim.addListener(Event.PROGRESS, this.onProgress, this);
+			this.progress[i] = 0;
 		});
+	}
+
+	onProgress(e) {
+		this.progress[e.target.unit] = e.target.progress;
+		let total = 0;
+		Object.keys(this.progress).forEach((i) => {
+			total += this.progress[i];
+		});
+		this.dispatch(new Event(Event.PROGRESS, { progress: total/Object.keys(this.progress).length, save: this.save }))
 	}
 
 	onComplete(e) {

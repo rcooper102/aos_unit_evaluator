@@ -42,6 +42,11 @@ export class Combat extends View {
 		this.addChild(this.loading);
 		const sim = new Simulator(this.simConfig.value, this.iterations);
 		sim.addListener(Event.COMPLETE, this.onSimulate, this);
+		sim.addListener(Event.PROGRESS, this.onProgess, this);
+	}
+
+	onProgess(e) {
+		this.loading.progress = e.target;
 	}
 
 	onSimulate(e) {
