@@ -1,5 +1,5 @@
 import { Utils } from "../../utils";
-import { BellCurve } from "./BellCurve.js";
+import { Histogram } from "./Histogram.js";
 import "./Results.scss";
 
 export class Results extends Base {
@@ -12,7 +12,7 @@ export class Results extends Base {
 		this.data = data;
 
 		this.components = [
-			new BellCurve(iterations),
+			new Histogram(iterations),
 		]
 
 		this.components.forEach((item) => {

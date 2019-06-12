@@ -1,11 +1,11 @@
 const Chart = require("chart.js");
 const cloneDeep = require('clone-deep');
 
-export class BellCurve extends Base {
+export class Histogram extends Base {
 
 	constructor(iterations) {
 		super();
-		this.make("bell-curve");
+		this.make("histogram");
 		this.iterations = iterations;
 		this.container = new Base();
 		this.container.make("canvas");
@@ -21,9 +21,15 @@ export class BellCurve extends Base {
 		    	datasets: this.series,
 		  	},
 		  	options: {
+		  		bezierCurve : false,
 		  		responsive: true,
 		  		animation: false,
 		  		fill: false,
+		  		elements: {
+                    point:{
+                        radius: 0
+                    }
+                },
 		  		tooltips: {
 		  			enabled: false,
 		  		},
@@ -34,13 +40,18 @@ export class BellCurve extends Base {
 				    yAxes: [{
 				      scaleLabel: {
 				        display: true,
-				        labelString: Locale.gen("bell-curve-percentage"),
-				      }
+				        labelString: Locale.gen("histogram-percentage"),
+				      },
+				      ticks: {
+						    callback: (value) => { 
+						        return `${value}%`;
+						    },
+						},
 				    }],
 				    xAxes: [{
 				      scaleLabel: {
 				        display: true,
-				        labelString: Locale.gen("bell-curve-damage"),
+				        labelString: Locale.gen("histogram-damage"),
 				      }
 				    }]
 				}
@@ -48,14 +59,34 @@ export class BellCurve extends Base {
 		});	
 	}
 
+	/*
+		Ensures that all curves share all the same damage points.
+		Any curve that is missing a damage point that one of the others has zeroes it out.
+	*/
 	normalize(data) {
-		console.log(data);
+		const newData = cloneDeep(data);
+		let highest = 0;
+		newData.forEach((item) => {
+			Object.keys(item.curve).forEach((damage) => {
+				damage = Number(damage);
+				if(damage > highest) {
+					highest = damage;
+				}
+			});
+		});
+		newData.forEach((item) => {
+			for(let i = 0; i < highest+1; i++) {
+				if(!item.curve[i]) {
+					item.curve[i] = 0;
+				}
+			}
+		});
+		return newData;
 	}
 
 	get series() {
 		this._series = [];
-		this.normalize(this.data);
-		this.data.forEach((unit) => {
+		this.normalize(this.data).forEach((unit) => {
 			const curve = [];
 			Object.keys(unit.curve).forEach((i) => {
 				curve.push({
@@ -69,6 +100,7 @@ export class BellCurve extends Base {
 				data: curve,
 				backgroundColor: unit.data.color,
 				fill: false,
+				lineTension: 0.3,
 				borderColor: unit.data.color });
 		});
 		return this._series;

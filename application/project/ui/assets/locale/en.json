@@ -13,8 +13,8 @@
 	"attacks-rend": "Rend",
 	"attacks-damage": "Damage",
 	"unit-name": "Unit Name",
-	"bell-curve-damage": "Total Damage",
-	"bell-curve-percentage": "Percentage of Attacks",
+	"histogram-damage": "Total Damage",
+	"historgram-percentage": "Percentage of Attacks",
 	"loading-message": "Patience! The Grots are hard at work!"
 
 }
