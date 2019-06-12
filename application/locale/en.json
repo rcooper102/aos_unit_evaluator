@@ -1,6 +1,6 @@
 {
 	"app-title": "AoS Attack Simulator",
-	"app-sub-title": "Powered by <a href='http://relicwargaming.com'>Relic Wargaming</a>.",
+	"app-sub-title": "by <a href='http://relicwargaming.com'>Relic Wargaming</a>.",
 	"app-cta": "Run Simulation:",
 	"title-iterations": "{[iterations]}",
 	"sim-config-add-unit": "Add Unit",

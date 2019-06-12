@@ -1,5 +1,6 @@
 import { Utils } from "../../utils";
 import { Histogram } from "./Histogram.js";
+import { BarGraph } from "./BarGraph.js";
 import { SaveNavigation } from "./SaveNavigation.js";
 import "./Results.scss";
 
@@ -18,6 +19,10 @@ export class Results extends Base {
 
 		this.components = [
 			new Histogram(iterations, highestDamage),
+			new BarGraph([
+				{ value: 5, color: "#f00" },
+				{ value: 10, color: "#ff0" },
+			], "title", "subtitle")
 		]
 
 		this.components.forEach((item) => {
@@ -32,6 +37,7 @@ export class Results extends Base {
 				item.update(this.data[target]);
 			});
 		}
+		console.log(this.data[target]);
 		this.saveNav.value = target;
 	}
 
