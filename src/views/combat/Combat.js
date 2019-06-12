@@ -1,6 +1,7 @@
 import { View } from "../../../velocity/View/View.js";
 import { Title, SimConfig, Results, Loading } from "../../components";
 import { Simulator } from "../../services";
+import { config } from "../../config.js";
 import "./Combat.scss";
 
 export class Combat extends View {
@@ -57,7 +58,7 @@ export class Combat extends View {
 		this.loading.shutDown();
 		this.results = new Results(e.target.results, this.iterations, e.target.highestDamage);
 		this.addChild(this.results);
-		this.results.save = 4;
+		this.results.save = config.simulator['default-save'];
 	}
 
 }
