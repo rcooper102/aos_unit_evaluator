@@ -33,6 +33,7 @@ export class Histogram extends Base {
 		  	options: {
 		  		bezierCurve : false,
 		  		responsive: true,
+		  		maintainAspectRatio: false,
 		  		animation: false,
 		  		fill: true,
 		  		elements: {

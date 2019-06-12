@@ -25,5 +25,7 @@
 	"reliabiliy-graph-sub-title": "How often the unit deals average data or better.",
 	"histogram-title": "Histogram",
 	"histogram-sub-title": "Visual representation of the distribution of damage.",
+	"potential-graph-title": "Damage Potential",
+	"potential-graph-sub-title": "Highest damage recorded during simulation.",
 	"results-title": "Simulation Results"
 }

@@ -4,6 +4,7 @@ import { AverageGraph } from "./AverageGraph.js";
 import { SaveNavigation } from "./SaveNavigation.js";
 import { WhiffGraph } from "./WhiffGraph.js";
 import { ReliabilityGraph } from "./ReliabilityGraph.js";
+import { PotentialGraph } from "./PotentialGraph.js";
 import "./Results.scss";
 
 export class Results extends Base {
@@ -28,6 +29,7 @@ export class Results extends Base {
 			new ReliabilityGraph(),
 			new Histogram(iterations, highestDamage),
 			new WhiffGraph(),
+			new PotentialGraph(),
 		];
 
 		this.components.forEach((item) => {
