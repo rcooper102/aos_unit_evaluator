@@ -19,7 +19,7 @@ export class Unit extends Base {
 		this.onSwatchChange();
 
 		this.unitName = new Input();
-		this.unitName.obj.placeholder = Locale.gen("unit-unit");
+		this.unitName.obj.placeholder = Locale.gen("unit-name");
 		this.unitName.addClass("unit");
 		this.unitName.addListener(InputEvent.CHANGE, this.onChange, this);
 		this.addChild(this.unitName);

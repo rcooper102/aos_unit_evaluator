@@ -1,7 +1,20 @@
 {
-	"app-title": "Test",
-	"app-sub-title": "Untitled",
+	"app-title": "AOS Attack Simulator",
+	"app-sub-title": "Powered by <a href='http://relicwargaming.com'>Relic Wargaming</a>.",
 	"app-cta": "Run Simulation:",
 	"title-iterations": "{[iterations]}",
-	"sim-config-description": "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin molestie aliquet dapibus. Pellentesque interdum massa eros, ac cursus mi faucibus eu. Vestibulum vitae mollis arcu. Sed quis lorem et sem lobortis laoreet. Fusce semper sem massa, id consequat augue tempor sed. Curabitur mattis malesuada nisi nec pellentesque. Aenean at magna nec libero accumsan facilisis nec et arcu. Nullam id lectus ac diam laoreet elementum. Vestibulum vel odio nec sapien tempor accumsan sit amet sit amet nulla. Vivamus commodo tristique lacus, ut dignissim augue malesuada id. Integer quis dictum lectus.</p>"
+	"sim-config-add-unit": "Add Unit",
+	"sim-config-title": "Configure Attacks",
+	"sim-config-description": "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin molestie aliquet dapibus. Pellentesque interdum massa eros, ac cursus mi faucibus eu. Vestibulum vitae mollis arcu. Sed quis lorem et sem lobortis laoreet. Fusce semper sem massa, id consequat augue tempor sed. Curabitur mattis malesuada nisi nec pellentesque. Aenean at magna nec libero accumsan facilisis nec et arcu. Nullam id lectus ac diam laoreet elementum. Vestibulum vel odio nec sapien tempor accumsan sit amet sit amet nulla. Vivamus commodo tristique lacus, ut dignissim augue malesuada id. Integer quis dictum lectus.</p>",
+	"unit-delete": "Delete Unit",
+	"attacks-number": "Attacks",
+	"attacks-hit": "To hit",
+	"attacks-wound": "To wound",
+	"attacks-rend": "Rend",
+	"attacks-damage": "Damage",
+	"unit-name": "Unit Name",
+	"bell-curve-damage": "Total Damage",
+	"bell-curve-percentage": "Percentage of Attacks",
+	"loading-message": "Patience! The Grots are hard at work!"
+
 }
