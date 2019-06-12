@@ -68,6 +68,12 @@ export class SimConfig extends Base {
 		unit.addListener(Event.CHANGE, this.onUnitChange, this);
 		unit.addListener(Event.REMOVE, this.onUnitDelete, this);
 
+		this.refreshAddButton();
+
+		return unit;
+	}
+
+	refreshAddButton() {
 		if(this.units.length > config['max-units'] - 1) {
 			if(this.createButton.obj.parentNode) {
 				this.removeChild(this.createButton)
@@ -75,14 +81,13 @@ export class SimConfig extends Base {
 		} else {
 			this.addChild(this.createButton);
 		}
-
-		return unit;
 	}
 
 	onUnitDelete(e) {
 		e.target.shutDown();
 		this.units = this.units.filter((item) => e.target !== item);
-		this.onUnitChange();	
+		this.onUnitChange();
+		this.refreshAddButton();	
 	}
 
 	onUnitChange(e) {
