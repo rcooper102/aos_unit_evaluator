@@ -2,18 +2,18 @@ results {
 	display: block;
 	width: 50%;
 	float:right;
+	box-sizing: border-box;
+	padding: 20px;
 
 	bell-curve {
 		display: block;
-		width: calc(100% - 20px);
+		width: 100%;
 		height: 500px;
 
 		canvas {
 			display: block;
 			width: 100%;
 			height: 100%;
-			border: 1px solid green
-
 		}
 	}
 }

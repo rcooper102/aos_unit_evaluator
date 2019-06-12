@@ -1,6 +1,6 @@
 import { Combat } from "./views/combat/Combat.js";
 
-const ITERATIONS = 10000;
+const ITERATIONS = 2000;
 
 export let config = {
 	"container": "unit-evaluator",

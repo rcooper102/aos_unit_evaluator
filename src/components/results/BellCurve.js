@@ -31,7 +31,21 @@ export class BellCurve extends Base {
 		  		},
 			    legend: {
 			    	display: false,
-			    }
+			    },
+			    scales: {
+				    yAxes: [{
+				      scaleLabel: {
+				        display: true,
+				        labelString: Locale.gen("bell-curve-percentage"),
+				      }
+				    }],
+				    xAxes: [{
+				      scaleLabel: {
+				        display: true,
+				        labelString: Locale.gen("bell-curve-damage"),
+				      }
+				    }]
+				}
 		    }
 		});	
 	}
