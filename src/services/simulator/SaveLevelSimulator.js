@@ -8,6 +8,7 @@ export class SaveLevelSimulator extends EventDispatcher {
 		this.save = save;
 
 		this.results = [];
+		this.highest = 0;
 		this.progress = {};
 		this.data.forEach((unit, i) => {
 			const sim = new UnitSimulator(unit, save, iterations, i);
@@ -28,8 +29,11 @@ export class SaveLevelSimulator extends EventDispatcher {
 
 	onComplete(e) {
 		this.results.push(e.target);
+		if(e.target.highestDamage > this.highest) {
+			this.highest = e.target.highestDamage;
+		}
 		if(this.results.length === this.data.length) {
-			this.dispatch(new Event(Event.COMPLETE, { results: this.results, save: this.save }));
+			this.dispatch(new Event(Event.COMPLETE, { highestDamage: this.highest, results: this.results, save: this.save }));
 		}
 	}
 

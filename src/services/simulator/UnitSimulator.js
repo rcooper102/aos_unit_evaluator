@@ -8,6 +8,7 @@ export class UnitSimulator extends EventDispatcher {
 		this.data = data;
 		this.results = [];
 		const thread = new Thread();
+		this.highest = 0;
 		thread.createFor((i) => {
 			let total = 0;
 			let list = [];
@@ -16,6 +17,9 @@ export class UnitSimulator extends EventDispatcher {
 				total += attackSimulator.damage;
 				list.push(attackSimulator.damage);
 			});
+			if(total > this.highest) {
+				this.highest = total;
+			}
 			this.results.push({
 				total,
 				list,
@@ -27,7 +31,7 @@ export class UnitSimulator extends EventDispatcher {
 	}
 
 	onComplete(e) {
-		this.dispatch(new Event(Event.COMPLETE, { data: this.data, results: this.results, curve: this.generateCurve(this.results), average: this.generateAverage(this.results) }));
+		this.dispatch(new Event(Event.COMPLETE, { highestDamage: this.highest, data: this.data, results: this.results, curve: this.generateCurve(this.results), average: this.generateAverage(this.results) }));
 	}
 
 	generateAverage(results) {

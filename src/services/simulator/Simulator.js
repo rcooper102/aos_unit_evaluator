@@ -10,6 +10,7 @@ export class Simulator extends EventDispatcher {
 		this.results = {};
 		this.completed = 0;
 		this.progress = {};
+		this.highest = 0;
 		this.config.saves.forEach((item) => {
 			const save = new SaveLevelSimulator(data, item, iterations);
 			save.addListener(Event.COMPLETE, this.onComplete, this);
@@ -29,9 +30,12 @@ export class Simulator extends EventDispatcher {
 
 	onComplete(e) {
 		this.completed ++;
+		if(e.target.highestDamage > this.highest) {
+			this.highest = e.target.highestDamage;
+		}
 		this.results[e.target.save] = e.target.results;
 		if(this.completed === this.config.saves.length) {
-			this.dispatch(new Event(Event.COMPLETE, this.results));
+			this.dispatch(new Event(Event.COMPLETE, { results: this.results, highestDamage: this.highest }));
 		}
 	}
 

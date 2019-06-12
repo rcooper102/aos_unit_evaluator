@@ -51,7 +51,7 @@ export class Combat extends View {
 
 	onSimulate(e) {
 		this.loading.shutDown();
-		this.results = new Results(e.target, this.iterations);
+		this.results = new Results(e.target.results, this.iterations, e.target.highestDamage);
 		this.addChild(this.results);
 		this.results.save = 4;
 	}

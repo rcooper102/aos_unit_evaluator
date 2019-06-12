@@ -3,13 +3,14 @@ const cloneDeep = require('clone-deep');
 
 export class Histogram extends Base {
 
-	constructor(iterations) {
+	constructor(iterations, highestDamage) {
 		super();
 		this.make("histogram");
 		this.iterations = iterations;
 		this.container = new Base();
 		this.container.make("canvas");
 		this.addChild(this.container);
+		this.highestDamage = highestDamage;
 	}
 
 	update(data) {
@@ -45,14 +46,23 @@ export class Histogram extends Base {
 						    callback: (value) => { 
 						        return `${value}%`;
 						    },
-						    beginAtZero: true
+						    beginAtZero: true,
+						    steps: 5,
+						    stepValue: 20,
+                            max: 100,
 						},
 				    }],
 				    xAxes: [{
 				      scaleLabel: {
 				        display: true,
 				        labelString: Locale.gen("histogram-damage"),
-				      }
+				      },
+				      ticks: {
+						    beginAtZero: true,
+						    steps: 5,
+						    stepValue: Math.round(this.highestDamage/5),
+                            max: this.highestDamage,
+						},
 				    }]
 				}
 		    }

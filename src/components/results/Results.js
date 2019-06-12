@@ -6,7 +6,7 @@ import "./Results.scss";
 export class Results extends Base {
 
 
-	constructor(data, iterations) {
+	constructor(data, iterations, highestDamage) {
 		super();
 		this.make("results");
 		this._save = null;
@@ -17,7 +17,7 @@ export class Results extends Base {
 		this.saveNav.addListener(Event.ACTIVATE, this.onChangeSave, this);
 
 		this.components = [
-			new Histogram(iterations),
+			new Histogram(iterations, highestDamage),
 		]
 
 		this.components.forEach((item) => {
