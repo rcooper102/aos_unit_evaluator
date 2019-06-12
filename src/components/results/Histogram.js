@@ -40,16 +40,17 @@ export class Histogram extends Base {
 			    scales: {
 				    yAxes: [{
 				      scaleLabel: {
-				        display: true,
+				        display: false,
 				        labelString: Locale.gen("histogram-percentage"),
 				      },
 				      ticks: {
 						    callback: (value) => { 
 						        return `${value}%`;
 						    },
+						    display: false,
 						    beginAtZero: true,
-						    steps: 5,
-						    stepValue: 20,
+						    steps: 10,
+						    stepValue: 10,
                             max: 100,
 						},
 				    }],
