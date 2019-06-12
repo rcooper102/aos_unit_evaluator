@@ -27,7 +27,7 @@ export class Histogram extends Base {
 		  		fill: false,
 		  		elements: {
                     point:{
-                        radius: 0
+                        radius: 2
                     }
                 },
 		  		tooltips: {
@@ -101,6 +101,7 @@ export class Histogram extends Base {
 				backgroundColor: unit.data.color,
 				fill: false,
 				lineTension: 0.3,
+				borderWidth: 2,
 				borderColor: unit.data.color });
 		});
 		return this._series;
