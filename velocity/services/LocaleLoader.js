@@ -19,7 +19,7 @@ export class LocaleLoader extends EventDispatcher {
 
 	load(target) {
 		this.targetLocale = target;
-		let loader = new Ajax(`/application/project/ui/assets/locale/${target}.json`);
+		let loader = new Ajax(`/application/locale/${target}.json`);
 		loader.method = Ajax.methods.GET;
 		loader.addListener(AjaxEvent.COMPLETE, this.onLoad, this);
 		loader.send({});
