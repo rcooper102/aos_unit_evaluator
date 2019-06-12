@@ -34,15 +34,18 @@ export class Combat extends View {
 	}
 
 	onReload(e) {
-		if(this.results) {
-			this.results.shutDown();
+		if(!this.simulating) {
+			this.simulating = true;
+			if(this.results) {
+				this.results.shutDown();
+			}
+			this.iterations = e.target;
+			this.loading = new Loading();
+			this.addChild(this.loading);
+			const sim = new Simulator(this.simConfig.value, this.iterations);
+			sim.addListener(Event.COMPLETE, this.onSimulate, this);
+			sim.addListener(Event.PROGRESS, this.onProgess, this);
 		}
-		this.iterations = e.target;
-		this.loading = new Loading();
-		this.addChild(this.loading);
-		const sim = new Simulator(this.simConfig.value, this.iterations);
-		sim.addListener(Event.COMPLETE, this.onSimulate, this);
-		sim.addListener(Event.PROGRESS, this.onProgess, this);
 	}
 
 	onProgess(e) {
@@ -50,6 +53,7 @@ export class Combat extends View {
 	}
 
 	onSimulate(e) {
+		this.simulating = false;
 		this.loading.shutDown();
 		this.results = new Results(e.target.results, this.iterations, e.target.highestDamage);
 		this.addChild(this.results);
