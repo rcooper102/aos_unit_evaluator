@@ -1,12 +1,11 @@
-import { config } from "../../config.js";
 const Chart = require("chart.js");
 
 export class BellCurve extends Base {
 
-	constructor() {
+	constructor(iterations) {
 		super();
 		this.make("bell-curve");
-
+		this.iterations = iterations;
 		this.container = new Base();
 		this.container.make("canvas");
 		this.addChild(this.container);
@@ -57,7 +56,7 @@ export class BellCurve extends Base {
 			Object.keys(unit.curve).forEach((i) => {
 				curve.push({
 					x: Number(i),
-					y: Math.round(unit.curve[i] / config.simulator.iterations*100),
+					y: Math.round(unit.curve[i] / this.iterations*100),
 				});
 			});
 			this._series.push({ 

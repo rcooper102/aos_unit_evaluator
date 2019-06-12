@@ -1,4 +1,6 @@
 import "./Title.scss";
+import { Utils } from "../../utils";
+import { config } from "../../config.js";
 
 export class Title extends Base {
 
@@ -9,36 +11,47 @@ export class Title extends Base {
 	}
 
 	build() {
+		this.buttons = [];
+		config.simulator.iterations.forEach((item) => {
+			const button = new Base();
+			button.make("button");
+			button.text = Locale.gen("title-iterations", {iterations: Utils.bigNumberFormat(item)});
+			button.name = item;
+			this.buttons.push(button);
+			this.addChild(button);
+			button.addListener(MouseEvent.CLICK, this.onSimulate, this);
+		});
+
+		const cta = new Header(3);
+		cta.text = Locale.gen("app-cta");
+		this.addChild(cta);
+
 		const appName = new Header(1);
 		appName.text = Locale.gen("app-title");
 		this.addChild(appName);
 
 		const appSubName = new Header(2);
 		appSubName.text = Locale.gen("app-sub-title");
-		this.addChild(appSubName);
-
-		this.button = new Base();
-		this.button.make("button");
-		this.button.text = Locale.gen("app-simulate-button");
-		this.addChild(this.button);
-		this.button.addListener(MouseEvent.CLICK, this.onSimulate, this);
+		this.addChild(appSubName);	
 	}
 
 	set buttonActive(target) {
 		this._buttonActive = target;
-		if(target) {
-			this.button.removeClass("inactive");
-		} else {
-			this.button.addClass("inactive");
-		}
+		this.buttons.forEach((button) => {
+			if(target) {
+				button.removeClass("inactive");
+			} else {
+				button.addClass("inactive");
+			}
+		});
 	}
 
 	get buttonActive() {
 		return this._buttonActive;
 	}
 
-	onSimulate() {
-		this.dispatch(new Event(Event.RELOAD, this));
+	onSimulate(e) {
+		this.dispatch(new Event(Event.RELOAD, Number(e.target.name)));
 	}
 
 }

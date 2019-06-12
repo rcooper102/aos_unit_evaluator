@@ -1,5 +1,5 @@
 import { View } from "../../../velocity/View/View.js";
-import { Title, SimConfig, Results } from "../../components";
+import { Title, SimConfig, Results, Loading } from "../../components";
 import { Simulator } from "../../services";
 import "./Combat.scss";
 
@@ -33,16 +33,20 @@ export class Combat extends View {
 		this.appTitle.buttonActive = this.simConfig.valid;
 	}
 
-	onReload() {
-		const sim = new Simulator(this.simConfig.value);
+	onReload(e) {
+		if(this.results) {
+			this.results.shutDown();
+		}
+		this.iterations = e.target;
+		this.loading = new Loading();
+		this.addChild(this.loading);
+		const sim = new Simulator(this.simConfig.value, this.iterations);
 		sim.addListener(Event.COMPLETE, this.onSimulate, this);
 	}
 
 	onSimulate(e) {
-		if(this.results) {
-			this.results.shutDown();
-		}
-		this.results = new Results(e.target);
+		this.loading.shutDown();
+		this.results = new Results(e.target, this.iterations);
 		this.addChild(this.results);
 		this.results.save = 4;
 	}

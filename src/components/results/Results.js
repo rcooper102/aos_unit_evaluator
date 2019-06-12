@@ -5,7 +5,7 @@ import "./Results.scss";
 export class Results extends Base {
 
 
-	constructor(data) {
+	constructor(data, iterations) {
 		super();
 		this.make("results");
 		this._save = null;
@@ -14,7 +14,7 @@ export class Results extends Base {
 		console.log(data);
 
 		this.components = [
-			new BellCurve(),
+			new BellCurve(iterations),
 		]
 
 		this.components.forEach((item) => {

@@ -19,10 +19,30 @@ title {
 		font-size: 16px;		
 	}
 
+	h3{
+		float:right;
+		height: 100%;
+		line-height: 100%;
+		text-decoration: center;
+		border: none;
+		color: #FFF;
+		font-size: 16px;
+		padding: 15px 0px;
+
+	}
+
 	button {
-		position: absolute;
-		right: 10px;
-		top: 10px;
+		float:right;
+		background: #cc0b0b;
+		height: 100%;
+		text-decoration: center;
+		border: none;
+		color: #FFF;
+		font-size: 20px;
+		padding: 0px 10px;
+		margin-left:10px;
+		border-radius: 5px;
+		width: 85px;
 
 		&.inactive {
 			opacity: 0.5;
