@@ -7,6 +7,7 @@ sim-config {
 	width: 30%;
 	float: left;
 	position: relative;
+	overflow: auto;
 
 	h3 {
 		color: #999;
@@ -26,13 +27,11 @@ sim-config {
 	> button {
 		display: block;
 		background: #cc0b0b;
-		width: calc(100% - 40px);
+		width: 100%;
 		margin-top: 20px;
 		padding:10px;
 		font-size: 16px;
 		color: #fff;
 		border: none;
-		position: absolute;
-		bottom: 20px;
 	}
 }

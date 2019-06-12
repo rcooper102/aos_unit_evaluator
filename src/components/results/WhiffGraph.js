@@ -6,6 +6,7 @@ export class WhiffGraph extends Base {
 	constructor() {
 		super();
 		this.make("whiff-graph");
+		this.addClass("bar-graph");
 	}
 
 	update(data) {
@@ -22,7 +23,7 @@ export class WhiffGraph extends Base {
 				scale: 1,
 			}
 		});
-		const graph = new BarGraph(series, Locale.gen("whiff-graph-title"), Locale.gen("whiff-graph-sub-title"))
-		this.addChild(graph);
+		this.graph = new BarGraph(series, Locale.gen("whiff-graph-title"), Locale.gen("whiff-graph-sub-title"))
+		this.addChild(this.graph);
 	}
 }

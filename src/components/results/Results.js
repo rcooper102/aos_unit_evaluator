@@ -15,14 +15,18 @@ export class Results extends Base {
 		this._save = null;
 		this.data = data;
 
+		const title = new Header(3);
+		title.text = Locale.gen("results-title");
+		this.addChild(title);
+
 		this.saveNav = new SaveNavigation();
 		this.addChild(this.saveNav);
 		this.saveNav.addListener(Event.ACTIVATE, this.onChangeSave, this);
 
 		this.components = [
-			new Histogram(iterations, highestDamage),
 			new AverageGraph(),
 			new ReliabilityGraph(),
+			new Histogram(iterations, highestDamage),
 			new WhiffGraph(),
 		];
 

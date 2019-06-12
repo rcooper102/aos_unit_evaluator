@@ -6,6 +6,7 @@ export class ReliabilityGraph extends Base {
 	constructor() {
 		super();
 		this.make("reliabiliy-graph");
+		this.addClass("bar-graph");
 	}
 
 	update(data) {
@@ -21,7 +22,7 @@ export class ReliabilityGraph extends Base {
 				scale: 1,
 			}
 		});
-		const graph = new BarGraph(series, Locale.gen("reliabiliy-graph-title"), Locale.gen("reliabiliy-graph-sub-title"))
-		this.addChild(graph);
+		this.graph = new BarGraph(series, Locale.gen("reliabiliy-graph-title"), Locale.gen("reliabiliy-graph-sub-title"))
+		this.addChild(this.graph);
 	}
 }

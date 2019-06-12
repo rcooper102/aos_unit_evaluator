@@ -6,7 +6,6 @@ export class BarGraph extends Base {
 		super();
 		this.make("bar-graph");
 		
-
 		const graphTitle = new Header(4);
 		graphTitle.text = title;
 		this.addChild(graphTitle);
