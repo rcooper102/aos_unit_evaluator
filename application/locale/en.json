@@ -22,7 +22,7 @@
 	"whiff-graph-title": "Whiff Rate",
 	"whiff-graph-sub-title": "How often the unit does zero damage.",
 	"reliabiliy-graph-title": "Reliability",
-	"reliabiliy-graph-sub-title": "How often the unit deals average data or better.",
+	"reliabiliy-graph-sub-title": "How often the unit deals average damage or better.",
 	"histogram-title": "Histogram",
 	"histogram-sub-title": "Visual representation of the distribution of damage.",
 	"potential-graph-title": "Damage Potential",
