@@ -26,6 +26,17 @@ results {
 		margin-bottom: 20px;
 	}
 
+	normalized {
+		display:block;
+		margin-bottom: 20px;
+		color: #333;
+		margin-top: -15px;
+
+		strong {
+			color: #cc0b0b;
+		}
+	}
+
 	histogram {
 		clear: both;
 		display: block;

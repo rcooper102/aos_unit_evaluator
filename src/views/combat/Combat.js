@@ -17,6 +17,7 @@ export class Combat extends View {
 
 		this.simConfig = new SimConfig();
 		this.simConfig.addListener(Event.CHANGE, this.onConfigChange, this);
+		this.simConfig.addListener(Event.ACTIVATE, this.onReload, this);
 
 		const components = [
 			this.appTitle,
@@ -35,7 +36,7 @@ export class Combat extends View {
 	}
 
 	onReload(e) {
-		if(!this.simulating) {
+		if(!this.simulating && this.simConfig.valid) {
 			this.simulating = true;
 			if(this.results) {
 				this.results.shutDown();

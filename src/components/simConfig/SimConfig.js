@@ -33,6 +33,9 @@ export class SimConfig extends Base {
 			this.data.forEach((item) => {
 				this.addUnit(item);
 			});
+			setTimeout(() => {
+				this.dispatch(new Event(Event.ACTIVATE, config.simulator['default-iterations']));
+			},1);
 		}
 
 		this.onUnitChange();

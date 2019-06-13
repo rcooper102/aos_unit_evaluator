@@ -17,8 +17,16 @@ export class Results extends Base {
 		this.data = data;
 
 		const title = new Header(3);
-		title.text = Locale.gen("results-title");
+		title.text = Locale.gen("results-title", { iterations: Utils.bigNumberFormat(data[Object.keys(data)[0]][0].results.length) });
 		this.addChild(title);
+
+		const normalizedPoints = data[Object.keys(data)[0]][0].data.normalizedPoints || null;
+		if(normalizedPoints) {
+			const norm = new Base;
+			norm.make("normalized");
+			norm.text = Locale.gen("results-normalized", { points: normalizedPoints });
+			this.addChild(norm);
+		}
 
 		this.saveNav = new SaveNavigation();
 		this.addChild(this.saveNav);

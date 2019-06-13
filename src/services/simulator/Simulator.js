@@ -44,13 +44,20 @@ export class Simulator extends EventDispatcher {
 	normalizePoints(data) {
 		let canNormalize = true;
 		let highestPoints = 0;
+		let lowestPoints = 0;
 		data.forEach((item) => {
 			if(!item.points) {
 				canNormalize = false;
 			} else {
-				highestPoints = item.points > highestPoints ? item.points : highestPoints
+				highestPoints = item.points > highestPoints ? item.points : highestPoints;
+				lowestPoints = item.points < lowestPoints || !lowestPoints ? item.points : lowestPoints;
 			}
 		});
+		let normalized = false;
+		if (highestPoints/lowestPoints < 5) {
+			highestPoints = highestPoints * 5;
+			normalized = true;
+		}
 		if(!canNormalize) {
 			return data;
 		} else {
@@ -59,6 +66,7 @@ export class Simulator extends EventDispatcher {
 				const ratio = highestPoints / item.points;
 				item.attacks.forEach((attack) => {
 					attack['number'] = Utils.multiplyDiceValue(attack['number'], ratio);
+					item['normalizedPoints'] = normalized ? highestPoints : null;
 				});
 			});
 			return newData;
