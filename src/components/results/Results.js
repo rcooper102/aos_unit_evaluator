@@ -25,9 +25,9 @@ export class Results extends Base {
 		this.saveNav.addListener(Event.ACTIVATE, this.onChangeSave, this);
 
 		this.components = [
-			new AverageGraph(),
-			new ReliabilityGraph(),
 			new Histogram(iterations, highestDamage),
+			new AverageGraph(),
+			new ReliabilityGraph(),			
 			new WhiffGraph(),
 			new PotentialGraph(),
 		];
