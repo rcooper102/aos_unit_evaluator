@@ -6,7 +6,7 @@ export class AttackSimulator {
 		this.data = data;
 		
 		this._damage = 0;
-		const attacks = this.generateAttacks();
+		const attacks = this.executeRoll(this.data.number);
 		
 		for(let i = 0; i < attacks; i++) {
 			const hit = Utils.rollDice();
@@ -15,7 +15,7 @@ export class AttackSimulator {
 				if(wound >= Number(this.data.wound)) {
 					const saveRoll = Utils.rollDice();
 					if(saveRoll < (save + Number(this.data.rend))) {
-						this._damage += this.generateDamage();
+						this._damage += this.executeRoll(this.data.damage);
 					}
 				}
 			}
@@ -23,20 +23,11 @@ export class AttackSimulator {
 		this._damage = this._damage;
 	}
 
-	generateDamage() {
-		if(Utils.isInteger(this.data.damage)) {
-			return Number(this.data.damage);
+	executeRoll(dice) {
+		if(Utils.isInteger(dice)) {
+			return Number(dice);
 		} else {
-			return Utils.rollDice(this.data.damage);
-		}
-		return 0;
-	}
-
-	generateAttacks() {
-		if(Utils.isInteger(this.data.number)) {
-			return Number(this.data.number);
-		} else {
-			return Utils.rollDice(this.data.number);
+			return Utils.rollDice(dice);
 		}
 		return 0;
 	}

@@ -49,8 +49,9 @@ export class Simulator extends EventDispatcher {
 			if(!item.points) {
 				canNormalize = false;
 			} else {
-				highestPoints = item.points > highestPoints ? item.points : highestPoints;
-				lowestPoints = item.points < lowestPoints || !lowestPoints ? item.points : lowestPoints;
+				const points = Number(item.points);
+				highestPoints =points > highestPoints ? points : highestPoints;
+				lowestPoints = points < lowestPoints || !lowestPoints ? points : lowestPoints;
 			}
 		});
 		let normalized = false;
