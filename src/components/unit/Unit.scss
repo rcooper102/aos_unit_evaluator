@@ -56,8 +56,13 @@ unit {
 		font-size: 16px;
 		border: none;
 		float: left;
-		width: calc(100% - 108px);
+		width: calc(100% - 198px);
 		margin-bottom: 10px;
+		margin-right: 5px;
+	}
+
+	> input.points {
+		width: 60px
 	}
 }
 	

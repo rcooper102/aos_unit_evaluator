@@ -1,11 +1,11 @@
 export class Utils {
 
 	static isInteger(target) {
-		return !!target.match(/^[0-9]*$/)
+		return !!String(target).match(/^[0-9]*$/)
 	}
 
 	static isDiceNotation(target) {
-		if (/^[\d+]?d\d+[\+|\-]?\d*$/.test(target.toLowerCase())) {
+		if (/^[\d+]*d\d+[\+|\-]?\d*$/.test(target.toLowerCase())) {
 			return true;
 		}
 		return false;
@@ -80,6 +80,17 @@ export class Utils {
 
 	static formatPercent(target) {
 		return `${Math.round(target*1000)/10}%`;
+	}
+
+	static multiplyDiceValue (target, ratio) {
+		if(Utils.isDiceNotation(target)) {
+			let broken = target.toLowerCase().split("d");
+			broken[0] = broken[0] === "" ? 1 : broken[0];
+			broken[0] = Math.round(broken[0] * ratio);
+			return broken.join("d");
+		} else {
+			return Math.round(target * ratio);
+		}
 	}
 
 }

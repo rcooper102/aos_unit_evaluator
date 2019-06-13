@@ -13,6 +13,7 @@
 	"attacks-rend": "Rend",
 	"attacks-damage": "Damage",
 	"unit-name": "Unit Name",
+	"unit-points": "Points",
 	"histogram-damage": "Total Damage",
 	"histogram-percentage": "Percentage of Attacks",
 	"loading-message": "{[progress]}",

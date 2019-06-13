@@ -1,18 +1,20 @@
 import { config } from "../../config.js";
 import { SaveLevelSimulator } from "./SaveLevelSimulator.js";
+import { Utils } from "../../utils";
+const cloneDeep = require('clone-deep');
 
 export class Simulator extends EventDispatcher {
 
 	constructor(data, iterations) {
 		super();
 		this.config = config.simulator;
-		this.data = data;
+		this.data = this.normalizePoints(data);
 		this.results = {};
 		this.completed = 0;
 		this.progress = {};
 		this.highest = 0;
 		this.config.saves.forEach((item) => {
-			const save = new SaveLevelSimulator(data, item, iterations);
+			const save = new SaveLevelSimulator(this.data, item, iterations);
 			save.addListener(Event.COMPLETE, this.onComplete, this);
 			save.addListener(Event.PROGRESS, this.onProgress, this);
 			this.progress[item] = 0;
@@ -36,6 +38,30 @@ export class Simulator extends EventDispatcher {
 		this.results[e.target.save] = e.target.results;
 		if(this.completed === this.config.saves.length) {
 			this.dispatch(new Event(Event.COMPLETE, { results: this.results, highestDamage: this.highest }));
+		}
+	}
+
+	normalizePoints(data) {
+		let canNormalize = true;
+		let highestPoints = 0;
+		data.forEach((item) => {
+			if(!item.points) {
+				canNormalize = false;
+			} else {
+				highestPoints = item.points > highestPoints ? item.points : highestPoints
+			}
+		});
+		if(!canNormalize) {
+			return data;
+		} else {
+			const newData = cloneDeep(data);
+			newData.forEach((item) => {
+				const ratio = highestPoints / item.points;
+				item.attacks.forEach((attack) => {
+					attack['number'] = Utils.multiplyDiceValue(attack['number'], ratio);
+				});
+			});
+			return newData;
 		}
 	}
 

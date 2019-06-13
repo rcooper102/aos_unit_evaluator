@@ -13,7 +13,6 @@ export class WhiffGraph extends Base {
 		if(this.graph) {
 			this.graph.shutDown();
 		}
-		console.log(data);
 		const series = data.map((item) => {
 			const zeroes = item.results.filter((item) => item.total === 0);
 			return {

@@ -24,6 +24,12 @@ export class Unit extends Base {
 		this.unitName.addListener(InputEvent.CHANGE, this.onChange, this);
 		this.addChild(this.unitName);
 
+		this.unitPoints = new Input();
+		this.unitPoints.obj.placeholder = Locale.gen("unit-points");
+		this.unitPoints.addClass("points");
+		this.unitPoints.addListener(InputEvent.CHANGE, this.onChange, this);
+		this.addChild(this.unitPoints);
+
 		this.delete = new Base();
 		this.delete.make("button");
 		this.delete.text = Locale.gen("unit-delete");
@@ -86,6 +92,7 @@ export class Unit extends Base {
 	get value() {
 		return {
 			name: this.unitName.value,
+			points: this.unitPoints.value !== "" ? this.unitPoints.value : null,
 			color: this.color,
 			attacks: this.attacks
 					.filter((item) => { return item.active })
@@ -98,6 +105,7 @@ export class Unit extends Base {
 			this.add();
 		} else {
 			this.color = target.color;
+			this.unitPoints.value = target.points || "";
 			this.unitName.value = target.name || "";
 			target.attacks.forEach((item) => {
 				this.add(item);
