@@ -22,8 +22,6 @@ export class AttackSimulator {
 	}
 
 	makeAttacks(attacks, canSpawnAttacks = true, autoHit = false, autoWound = false) {
-		this.buffs.hit = [ new Buff(Buff.TYPES.TRIGGER_ATTACKS, { trigger: [4,5,6], output: 1 }) ];
-
 		for(let i = 0; i < attacks; i++) {
 			if(autoHit || this.comparisonRoll(this.data.hit, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.hit, canSpawnAttacks)) {	
 				if(autoWound || this.comparisonRoll(this.data.wound, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.wound, canSpawnAttacks)) {
