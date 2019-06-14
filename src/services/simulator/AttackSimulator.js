@@ -105,11 +105,6 @@ export class AttackSimulator {
 		return !result && buffs && buffs[Buff.TYPES.REROLL] && buffs[Buff.TYPES.REROLL].data.indexOf(roll) > -1;
 	}
 
-	inverseRoll(difficulty) {
-		let roll = Utils.rollDice();
-		return roll < difficulty ? true : false;
-	}
-
 	magnitudeRoll(dice) {
 		if(Utils.isInteger(dice)) {
 			return Number(dice);
