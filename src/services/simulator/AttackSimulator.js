@@ -23,9 +23,11 @@ export class AttackSimulator {
 
 	makeAttacks(attacks, canSpawnAttacks = true, autoHit = false, autoWound = false) {
 		for(let i = 0; i < attacks; i++) {
-			if(autoHit || this.comparisonRoll(this.data.hit, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.hit, canSpawnAttacks)) {	
-				if(autoWound || this.comparisonRoll(this.data.wound, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.wound, canSpawnAttacks)) {
-					if(this.comparisonRoll(this.save + Number(this.data.rend), AttackSimulator.ROLL_TYPES.NEGATIVE)) {
+			const hit = this.comparisonRoll(this.data.hit, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.hit, canSpawnAttacks, autoHit);
+			if(hit.result) {
+				const wound = this.comparisonRoll(this.data.wound, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.wound, canSpawnAttacks);	
+				if(wound.result) {
+					if(this.comparisonRoll(this.save + Number(this.data.rend), AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
 						this._damage += this.magnitudeRoll(this.data.damage);
 					}
 				}
@@ -33,10 +35,12 @@ export class AttackSimulator {
 		}
 	}
 
-	comparisonRoll(difficulty, type, buffs, canSpawnAttacks) {
+	comparisonRoll(difficulty, type, buffs, canSpawnAttacks, auto = false) {
+		if(auto) { return { result: true } }
 		const diff = Number(difficulty);
 		let roll = Utils.rollDice();
 		let result = false;
+		let output = {};
 		switch(type) {
 			case AttackSimulator.ROLL_TYPES.POSITIVE: 
 				result = roll >= diff ? true : false;
@@ -47,12 +51,12 @@ export class AttackSimulator {
 		}
 
 		if(this.needsReroll(roll, result, buffs)){
-			result = this.comparisonRoll(difficulty, type, { ...buffs, [Buff.TYPES.REROLL]: null });
+			output = this.comparisonRoll(difficulty, type, { ...buffs, [Buff.TYPES.REROLL]: null });
 		}
 
-		result = this.checkTriggers(result, roll, buffs, canSpawnAttacks);
+		output = this.checkTriggers(result, roll, buffs, canSpawnAttacks);
 
-		return result;
+		return { ...output, result };
 	}
 
 	checkTriggers(result, roll, buffs, canSpawnAttacks) {
@@ -71,7 +75,6 @@ export class AttackSimulator {
 					break;
 					case Buff.TYPES.TRIGGER_ATTACKS:
 						if(canSpawnAttacks && buff.data.trigger.indexOf(roll) > -1) {
-
 							this.makeAttacks(this.magnitudeRoll(buff.data.output), false, buff.data.autoHit, buff.data.autoWound);
 							if(buff.data.stop) {
 								result = false;
@@ -81,7 +84,7 @@ export class AttackSimulator {
 				}
 			});
 		}
-		return result;
+		return { result: result };
 	}
 
 	needsReroll(roll, result, buffs) {
