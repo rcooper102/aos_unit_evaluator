@@ -33,7 +33,6 @@ export class AttackSimulator {
 		}
 	}
 
-
 	comparisonRoll(difficulty, type, buffs) {
 		const diff = Number(difficulty);
 		let roll = Utils.rollDice();
