@@ -10,23 +10,29 @@ export class AttackSimulator {
 		};
 	}
 
-	constructor(data, save) {
+	constructor(data, save, buffs = { hit: [], wound: [] }) {
 		this.data = data;
-		
+		this.save = save;
+		this.buffs = buffs;
 		this._damage = 0;
+		this._mortalWounds = 0;
 		const attacks = this.magnitudeRoll(this.data.number);
-	
+
+		this.makeAttacks(attacks);
+	}
+
+	makeAttacks(attacks) {
 		for(let i = 0; i < attacks; i++) {
-			if(this.comparisonRoll(this.data.hit, AttackSimulator.ROLL_TYPES.POSITIVE)) {	
-				if(this.comparisonRoll(this.data.wound, AttackSimulator.ROLL_TYPES.POSITIVE)) {
-					if(this.comparisonRoll(save + Number(this.data.rend), AttackSimulator.ROLL_TYPES.NEGATIVE)) {
+			if(this.comparisonRoll(this.data.hit, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.hit)) {	
+				if(this.comparisonRoll(this.data.wound, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.wound)) {
+					if(this.comparisonRoll(this.save + Number(this.data.rend), AttackSimulator.ROLL_TYPES.NEGATIVE)) {
 						this._damage += this.magnitudeRoll(this.data.damage);
 					}
 				}
 			}
 		}
-		this._damage = this._damage;
 	}
+
 
 	comparisonRoll(difficulty, type, buffs) {
 		const diff = Number(difficulty);
@@ -45,6 +51,28 @@ export class AttackSimulator {
 			result = this.comparisonRoll(difficulty, type, { ...buffs, [Buff.TYPES.REROLL]: null });
 		}
 
+		result = this.checkTriggers(result, roll, buffs);
+
+		return result;
+	}
+
+	checkTriggers(result, roll, buffs) {
+		if(buffs) {
+			buffs.forEach((buff) => {
+				switch(buff.type) {
+					case Buff.TYPES.TRIGGER_MORTAL:
+						if(buff.data.trigger.indexOf(roll) > -1) {
+							const wounds = this.magnitudeRoll(buff.data.output);
+							this._mortalWounds += wounds;
+							this._damage += wounds;
+							if(buff.data.stop) {
+								result = false;
+							}
+						}
+					break;
+				}
+			});
+		}
 		return result;
 	}
 
@@ -68,5 +96,9 @@ export class AttackSimulator {
 
 	get damage() {
 		return this._damage;
+	}
+
+	get mortalWounds() {
+		return this._mortalWounds;
 	}
 }
