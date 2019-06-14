@@ -27,8 +27,10 @@ export class AttackSimulator {
 			if(hit.result) {
 				const wound = this.comparisonRoll(this.data.wound, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.wound, canSpawnAttacks);	
 				if(wound.result) {
-					if(this.comparisonRoll(this.save + Number(this.data.rend), AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
-						this._damage += this.magnitudeRoll(this.data.damage);
+					const rend = hit.rendOverride || wound.rendOverride || Number(this.data.rend);
+					const damage = hit.damageOverride || wound.damageOverride || Number(this.data.damage);
+					if(this.comparisonRoll(this.save + rend, AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
+						this._damage += damage;
 					}
 				}
 			}
@@ -60,6 +62,8 @@ export class AttackSimulator {
 	}
 
 	checkTriggers(result, roll, buffs, canSpawnAttacks) {
+		let rendOverride = null;
+		let damageOverride = null;
 		if(buffs) {
 			buffs.forEach((buff) => {
 				switch(buff.type) {
@@ -81,10 +85,20 @@ export class AttackSimulator {
 							}
 						}
 					break;
+					case Buff.TYPES.TRIGGER_REND:
+						if(buff.data.trigger.indexOf(roll) > -1) {
+							rendOverride = this.magnitudeRoll(buff.data.output);
+						}
+					break;
+					case Buff.TYPES.TRIGGER_DAMAGE:
+						if(buff.data.trigger.indexOf(roll) > -1) {
+							damageOverride = this.magnitudeRoll(buff.data.output);
+						}
+					break;
 				}
 			});
 		}
-		return { result: result };
+		return { result, rendOverride, damageOverride };
 	}
 
 	needsReroll(roll, result, buffs) {
