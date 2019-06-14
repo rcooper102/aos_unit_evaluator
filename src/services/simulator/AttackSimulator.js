@@ -21,10 +21,12 @@ export class AttackSimulator {
 		this.makeAttacks(attacks);
 	}
 
-	makeAttacks(attacks) {
+	makeAttacks(attacks, canSpawnAttacks = true, autoHit = false, autoWound = false) {
+		this.buffs.hit = [ new Buff(Buff.TYPES.TRIGGER_ATTACKS, { trigger: [4,5,6], output: 1 }) ];
+
 		for(let i = 0; i < attacks; i++) {
-			if(this.comparisonRoll(this.data.hit, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.hit)) {	
-				if(this.comparisonRoll(this.data.wound, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.wound)) {
+			if(autoHit || this.comparisonRoll(this.data.hit, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.hit, canSpawnAttacks)) {	
+				if(autoWound || this.comparisonRoll(this.data.wound, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.wound, canSpawnAttacks)) {
 					if(this.comparisonRoll(this.save + Number(this.data.rend), AttackSimulator.ROLL_TYPES.NEGATIVE)) {
 						this._damage += this.magnitudeRoll(this.data.damage);
 					}
@@ -33,7 +35,7 @@ export class AttackSimulator {
 		}
 	}
 
-	comparisonRoll(difficulty, type, buffs) {
+	comparisonRoll(difficulty, type, buffs, canSpawnAttacks) {
 		const diff = Number(difficulty);
 		let roll = Utils.rollDice();
 		let result = false;
@@ -50,12 +52,12 @@ export class AttackSimulator {
 			result = this.comparisonRoll(difficulty, type, { ...buffs, [Buff.TYPES.REROLL]: null });
 		}
 
-		result = this.checkTriggers(result, roll, buffs);
+		result = this.checkTriggers(result, roll, buffs, canSpawnAttacks);
 
 		return result;
 	}
 
-	checkTriggers(result, roll, buffs) {
+	checkTriggers(result, roll, buffs, canSpawnAttacks) {
 		if(buffs) {
 			buffs.forEach((buff) => {
 				switch(buff.type) {
@@ -64,6 +66,15 @@ export class AttackSimulator {
 							const wounds = this.magnitudeRoll(buff.data.output);
 							this._mortalWounds += wounds;
 							this._damage += wounds;
+							if(buff.data.stop) {
+								result = false;
+							}
+						}
+					break;
+					case Buff.TYPES.TRIGGER_ATTACKS:
+						if(canSpawnAttacks && buff.data.trigger.indexOf(roll) > -1) {
+
+							this.makeAttacks(this.magnitudeRoll(buff.data.output), false, buff.data.autoHit, buff.data.autoWound);
 							if(buff.data.stop) {
 								result = false;
 							}
