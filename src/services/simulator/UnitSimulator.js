@@ -11,10 +11,12 @@ export class UnitSimulator extends EventDispatcher {
 		this.highest = 0;
 		thread.createFor((i) => {
 			let total = 0;
+			let mortalWounds = 0;
 			let list = [];
 			data.attacks.forEach((attack) => {
 				const attackSimulator = new AttackSimulator(attack, save);
 				total += attackSimulator.damage;
+				mortalWounds += attackSimulator.mortalWounds;
 				list.push(attackSimulator.damage);
 			});
 			if(total > this.highest) {
@@ -23,6 +25,7 @@ export class UnitSimulator extends EventDispatcher {
 			this.results.push({
 				total,
 				list,
+				mortalWounds,
 			});
 			this.dispatch(new Event(Event.PROGRESS, { unit: id, progress: i/iterations }))
 		}, iterations);
