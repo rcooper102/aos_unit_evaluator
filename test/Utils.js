@@ -107,6 +107,25 @@ describe.only('Utils', function () {
                 expect(Utils.bigNumberFormat(item.test)).to.equal(item.expect);  
             }); 
         });
+    });  
+    describe('hexToRGB', function () { 
+        const cases = [
+            { test: "F00", expect: "rgb(240, 0, 0)" },
+            { test: "030", expect: "rgb(0, 48, 0)" },
+            { test: "#030", expect: "rgb(0, 48, 0)" },
+            { test: 40, expect: "rgb(0, 0, 0)" },
+            { test: [], expect: "rgb(0, 0, 0)" },
+            { test: '', expect: "rgb(0, 0, 0)" },
+            { test: false, expect: "rgb(0, 0, 0)" },
+            { test: null, expect: "rgb(0, 0, 0)" },
+            { test: "030", expect: "rgba(0, 48, 0, 0.5)", alpha: 0.5 },
+        ];
+
+        cases.forEach((item) => {
+            it(`Should properly convert 3 digit hex to rgb, case: ${String(item.test)}`, function () {
+                expect(Utils.hexToRGB(item.test, item.alpha)).to.equal(item.expect);  
+            }); 
+        });
     });   
 });
 

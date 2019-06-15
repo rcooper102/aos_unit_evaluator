@@ -77,9 +77,15 @@ export class Utils {
 	}
 
 	static hexToRGB(hex, alpha) {
-	    var r = parseInt(hex.substr(1, 1)+"0", 16),
-	        g = parseInt(hex.substr(2, 1)+"0", 16),
-	        b = parseInt(hex.substr(3, 1)+"0", 16);
+		if(typeof hex !== 'string') {
+			hex = '#000';
+		}
+		if(hex.substr(0,1) === "#") {
+			hex =hex.substr(1);
+		}
+	    var r = parseInt(hex.substr(0, 1)+"0", 16),
+	        g = parseInt(hex.substr(1, 1)+"0", 16),
+	        b = parseInt(hex.substr(2, 1)+"0", 16);
 
 	    if (alpha) {
 	        return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
