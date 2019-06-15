@@ -15,7 +15,7 @@ let expectWithinPercentage = function(value, target, percent) {
 }
 
 describe('AttackSimulator', function () {	
- 	it('Should simulate statistical average for attacks with no rend', function () {
+ 	it('Should simulate statistical average for 4+/4+ attacks with no rend', function () {
         sim = new AttackSimulator({
         	number: ATTACKS_COUNT,
         	hit: 4, 
