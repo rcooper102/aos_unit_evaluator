@@ -1,7 +1,8 @@
 export class Utils {
 
 	static isInteger(target) {
-		return !!String(target).match(/^[0-9]*$/)
+		const tar = String(target);
+		return tar !== '' && !!tar.match(/^[0-9]*$/);
 	}
 
 	static isDiceNotation(target) {
