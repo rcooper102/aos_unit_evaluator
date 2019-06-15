@@ -304,6 +304,20 @@ describe('AttackSimulator', function () {
         	wound: [],       	
         });
         expectWithinPercentage(sim.damage, (ATTACKS_COUNT/3 * 0.5) + (ATTACKS_COUNT/6 * 0.5 * 2 ), ERROR_MARGIN);     
+    }); 
+    it('Should simulate statistical average for attacks that do d3 mortals on a 6 to wound and reroll hits', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '1',
+        }, 7,{
+            hit: [ new Buff(Buff.TYPES.REROLL, [1,2,3]) ] ,
+            wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [6], output: 'd3', stop: false }) ],          
+        });
+        expectWithinPercentage(sim.damage, (ATTACKS_COUNT * 0.75) / 2 + (ATTACKS_COUNT * 0.75) / 6 * 2, ERROR_MARGIN);     
+        expectWithinPercentage(sim.mortalWounds, (ATTACKS_COUNT * 0.75) / 6 * 2, ERROR_MARGIN);    
     });  
     it('Should simulate statistical average for attacks that do d3 damage on a 5,6', function () {
         sim = new AttackSimulator({
