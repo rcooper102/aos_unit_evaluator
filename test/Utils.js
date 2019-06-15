@@ -126,6 +126,28 @@ describe.only('Utils', function () {
                 expect(Utils.hexToRGB(item.test, item.alpha)).to.equal(item.expect);  
             }); 
         });
+    }); 
+    describe('formatPercent', function () { 
+        const cases = [
+            { test: "40", expect: "" },
+            { test: 0.4, expect: "40%" },
+            { test: 0.35, expect: "35%" },
+            { test: 1.4, expect: "140%" },
+            { test: 0.444, expect: "44.4%" },
+            { test: 0.445, expect: "44.5%" },
+            { test: 0.4444, expect: "44.4%" },
+            { test: 0.4445, expect: "44.5%" },
+            { test: [], expect: "" },
+            { test: '', expect: "" },
+            { test: false, expect: "" },
+            { test: null, expect: "" },
+        ];
+
+        cases.forEach((item) => {
+            it(`Should properly convert a decimal to a percent rounded to 1 digits, case: ${String(item.test)}`, function () {
+                expect(Utils.formatPercent(item.test)).to.equal(item.expect);  
+            }); 
+        });
     });   
 });
 

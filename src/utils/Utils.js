@@ -95,6 +95,9 @@ export class Utils {
 	}
 
 	static formatPercent(target) {
+		if(typeof target !== 'number') {
+			return '';
+		}
 		return `${Math.round(target*1000)/10}%`;
 	}
 
