@@ -25,6 +25,16 @@ describe('AttackSimulator', function () {
         }, 7);
         expectWithinPercentage(sim.damage, ATTACKS_COUNT*0.5*0.5, ERROR_MARGIN);    
     });
+    it('Should simulate statistical average for 2+/5+ attacks with no rend', function () {
+        sim = new AttackSimulator({
+        	number: ATTACKS_COUNT,
+        	hit: 2, 
+        	wound: 5, 
+        	rend: 0, 
+        	damage: 1,
+        }, 7);
+        expectWithinPercentage(sim.damage, ATTACKS_COUNT*5/6/3, ERROR_MARGIN);    
+    });
     it('Should simulate statistical average for attacks against a save', function () {
         sim = new AttackSimulator({
         	number: ATTACKS_COUNT,
