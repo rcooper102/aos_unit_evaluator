@@ -20,7 +20,7 @@ export class Buff {
 			{
 				trigger: [5, 6], //Which dice rolls trigger the bonus attack. 
 				output: "D3", //Dice notation of integer of how many attacks are triggered.
-				stop: true, //Does triggering mortal wounds stop the attack sequence?
+				stop: true, //Does triggering attacks wounds stop the attack sequence?
 				autoHit: true,
 			}
 			**/

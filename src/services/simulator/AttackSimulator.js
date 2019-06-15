@@ -28,7 +28,7 @@ export class AttackSimulator {
 				const wound = this.comparisonRoll(this.data.wound, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.wound, canSpawnAttacks);	
 				if(wound.result) {
 					const rend = hit.rendOverride || wound.rendOverride || Number(this.data.rend);
-					const damage = hit.damageOverride || wound.damageOverride || Number(this.data.damage);
+					const damage = hit.damageOverride || wound.damageOverride || this.magnitudeRoll(this.data.damage);
 					if(this.comparisonRoll(this.save + rend, AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
 						this._damage += damage;
 					}
