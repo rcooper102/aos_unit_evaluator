@@ -6,14 +6,16 @@ export class Utils {
 	}
 
 	static isDiceNotation(target) {
-		if (/^[\d+]*d\d+[\+|\-]?\d*$/.test(target.toLowerCase())) {
+		if(Utils.isInteger(target)) {
+			return true;
+		}
+		if (/^[\d+]*d\d+[\+|\-]?\d*$/.test(String(target).toLowerCase())) {
 			return true;
 		}
 		return false;
 	}
 
 	static rollDice(dice = "d6") {
-		dice = dice.toLowerCase();
 		if (!Utils.isDiceNotation(dice)) { //Regex validate
 			return 0; //Return if input invalid
 		}
