@@ -170,7 +170,7 @@ describe('AttackSimulator', function () {
             hit: [ new Buff(Buff.TYPES.REROLL, [1]), new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [6], output: 1, stop: true }) ],
             wound: []           
         });
-        expectWithinPercentage(sim.damage, (ATTACKS_COUNT + ATTACKS_COUNT / 6) / 3 * 0.5, ERROR_MARGIN);
+        expectWithinPercentage(sim.damage, (ATTACKS_COUNT + ATTACKS_COUNT / 6) / 3 * 0.5 + (ATTACKS_COUNT + ATTACKS_COUNT / 6) / 6, ERROR_MARGIN);
         expectWithinPercentage(sim.mortalWounds, (ATTACKS_COUNT + ATTACKS_COUNT / 6) / 6, ERROR_MARGIN);     
     }); 
     it('Should simulate statistical average for attacks that do not stop and do mortal wounds on 6s to hit', function () {
