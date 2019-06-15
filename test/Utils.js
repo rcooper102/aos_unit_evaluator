@@ -4,7 +4,7 @@ const assert = require('assert');
 const { it } = require('mocha');
 const { expect } = require('chai');
 
-describe.only('Utils', function () {	
+describe('Utils', function () {	
     describe('isInteger', function () { 
         const cases = [
             { test: 1, expect: true },
