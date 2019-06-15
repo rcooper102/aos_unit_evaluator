@@ -131,6 +131,19 @@ describe('AttackSimulator', function () {
         });
         expectWithinPercentage(sim.damage, (ATTACKS_COUNT * 0.5) * 0.75, ERROR_MARGIN);    
     }); 
+    it('Should simulate statistical average for attacks that re-roll hits and wounds', function () {
+        sim = new AttackSimulator({
+        	number: ATTACKS_COUNT,
+        	hit: 4, 
+        	wound: 4, 
+        	rend: 0, 
+        	damage: '1',
+        }, 7,{
+        	hit: [ new Buff(Buff.TYPES.REROLL, [1,2,3]) ],
+        	wound: [ new Buff(Buff.TYPES.REROLL, [1,2,3]) ]        	
+        });
+        expectWithinPercentage(sim.damage, (ATTACKS_COUNT * 0.75) * 0.75, ERROR_MARGIN);    
+    }); 
     it('Should simulate statistical average for attacks that stop and do mortal wounds on 6s to hit', function () {
         sim = new AttackSimulator({
         	number: ATTACKS_COUNT,
