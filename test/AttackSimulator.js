@@ -7,7 +7,7 @@ const { expect } = require('chai');
 
 
 const ATTACKS_COUNT = 50000;
-const ERROR_MARGIN = 0.04;
+const ERROR_MARGIN = 0.05;
 let sim;
 
 let expectWithinPercentage = function(value, target, percent) {
