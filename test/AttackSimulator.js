@@ -1,5 +1,6 @@
 import { AttackSimulator } from "../src/services/simulator/AttackSimulator.js";
 import { Buff } from "../src/models/Buff.js"
+import { expectWithinPercentage } from "./testUtils.js";
 const assert = require('assert');
 const { it } = require('mocha');
 const { expect } = require('chai');
@@ -9,10 +10,6 @@ const { expect } = require('chai');
 const ATTACKS_COUNT = 50000;
 const ERROR_MARGIN = 0.05;
 let sim;
-
-let expectWithinPercentage = function(value, target, percent) {
-	 expect(value).to.be.within(Math.round(target*(1 - percent)), Math.round(target*(1 + percent)));
-}
 
 describe('AttackSimulator', function () {	
  	it('Should simulate statistical average for 4+/4+ attacks with no rend', function () {

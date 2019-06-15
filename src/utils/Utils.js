@@ -16,8 +16,12 @@ export class Utils {
 	}
 
 	static rollDice(dice = "d6") {
+		dice = String(dice).toLowerCase();
 		if (!Utils.isDiceNotation(dice)) { //Regex validate
 			return 0; //Return if input invalid
+		}
+		if(Utils.isInteger(dice)) {
+			return Number(dice);
 		}
 
 		if(dice[0]=="d") { //If the first character is a d (dY)
