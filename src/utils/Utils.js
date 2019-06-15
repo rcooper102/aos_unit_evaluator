@@ -64,12 +64,15 @@ export class Utils {
 	}
 
 	static bigNumberFormat(x) {
-		if(isNaN(x)) return x;
-		if(x < 9999) { return x; }
-		if(x < 1000000) { return Math.round(x/1000) + "K"; }
-		if( x < 10000000) {	return (x/1000000).toFixed(2) + "M"; }
-		if(x < 1000000000) { return Math.round((x/1000000)) + "M";	}
-		if(x < 1000000000000) {	return Math.round((x/1000000000)) + "B"; }
+		if(isNaN(x)) return '';
+		if(typeof x !== "string" && typeof x !== "number") return '';
+		if(typeof x === "string" && x.trim() === '') return '';
+		x = Number(x);
+		if(x < 9999) { return String(x); }
+		if(x <= 1000000) { return Math.round(x/1000) + "K"; }
+		if( x <= 10000000) {	return (x/1000000).toFixed(2) + "M"; }
+		if(x <= 1000000000) { return Math.round((x/1000000)) + "M";	}
+		if(x <= 1000000000000) {	return Math.round((x/1000000000)) + "B"; }
 		return x;
 	}
 

@@ -84,6 +84,29 @@ describe.only('Utils', function () {
                 expectWithinPercentage(total/iterations, item.expect, 0.05);
             }); 
         });
+    }); 
+    describe('bigNumberFormat', function () { 
+        const cases = [
+            { test: 1, expect: "1" },
+            { test: 2, expect: "2" },
+            { test: 1000, expect: "1000" },
+            { test: 10000, expect: "10K" },
+            { test: 30000, expect: "30K" },
+            { test: 100000000, expect: "100M" },
+            { test: 1000000000000, expect: "1000B" },
+            { test: " ", expect: '' },
+            { test: "", expect: '' },
+            { test: true, expect: '' },
+            { test: [], expect: '' },
+            { test: null, expect: '' },
+            { test: "10000", expect: '10K' },
+        ];
+
+        cases.forEach((item) => {
+            it(`Should properly convert big number formats, case: ${String(item.test)}`, function () {
+                expect(Utils.bigNumberFormat(item.test)).to.equal(item.expect);  
+            }); 
+        });
     });   
 });
 
