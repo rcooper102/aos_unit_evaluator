@@ -52,13 +52,13 @@ export class AttackSimulator {
 				break;
 		}
 
-		let output = { result };
+		let output = { result, roll };
 
-		if(this.needsReroll(roll, result, buffs)){
+		if(this.needsReroll(output.roll, result, buffs)){
 			output = this.comparisonRoll(difficulty, type, buffs.filter((item) => item.type !== Buff.TYPES.REROLL));
+		} else {
+			output = this.checkTriggers(output.result, output.roll, buffs, canSpawnAttacks);
 		}
-
-		output = this.checkTriggers(output.result, roll, buffs, canSpawnAttacks);
 
 		return output;
 	}
@@ -100,7 +100,7 @@ export class AttackSimulator {
 				}
 			});
 		}
-		return { result, rendOverride, damageOverride };
+		return { result, rendOverride, damageOverride, roll };
 	}
 
 	needsReroll(roll, result, buffs) {

@@ -144,6 +144,34 @@ describe('AttackSimulator', function () {
         });
         expectWithinPercentage(sim.damage, ATTACKS_COUNT / 3 * 0.5 + ATTACKS_COUNT / 6, ERROR_MARGIN); 
         expectWithinPercentage(sim.mortalWounds, ATTACKS_COUNT / 6, ERROR_MARGIN);    
+    });
+    it('Should simulate statistical average for attacks that re-roll 1s to hit and do mortal wounds on 6s to hit', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '1',
+        }, 7,{
+            hit: [ new Buff(Buff.TYPES.REROLL, [1]), new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [6], output: 1, stop: false }) ],
+            wound: []           
+        });
+        expectWithinPercentage(sim.damage, (ATTACKS_COUNT + ATTACKS_COUNT / 6) * 0.5 * 0.5 + (ATTACKS_COUNT + ATTACKS_COUNT / 6) / 6, ERROR_MARGIN);
+        expectWithinPercentage(sim.mortalWounds, (ATTACKS_COUNT + ATTACKS_COUNT / 6) / 6, ERROR_MARGIN);     
+    });
+    it('Should simulate statistical average for attacks that re-roll 1s to hit and do mortal wounds on 6s to hit that stop the attack sequence', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '1',
+        }, 7,{
+            hit: [ new Buff(Buff.TYPES.REROLL, [1]), new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [6], output: 1, stop: true }) ],
+            wound: []           
+        });
+        expectWithinPercentage(sim.damage, (ATTACKS_COUNT + ATTACKS_COUNT / 6) / 3 * 0.5, ERROR_MARGIN);
+        expectWithinPercentage(sim.mortalWounds, (ATTACKS_COUNT + ATTACKS_COUNT / 6) / 6, ERROR_MARGIN);     
     }); 
     it('Should simulate statistical average for attacks that do not stop and do mortal wounds on 6s to hit', function () {
         sim = new AttackSimulator({
