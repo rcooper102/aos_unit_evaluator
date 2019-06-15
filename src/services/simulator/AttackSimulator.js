@@ -42,7 +42,7 @@ export class AttackSimulator {
 		const diff = Number(difficulty);
 		let roll = Utils.rollDice();
 		let result = false;
-		let output = {};
+		
 		switch(type) {
 			case AttackSimulator.ROLL_TYPES.POSITIVE: 
 				result = roll >= diff ? true : false;
@@ -52,13 +52,15 @@ export class AttackSimulator {
 				break;
 		}
 
+		let output = { result };
+
 		if(this.needsReroll(roll, result, buffs)){
-			output = this.comparisonRoll(difficulty, type, { ...buffs, [Buff.TYPES.REROLL]: null });
+			output = this.comparisonRoll(difficulty, type, buffs.filter((item) => item.type !== Buff.TYPES.REROLL));
 		}
 
-		output = this.checkTriggers(result, roll, buffs, canSpawnAttacks);
+		output = this.checkTriggers(output.result, roll, buffs, canSpawnAttacks);
 
-		return { ...output, result };
+		return output;
 	}
 
 	checkTriggers(result, roll, buffs, canSpawnAttacks) {
@@ -102,7 +104,11 @@ export class AttackSimulator {
 	}
 
 	needsReroll(roll, result, buffs) {
-		return !result && buffs && buffs[Buff.TYPES.REROLL] && buffs[Buff.TYPES.REROLL].data.indexOf(roll) > -1;
+		if(buffs) {
+			const buff = buffs.filter((item) => item.type === Buff.TYPES.REROLL);
+			return !result && buff[0] && buff[0].data.indexOf(roll) > -1;
+		}
+		return false;
 	}
 
 	magnitudeRoll(dice) {

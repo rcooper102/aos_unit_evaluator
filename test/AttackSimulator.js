@@ -129,7 +129,7 @@ describe('AttackSimulator', function () {
         	hit: [],
         	wound: [ new Buff(Buff.TYPES.REROLL, [1,2,3]) ]        	
         });
-        expectWithinPercentage(sim.damage, (ATTACKS_COUNT * 0.5 + ATTACKS_COUNT * 0.5) * 0.5 * 0.5, ERROR_MARGIN);    
+        expectWithinPercentage(sim.damage, (ATTACKS_COUNT * 0.5) * 0.75, ERROR_MARGIN);    
     }); 
     it('Should simulate statistical average for attacks that stop and do mortal wounds on 6s to hit', function () {
         sim = new AttackSimulator({
@@ -142,7 +142,7 @@ describe('AttackSimulator', function () {
         	hit: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [6], output: 1, stop: true }) ] ,
         	wound: [],       	
         });
-        expectWithinPercentage(sim.damage, ATTACKS_COUNT / 3 * 0.5, ERROR_MARGIN); 
+        expectWithinPercentage(sim.damage, ATTACKS_COUNT / 3 * 0.5 + ATTACKS_COUNT / 6, ERROR_MARGIN); 
         expectWithinPercentage(sim.mortalWounds, ATTACKS_COUNT / 6, ERROR_MARGIN);    
     }); 
     it('Should simulate statistical average for attacks that do not stop and do mortal wounds on 6s to hit', function () {
@@ -156,7 +156,7 @@ describe('AttackSimulator', function () {
         	hit: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [6], output: 1, stop: false }) ] ,
         	wound: [],       	
         });
-        expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 0.5, ERROR_MARGIN); 
+        expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 0.5 + ATTACKS_COUNT / 6, ERROR_MARGIN); 
         expectWithinPercentage(sim.mortalWounds, ATTACKS_COUNT / 6, ERROR_MARGIN);    
     });
     it('Should simulate statistical average for attacks that do not stop and do variable mortal wounds on 6s to hit', function () {
@@ -170,7 +170,7 @@ describe('AttackSimulator', function () {
         	hit: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [6], output: 'd3', stop: false }) ] ,
         	wound: [],       	
         });
-        expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 0.5, ERROR_MARGIN); 
+        expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 0.5 + ATTACKS_COUNT / 6 * 2, ERROR_MARGIN); 
         expectWithinPercentage(sim.mortalWounds, ATTACKS_COUNT / 6 * 2, ERROR_MARGIN);    
     }); 
     it('Should simulate statistical average for attacks that generate additional attacks on a 6 that do not autohit', function () {
@@ -199,7 +199,7 @@ describe('AttackSimulator', function () {
         });
         expectWithinPercentage(sim.damage, (ATTACKS_COUNT * 0.5 + ATTACKS_COUNT/6) * 0.5, ERROR_MARGIN);     
     });
-    it('Should simulate statistical average for attacks that generate d6 hits on a 6', function () {
+    it('Should simulate statistical average for attacks that generate 2 hits on a 6', function () {
         sim = new AttackSimulator({
         	number: ATTACKS_COUNT,
         	hit: 4, 
@@ -207,10 +207,23 @@ describe('AttackSimulator', function () {
         	rend: 0, 
         	damage: '1',
         }, 7,{
-        	hit: [ new Buff(Buff.TYPES.TRIGGER_ATTACKS, { trigger: [6], output: 'd6', stop: true, autoHit: true }) ] ,
+        	hit: [ new Buff(Buff.TYPES.TRIGGER_ATTACKS, { trigger: [6], output: 2, stop: true, autoHit: true }) ] ,
         	wound: [],       	
         });
-        expectWithinPercentage(sim.damage, (ATTACKS_COUNT/3 + ATTACKS_COUNT/6*3.5) * 0.5 * 0.5, ERROR_MARGIN);     
+        expectWithinPercentage(sim.damage, (ATTACKS_COUNT/3 + ATTACKS_COUNT/6*2) * 0.5, ERROR_MARGIN);     
+    }); 
+    it('Should simulate statistical average for attacks that generate d6 hits on a 5,6', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '1',
+        }, 7,{
+            hit: [ new Buff(Buff.TYPES.TRIGGER_ATTACKS, { trigger: [5,6], output: 'd6', stop: true, autoHit: true }) ] ,
+            wound: [],          
+        });
+        expectWithinPercentage(sim.damage, (ATTACKS_COUNT/6 + ATTACKS_COUNT/3*3.5) * 0.5, ERROR_MARGIN);     
     }); 
     it('Should simulate statistical average for attacks that do 1 rend on a 6', function () {
         sim = new AttackSimulator({
@@ -223,7 +236,7 @@ describe('AttackSimulator', function () {
         	hit: [ new Buff(Buff.TYPES.TRIGGER_REND, { trigger: [6], output: 1 }) ] ,
         	wound: [],       	
         });
-        expectWithinPercentage(sim.damage, (ATTACKS_COUNT/3 * 0.5 * 0.5 * 0.5) + (ATTACKS_COUNT/6 * 0.5 * 0.5 * 2/3 ), ERROR_MARGIN);     
+        expectWithinPercentage(sim.damage, (ATTACKS_COUNT/3 * 0.5 * 0.5) + (ATTACKS_COUNT/6 * 0.5 * 2/3 ), ERROR_MARGIN);     
     }); 
     it('Should simulate statistical average for attacks that do 2 damage on a 6', function () {
         sim = new AttackSimulator({
@@ -236,7 +249,20 @@ describe('AttackSimulator', function () {
         	hit: [ new Buff(Buff.TYPES.TRIGGER_DAMAGE, { trigger: [6], output: 2 }) ] ,
         	wound: [],       	
         });
-        expectWithinPercentage(sim.damage, (ATTACKS_COUNT/3 * 0.5 * 0.5) + (ATTACKS_COUNT/6 * 0.5 * 0.5 * 2 ), ERROR_MARGIN);     
+        expectWithinPercentage(sim.damage, (ATTACKS_COUNT/3 * 0.5) + (ATTACKS_COUNT/6 * 0.5 * 2 ), ERROR_MARGIN);     
+    });  
+    it('Should simulate statistical average for attacks that do d3 damage on a 5,6', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '1',
+        }, 7,{
+            hit: [ new Buff(Buff.TYPES.TRIGGER_DAMAGE, { trigger: [5,6], output: 'd3' }) ] ,
+            wound: [],          
+        });
+        expectWithinPercentage(sim.damage, (ATTACKS_COUNT/6 * 0.5) + (ATTACKS_COUNT/3 * 0.5 * 2 ), ERROR_MARGIN);     
     });      
 });
 
