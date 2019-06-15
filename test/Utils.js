@@ -148,6 +148,25 @@ describe.only('Utils', function () {
                 expect(Utils.formatPercent(item.test)).to.equal(item.expect);  
             }); 
         });
+    }); 
+    describe('multiplyDiceValue', function () { 
+        const cases = [
+            { test: "3d3", multiply: 2, expect: "6d3" },
+            { test: "d3", multiply: 2, expect: "2d3" },
+            { test: "1", multiply: 2, expect: "2" },
+            { test: 1, multiply: 2, expect: "2" },
+            { test: 1, multiply: null, expect: "" },
+            { test: 1, multiply: true, expect: "" },
+            { test: 1, multiply: 2.1, expect: "2" },
+            { test: false, multiply: 2.1, expect: "" },
+            { test: [], multiply: 2.1, expect: "" },
+        ];
+
+        cases.forEach((item) => {
+            it(`Should properly multiply dice isDiceNotation, case: ${String(item.test)}, ${item.multiply}`, function () {
+                expect(Utils.multiplyDiceValue(item.test, item.multiply)).to.equal(item.expect);  
+            }); 
+        });
     });   
 });
 

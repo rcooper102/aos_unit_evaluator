@@ -102,14 +102,18 @@ export class Utils {
 	}
 
 	static multiplyDiceValue (target, ratio) {
-		if(Utils.isDiceNotation(target)) {
-			let broken = target.toLowerCase().split("d");
-			broken[0] = broken[0] === "" ? 1 : broken[0];
-			broken[0] = Math.round(broken[0] * ratio);
-			return broken.join("d");
-		} else {
-			return Math.round(target * ratio);
+		if(typeof ratio === 'number') {
+			if(Utils.isDiceNotation(target)) {
+				ratio = Math.round(ratio);
+				let broken = String(target).toLowerCase().split("d");
+				broken[0] = broken[0] === "" ? 1 : broken[0];
+				broken[0] = Math.round(broken[0] * ratio);
+				return broken.join("d");
+			} else if(Utils.isInteger(target)) {
+				return Math.round(target * ratio);
+			}
 		}
+		return '';
 	}
 
 }
