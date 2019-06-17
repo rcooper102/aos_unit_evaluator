@@ -23,4 +23,7 @@ export class BuffField extends Base {
 
 	}
 
+	get valid() {
+		return true;
+	}
 }

@@ -25,6 +25,18 @@ export class ModalWindow extends Base {
 		this.windowTitle = new Header(3);
 		this.windowTitle.text = "Test";
 		this.windowHeader.addChild(this.windowTitle);
+
+		this.container = new Base();
+		this.container.make('container');
+		this.window.addChild(this.container);
+	}
+
+	get title() {
+		return this.windowTitle.text;
+	}
+
+	set title(target) {
+		this.windowTitle.text = target;
 	}
 
 	onClose() {

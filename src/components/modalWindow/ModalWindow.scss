@@ -19,6 +19,11 @@ modal-window {
 		left: 50%;
 		transform: translateX(-50%);
 
+		container {
+			display: block;
+			padding: 20px;
+		}
+
 		window-header {
 			display: block;
 			padding: 24px;
