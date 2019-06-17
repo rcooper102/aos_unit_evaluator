@@ -1,0 +1,53 @@
+modal-window {
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0,0,0,0.8);
+	z-index: 50000;
+
+	window {
+		display: block;
+		width: 100%;
+		max-width: 700px;
+		background: #fff;
+		position: absolute;;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 50%;
+		transform: translateX(-50%);
+
+		window-header {
+			display: block;
+			padding: 24px;
+
+			h3 {
+				font-size: 30px;
+				color: #999;
+				display: block;
+				float: left;
+			}
+
+			close {
+				background: #cc0b0b;
+				color: #fff;
+				display: block;
+				float: right;
+				width: 30px;
+				height: 30px;
+				text-align: center;
+				box-sizing: border-box;
+				padding: 8px 0px;
+				cursor: pointer;
+			}
+
+			&:after {
+				content: '';
+				clear: both;
+				display: block;
+			}
+		}
+	}
+}

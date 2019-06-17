@@ -1,4 +1,4 @@
-import { NumberField } from "../../";
+import { NumberField, BuffField } from "../../";
 import "./Attack.scss";
 
 export class Attack extends Base {
@@ -16,6 +16,7 @@ export class Attack extends Base {
 			wound: new NumberField(Locale.gen("attacks-wound"), NumberField.TYPES.ROLL_VALUE, 1),
 			rend: new NumberField(Locale.gen("attacks-rend"), NumberField.TYPES.INTEGER, 1),
 			damage: new NumberField(Locale.gen("attacks-damage"), NumberField.TYPES.DICE_NOTATION, 5),
+			buffs: new BuffField(""),
 		};
 
 		Object.keys(this.fields).forEach((i) => { 
