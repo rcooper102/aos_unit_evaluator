@@ -1,0 +1,25 @@
+.buff-editor {
+
+	navigation {
+		display: block;
+
+		buff-choice {
+			background: #cc0b0b;
+			color: #fff;
+			text-align: center;
+			cursor: pointer;
+			padding: 5px;
+			display: block;
+			box-sizing: border-box;
+			width: 33.3%;
+			float: left;
+
+		}
+
+		&:after {
+			content: "";
+			display: block;
+			clear: both;
+		}
+	}
+}

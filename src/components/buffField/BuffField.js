@@ -1,5 +1,5 @@
 import { Utils } from "../../utils";
-import { ModalWindow } from "../";
+import { BuffEditor } from "../";
 import "./BuffField.scss";
 
 export class BuffField extends Base {
@@ -12,7 +12,7 @@ export class BuffField extends Base {
 	}
 
 	onClick() {
-		new ModalWindow();
+		new BuffEditor();
 	}
 
 	get value() {

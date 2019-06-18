@@ -1,4 +1,3 @@
-import { Utils } from "../../utils";
 import "./ModalWindow.scss";
 
 export class ModalWindow extends Base {
@@ -23,7 +22,6 @@ export class ModalWindow extends Base {
 		this.close.addListener(MouseEvent.CLICK, this.onClose, this);
 
 		this.windowTitle = new Header(3);
-		this.windowTitle.text = "Test";
 		this.windowHeader.addChild(this.windowTitle);
 
 		this.container = new Base();

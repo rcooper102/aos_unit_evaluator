@@ -29,5 +29,6 @@
 	"potential-graph-title": "Damage Potential",
 	"potential-graph-sub-title": "Highest damage recorded during simulation.",
 	"results-title": "Simulation Results <strong>({[iterations]} Iterations)</strong>",
-	"results-normalized": "Points normalized to: <strong>{[points]}pts</strong>"
+	"results-normalized": "Points normalized to: <strong>{[points]}pts</strong>",
+	"buff-add": "Add {[name]} Field"
 }
