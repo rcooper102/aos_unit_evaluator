@@ -1,14 +1,14 @@
 import { Utils } from "../../utils";
 import { Buff } from "../../models";
 import { ModalWindow } from "../modalWindow/ModalWindow";
-import { Toggle } from "../toggle/Toggle";
+import { CheckField } from "./CheckField";
 import "./BuffEditor.scss";
 
 export class BuffEditor extends ModalWindow {
 
 	static get FIELD_NAMES() {
 		return {
-			DICE: "DICE",
+			DICE: "dice",
 		}
 	}
 
@@ -40,6 +40,8 @@ export class BuffEditor extends ModalWindow {
 		super();
 		this.fields = [];
 
+		this.title = Locale.gen("buff-editor-title");
+
 		this.editor = new Base();
 		this.editor.make("editor");
 		this.container.addChild(this.editor);
@@ -67,7 +69,14 @@ export class BuffEditor extends ModalWindow {
 	}
 }
 
-export class BuffEditorField extends Base {
+class BuffEditorField extends Base {
+
+	static get OPTIONS() {
+		return {
+			HIT: Locale.gen("buff-editor-field-hit"),
+			WOUND: Locale.gen("buff-editor-field-wound"),
+		};
+	};
 
 	constructor(schema) {
 		super();
@@ -76,30 +85,70 @@ export class BuffEditorField extends Base {
 		this.schema = schema;
 		this.fields = [];
 
+		const title = new Header(3);
+		title.text = this.data.name;
+		this.addChild(title);
+
+		this.options = new CheckField({ options: Object.keys(BuffEditorField.OPTIONS).map((i) => BuffEditorField.OPTIONS[i])});
+		this.addChild(this.options);
+		this.options.addListener(Event.CHANGE, this.onChange, this);
+
 		this.data.fields.forEach((item) => {
 			const label = new Header(4);
 			label.text = item.label;
 			this.addChild(label);
+
 			const field = new item.type(item);
 			this.addChild(field);
 			this.fields.push(field);
+			field.addListener(Event.CHANGE, this.onChange, this);
 		});
 	}
 
-}
+	onChange() {
+		this.dispatch(new Event(Event.CHANGE, this));
+	}
 
-export class CheckField extends Base {
-	constructor(data) {
-		super();
-		this.make("check-field");
-		this.text = "checkfield";
-
-		this.boxes = [];
-
-		data.options.forEach((item) => {
-			const box = new Toggle(item, item);
-			this.addChild(box);
-			this.boxes.push(box);
+	get value() {
+		const ret = {};
+		this.options.value.forEach((item) => {
+			Object.keys(BuffEditorField.OPTIONS).forEach((option) => {
+				if(item === BuffEditorField.OPTIONS[option]) {
+					ret[option.toLowerCase()] = this.generateValue();
+				}
+			});
 		});
+
+		return ret;
+	}
+
+	set value(target) {
+		this.options.value = Object.keys(target).map((item) => BuffEditorField.OPTIONS[item.toUpperCase()]) || null;
+		const val = target[Object.keys(target)[0]];
+		if(this.fields.length === 1) {
+			this.fields[0].value = val.data;
+		} else {
+			this.fields.forEach((field) => {
+				Object.keys(val.data).forEach((key) => {
+					if(field.data.name === key) {
+						field.value = val.data[key];
+					}
+				});
+			});
+		}
+	}
+
+	generateValue() {	
+		const buff = new Buff(this.schema);
+		if(this.fields.length === 1) {
+			buff.data = this.fields[0].value;
+		} else {
+			const data = {};
+			this.fields.forEach((item) => {
+				data[item.data.name] = item.value;
+			});
+			buff.data = data;
+		}
+		return buff;
 	}
 }

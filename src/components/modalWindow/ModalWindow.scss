@@ -11,17 +11,19 @@ modal-window {
 	window {
 		display: block;
 		width: 100%;
-		max-width: 700px;
+		max-width: 900px;
 		background: #fff;
 		position: absolute;;
-		top: 50%;
-		transform: translateY(-50%);
+		top: 80px;
 		left: 50%;
 		transform: translateX(-50%);
+		overflow: auto;
+		max-height: calc(100vh - 160px);
 
 		container {
 			display: block;
 			padding: 20px;
+			padding-top: 0px;
 		}
 
 		window-header {

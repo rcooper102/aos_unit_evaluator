@@ -1,6 +1,7 @@
 .buff-editor {
 
 	navigation {
+		
 		display: block;
 
 		buff-choice {
@@ -20,6 +21,35 @@
 			content: "";
 			display: block;
 			clear: both;
+		}
+	}
+
+	buff-editor-field {
+		display: block;
+		margin-bottom: 20px;
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 20px;
+
+		h3 {
+			font-size:20px;
+			color:#333;
+			margin-bottom: 10px;
+		}
+
+		h4 {
+			margin-bottom: 3px;
+			font-size: 16px;
+			color: #333;
+			margin-top: 10px;
+		}
+
+		check-field {
+			display: flex;
+			margin-bottom: 3px;
+
+			toggle {
+				flex-grow: 1;
+			}
 		}
 	}
 }
