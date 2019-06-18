@@ -32,5 +32,8 @@
 	"results-normalized": "Points normalized to: <strong>{[points]}pts</strong>",
 	"buff-add": "Add {[name]} Field",
 	"buff-editor-field-hit": "Triggers By Hit Roll",
-	"buff-editor-field-wound": "Trigger By Wound Roll"
+	"buff-editor-field-wound": "Trigger By Wound Roll",
+	"buff-editor-title": "Buff Editor",
+	"buff-reroll-name": "Reroll",
+	"buff-reroll-dice": "Dice Results To Reroll"
 }
