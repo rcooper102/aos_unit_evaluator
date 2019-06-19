@@ -24,6 +24,8 @@ modal-window {
 			display: block;
 			padding: 20px;
 			padding-top: 0px;
+			overflow: auto;
+			max-height: calc(100vh - 260px);
 		}
 
 		window-header {

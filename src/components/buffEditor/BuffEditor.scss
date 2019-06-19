@@ -12,8 +12,14 @@
 			padding: 5px;
 			display: block;
 			box-sizing: border-box;
-			width: 33.3%;
+			width: calc(33.3% - 2px);
 			float: left;
+			margin-bottom: 3px;
+			margin-right: 3px;
+
+			&:nth-child(3n){ 
+				margin-right: 0px;
+			}
 
 		}
 

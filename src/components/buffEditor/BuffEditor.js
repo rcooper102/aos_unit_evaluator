@@ -14,6 +14,7 @@ export class BuffEditor extends ModalWindow {
 			STOP: "stop",
 			TRIGGER: "trigger",
 			OUTPUT: "output",
+			AUTO_HIT: "autoHit",
 		}
 	}
 
@@ -63,6 +64,73 @@ export class BuffEditor extends ModalWindow {
 				label: Locale.gen("buff-trigger-mortal-label"),
 				description: Locale.gen("buff-trigger-mortal-description"),
 				name: Locale.gen("buff-trigger-mortal-name"),
+			},
+			[Buff.TYPES.TRIGGER_DAMAGE]: {
+				fields: [
+					{
+						label: Locale.gen("buff-trigger-damage-trigger"),
+						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
+						options: [1,2,3,4,5,6],
+						name: BuffEditor.FIELD_NAMES.TRIGGER,
+					},
+					{
+						label: Locale.gen("buff-trigger-damage-output"),
+						type: BuffEditor.FIELD_TYPES.INPUT_FIELD,
+						diceNotation: true,
+						name: BuffEditor.FIELD_NAMES.OUTPUT,
+					},
+				],
+				label: Locale.gen("buff-trigger-damage-label"),
+				description: Locale.gen("buff-trigger-damage-description"),
+				name: Locale.gen("buff-trigger-damage-name"),
+			},
+			[Buff.TYPES.TRIGGER_REND]: {
+				fields: [
+					{
+						label: Locale.gen("buff-trigger-rend-trigger"),
+						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
+						options: [1,2,3,4,5,6],
+						name: BuffEditor.FIELD_NAMES.TRIGGER,
+					},
+					{
+						label: Locale.gen("buff-trigger-rend-output"),
+						type: BuffEditor.FIELD_TYPES.INPUT_FIELD,
+						diceNotation: true,
+						name: BuffEditor.FIELD_NAMES.OUTPUT,
+					},
+				],
+				label: Locale.gen("buff-trigger-rend-label"),
+				description: Locale.gen("buff-trigger-rend-description"),
+				name: Locale.gen("buff-trigger-rend-name"),
+			},
+			[Buff.TYPES.TRIGGER_ATTACKS]: {
+				fields: [
+					{
+						label: Locale.gen("buff-trigger-attacks-trigger"),
+						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
+						options: [1,2,3,4,5,6],
+						name: BuffEditor.FIELD_NAMES.TRIGGER,
+					},
+					{
+						label: Locale.gen("buff-trigger-attacks-output"),
+						type: BuffEditor.FIELD_TYPES.INPUT_FIELD,
+						diceNotation: true,
+						name: BuffEditor.FIELD_NAMES.OUTPUT,
+					},
+					{
+						label: Locale.gen("buff-trigger-attacks-stop"),
+						type: BuffEditor.FIELD_TYPES.TOGGLE_FIELD,
+						name: BuffEditor.FIELD_NAMES.STOP,
+					},
+					{
+						label: Locale.gen("buff-trigger-attacks-autohit"),
+						type: BuffEditor.FIELD_TYPES.TOGGLE_FIELD,
+						name: BuffEditor.FIELD_NAMES.AUTO_HIT,
+					}
+				],
+				label: Locale.gen("buff-trigger-attacks-damage"),
+				description: Locale.gen("buff-trigger-attacks-description"),
+				name: Locale.gen("buff-trigger-attacks-name"),
 			}
 		};
 	}
