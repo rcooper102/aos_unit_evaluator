@@ -115,6 +115,10 @@ class BuffEditorField extends Base {
 		title.text = this.data.name;
 		this.addChild(title);
 
+		const desc = new Paragraph();
+		desc.text = this.data.description;
+		this.addChild(desc);
+
 		this.options = new CheckField({ options: Object.keys(BuffEditorField.OPTIONS).map((i) => BuffEditorField.OPTIONS[i])});
 		this.addChild(this.options);
 		this.options.addListener(Event.CHANGE, this.onChange, this);

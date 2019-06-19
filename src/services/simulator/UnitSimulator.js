@@ -14,7 +14,7 @@ export class UnitSimulator extends EventDispatcher {
 			let mortalWounds = 0;
 			let list = [];
 			data.attacks.forEach((attack) => {
-				const attackSimulator = new AttackSimulator(attack, save);
+				const attackSimulator = new AttackSimulator(attack, save, this.transformBuffs(attack.buffs));
 				total += attackSimulator.damage;
 				mortalWounds += attackSimulator.mortalWounds;
 				list.push(attackSimulator.damage);
@@ -58,6 +58,15 @@ export class UnitSimulator extends EventDispatcher {
 		});
 		return values;
 
+	}
+
+	transformBuffs(buffs) {
+		const ret = { hit: [], wound: [] };
+		buffs.forEach((item) => {
+			if(item.hit) { ret.hit.push(item.hit) };
+			if(item.wound) { ret.wound.push(item.wound) };
+		});
+		return ret;
 	}
 
 }

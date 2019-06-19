@@ -35,5 +35,6 @@
 	"buff-editor-field-wound": "Trigger By Wound Roll",
 	"buff-editor-title": "Buff Editor",
 	"buff-reroll-name": "Reroll",
+	"buff-reroll-description": "Note: The simulator only uses the <strong>first</strong> re-roll effect that it finds for a given roll level",
 	"buff-reroll-dice": "Dice Results To Reroll"
 }
