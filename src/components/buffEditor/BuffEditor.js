@@ -171,9 +171,15 @@ export class BuffEditor extends ModalWindow {
 		this.editor.addChild(field);
 		this.fields.push(field);
 		field.addListener(Event.CHANGE, this.onChange, this);
+		field.addListener(Event.CLEAR, this.onDelete, this);
 		this.onChange();
 		return field;
 	}
+
+	onDelete(e) {
+		this.fields = this.fields.filter((item) => item !== e.target);
+		this.onChange();
+	};
 
 	onChange(e) {
 		this.dispatch(new Event(Event.CHANGE, this));
@@ -220,6 +226,12 @@ class BuffEditorField extends Base {
 		const title = new Header(3);
 		title.text = this.data.name;
 		this.addChild(title);
+
+		const del = new Base()
+		del.make("delete");
+		del.text = "X";
+		this.addChild(del);
+		del.addListener(MouseEvent.CLICK, this.onDelete, this);
 
 		const desc = new Paragraph();
 		desc.text = this.data.description;
@@ -286,5 +298,16 @@ class BuffEditorField extends Base {
 			buff.data = data;
 		}
 		return buff;
+	}
+
+	onDelete() {
+		this.dispatch(new Event(Event.CLEAR, this));
+		this.shutDown();
+	}
+
+	shutDown() {
+		if(this.obj.parentNode) {
+			this.obj.parentNode.removeChild(this.obj);
+		}
 	}
 }
