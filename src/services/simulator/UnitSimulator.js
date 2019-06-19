@@ -62,10 +62,12 @@ export class UnitSimulator extends EventDispatcher {
 
 	transformBuffs(buffs) {
 		const ret = { hit: [], wound: [] };
-		buffs.forEach((item) => {
-			if(item.hit) { ret.hit.push(item.hit) };
-			if(item.wound) { ret.wound.push(item.wound) };
-		});
+		if(buffs) {
+			buffs.forEach((item) => {
+				if(item.hit) { ret.hit.push(item.hit) };
+				if(item.wound) { ret.wound.push(item.wound) };
+			});
+		}
 		return ret;
 	}
 
