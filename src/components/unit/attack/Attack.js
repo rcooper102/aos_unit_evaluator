@@ -43,8 +43,8 @@ export class Attack extends Base {
 
 	get active () {
 		let ret = false;
-		Object.keys(this.fields).forEach((i) => { 
-			if(this.fields[i].value !== "") {
+		Object.keys(this.fields).forEach((i) => {
+			if(this.fields[i].value !== "" && !this.fields[i].buffs) {
 				ret = true;
 			}
 		});
