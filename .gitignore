@@ -9,3 +9,5 @@ coverage/
 .DS_Store
 .vscode
 docs/
+application/Application.css
+application/Application.js
