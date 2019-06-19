@@ -2,6 +2,9 @@ import { Utils } from "../../utils";
 import { Buff } from "../../models";
 import { ModalWindow } from "../modalWindow/ModalWindow";
 import { CheckField } from "./CheckField";
+import { ToggleField } from "./ToggleField";
+import { InputField } from "./InputField";
+import { config } from "../../config";
 import "./BuffEditor.scss";
 
 export class BuffEditor extends ModalWindow {
@@ -9,12 +12,18 @@ export class BuffEditor extends ModalWindow {
 	static get FIELD_NAMES() {
 		return {
 			DICE: "dice",
+			STOP: "stop",
+			TRIGGER: "trigger",
+			OUTPUT: "output",
+			AUTO_HIT: "autoHit",
 		}
 	}
 
 	static get FIELD_TYPES() {
 		return {
 			CHECK_FIELD: CheckField,
+			TOGGLE_FIELD: ToggleField,
+			INPUT_FIELD: InputField,
 		}
 	}
 
@@ -32,8 +41,99 @@ export class BuffEditor extends ModalWindow {
 				label: Locale.gen("buff-reroll-label"),
 				description: Locale.gen("buff-reroll-description"),
 				name: Locale.gen("buff-reroll-name"),
+			},
+			[Buff.TYPES.TRIGGER_MORTAL]: {
+				fields: [
+					{
+						label: Locale.gen("buff-trigger-mortal-trigger"),
+						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
+						options: [1,2,3,4,5,6],
+						name: BuffEditor.FIELD_NAMES.TRIGGER,
+					},
+					{
+						label: Locale.gen("buff-trigger-mortal-output"),
+						type: BuffEditor.FIELD_TYPES.INPUT_FIELD,
+						diceNotation: true,
+						name: BuffEditor.FIELD_NAMES.OUTPUT,
+					},
+					{
+						label: Locale.gen("buff-trigger-mortal-stop"),
+						type: BuffEditor.FIELD_TYPES.TOGGLE_FIELD,
+						name: BuffEditor.FIELD_NAMES.STOP,
+					}
+				],
+				label: Locale.gen("buff-trigger-mortal-label"),
+				description: Locale.gen("buff-trigger-mortal-description"),
+				name: Locale.gen("buff-trigger-mortal-name"),
+			},
+			[Buff.TYPES.TRIGGER_DAMAGE]: {
+				fields: [
+					{
+						label: Locale.gen("buff-trigger-damage-trigger"),
+						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
+						options: [1,2,3,4,5,6],
+						name: BuffEditor.FIELD_NAMES.TRIGGER,
+					},
+					{
+						label: Locale.gen("buff-trigger-damage-output"),
+						type: BuffEditor.FIELD_TYPES.INPUT_FIELD,
+						diceNotation: true,
+						name: BuffEditor.FIELD_NAMES.OUTPUT,
+					},
+				],
+				label: Locale.gen("buff-trigger-damage-label"),
+				description: Locale.gen("buff-trigger-damage-description"),
+				name: Locale.gen("buff-trigger-damage-name"),
+			},
+			[Buff.TYPES.TRIGGER_REND]: {
+				fields: [
+					{
+						label: Locale.gen("buff-trigger-rend-trigger"),
+						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
+						options: [1,2,3,4,5,6],
+						name: BuffEditor.FIELD_NAMES.TRIGGER,
+					},
+					{
+						label: Locale.gen("buff-trigger-rend-output"),
+						type: BuffEditor.FIELD_TYPES.INPUT_FIELD,
+						diceNotation: true,
+						name: BuffEditor.FIELD_NAMES.OUTPUT,
+					},
+				],
+				label: Locale.gen("buff-trigger-rend-label"),
+				description: Locale.gen("buff-trigger-rend-description"),
+				name: Locale.gen("buff-trigger-rend-name"),
+			},
+			[Buff.TYPES.TRIGGER_ATTACKS]: {
+				fields: [
+					{
+						label: Locale.gen("buff-trigger-attacks-trigger"),
+						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
+						options: [1,2,3,4,5,6],
+						name: BuffEditor.FIELD_NAMES.TRIGGER,
+					},
+					{
+						label: Locale.gen("buff-trigger-attacks-output"),
+						type: BuffEditor.FIELD_TYPES.INPUT_FIELD,
+						diceNotation: true,
+						name: BuffEditor.FIELD_NAMES.OUTPUT,
+					},
+					{
+						label: Locale.gen("buff-trigger-attacks-stop"),
+						type: BuffEditor.FIELD_TYPES.TOGGLE_FIELD,
+						name: BuffEditor.FIELD_NAMES.STOP,
+					},
+					{
+						label: Locale.gen("buff-trigger-attacks-autohit"),
+						type: BuffEditor.FIELD_TYPES.TOGGLE_FIELD,
+						name: BuffEditor.FIELD_NAMES.AUTO_HIT,
+					}
+				],
+				label: Locale.gen("buff-trigger-attacks-damage"),
+				description: Locale.gen("buff-trigger-attacks-description"),
+				name: Locale.gen("buff-trigger-attacks-name"),
 			}
-		}
+		};
 	}
 
 	constructor() {
@@ -71,11 +171,23 @@ export class BuffEditor extends ModalWindow {
 		this.editor.addChild(field);
 		this.fields.push(field);
 		field.addListener(Event.CHANGE, this.onChange, this);
+		field.addListener(Event.CLEAR, this.onDelete, this);
+		this.onChange();
 		return field;
 	}
 
+	onDelete(e) {
+		this.fields = this.fields.filter((item) => item !== e.target);
+		this.onChange();
+	};
+
 	onChange(e) {
 		this.dispatch(new Event(Event.CHANGE, this));
+		if(this.fields.length >= config['max-buffs']) {
+			this.navigation.style.display = "none";
+		} else {
+			this.navigation.style.display = "block";
+		}
 	}
 
 	get value() {
@@ -89,8 +201,10 @@ export class BuffEditor extends ModalWindow {
 
 	set value(target) {
 		target.forEach((item) => {
-			const field = this.add(item[Object.keys(item)[0]].type);
-			field.value = item;
+			if(Object.keys(item)[0]) {
+				const field = this.add(item[Object.keys(item)[0]].type);
+				field.value = item;
+			}
 		});
 	}
 }
@@ -114,6 +228,12 @@ class BuffEditorField extends Base {
 		const title = new Header(3);
 		title.text = this.data.name;
 		this.addChild(title);
+
+		const del = new Base()
+		del.make("delete");
+		del.text = "X";
+		this.addChild(del);
+		del.addListener(MouseEvent.CLICK, this.onDelete, this);
 
 		const desc = new Paragraph();
 		desc.text = this.data.description;
@@ -180,5 +300,16 @@ class BuffEditorField extends Base {
 			buff.data = data;
 		}
 		return buff;
+	}
+
+	onDelete() {
+		this.dispatch(new Event(Event.CLEAR, this));
+		this.shutDown();
+	}
+
+	shutDown() {
+		if(this.obj.parentNode) {
+			this.obj.parentNode.removeChild(this.obj);
+		}
 	}
 }

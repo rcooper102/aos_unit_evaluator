@@ -26,6 +26,11 @@ sim-config {
 		a {
 			color: #cc0b0b;
 		}
+
+		&.disclaimer {
+			margin-top:20px;
+			display: block;
+		}
 	}
 
 	> button {
@@ -37,6 +42,5 @@ sim-config {
 		font-size: 16px;
 		color: #fff;
 		border: none;
-		margin-bottom: 20px;
 	}
 }

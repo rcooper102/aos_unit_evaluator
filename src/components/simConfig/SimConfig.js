@@ -28,6 +28,7 @@ export class SimConfig extends Base {
 		this.disclaimer = new Base();
 		this.disclaimer.make("description");
 		this.disclaimer.text = Locale.gen("sim-config-disclaimer");
+		this.disclaimer.addClass("disclaimer");
 
 		this.units = [];
 

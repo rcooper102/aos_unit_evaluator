@@ -35,4 +35,8 @@ export class CheckField extends Base {
 			});
 		});
 	}
+
+	get valid() {
+		return true;
+	}
 }
