@@ -59,13 +59,39 @@ export class BuffEditor extends ModalWindow {
 			this.navigation.addChild(btn);
 			btn.text = Locale.gen("buff-add", { name: BuffEditor.SCHEMAS[item].name });
 			btn.addListener(MouseEvent.CLICK, this.onAdd, this);
-		})
+		});
 	}
 
 	onAdd(e) {
-		const field = new BuffEditorField(e.target.name);
+		this.add(e.target.name);
+	}
+
+	add(name) {
+		const field = new BuffEditorField(name);
 		this.editor.addChild(field);
 		this.fields.push(field);
+		field.addListener(Event.CHANGE, this.onChange, this);
+		return field;
+	}
+
+	onChange(e) {
+		this.dispatch(new Event(Event.CHANGE, this));
+	}
+
+	get value() {
+		let ret = []
+		this.fields.forEach((item) => {
+			ret.push(item.value);
+		});
+
+		return ret;
+	}
+
+	set value(target) {
+		target.forEach((item) => {
+			const field = this.add(item[Object.keys(item)[0]].type);
+			field.value = item;
+		});
 	}
 }
 
