@@ -201,8 +201,10 @@ export class BuffEditor extends ModalWindow {
 
 	set value(target) {
 		target.forEach((item) => {
-			const field = this.add(item[Object.keys(item)[0]].type);
-			field.value = item;
+			if(Object.keys(item)[0]) {
+				const field = this.add(item[Object.keys(item)[0]].type);
+				field.value = item;
+			}
 		});
 	}
 }
