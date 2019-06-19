@@ -11,3 +11,5 @@ coverage/
 docs/
 application/Application.css
 application/Application.js
+application/project/ui/assets/Application.css
+application/project/ui/assets/Application.js

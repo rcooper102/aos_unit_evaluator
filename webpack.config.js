@@ -2,7 +2,7 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const applicationFileName = "Application";
-const assetsPath = './application/';
+const assetsPath = 'application/project/ui/assets/';
 
 module.exports = {
 	entry: ['./src'],

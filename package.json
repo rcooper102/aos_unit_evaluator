@@ -4,9 +4,9 @@
 	"description": "",
 	"scripts": {
 		"start": "webpack-dev-server --mode none --open",
-		"build": "webpack --mode production",
+		"build": "npm run test && webpack --mode production",
 		"build-dev": "webpack --mode none",
-		"test": "mocha --require babel-core/register"
+		"test": "mocha --exit --require babel-core/register"
 	},
 	"keywords": [],
 	"author": "",

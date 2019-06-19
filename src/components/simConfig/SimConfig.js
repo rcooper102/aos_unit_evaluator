@@ -25,6 +25,10 @@ export class SimConfig extends Base {
 		this.createButton.text = Locale.gen("sim-config-add-unit");
 		this.createButton.addListener(MouseEvent.CLICK, this.onAddUnit, this);
 
+		this.disclaimer = new Base();
+		this.disclaimer.make("description");
+		this.disclaimer.text = Locale.gen("sim-config-disclaimer");
+
 		this.units = [];
 
 		if(this.data.length === 0) {
@@ -84,6 +88,7 @@ export class SimConfig extends Base {
 		} else {
 			this.addChild(this.createButton);
 		}
+		this.addChild(this.disclaimer);
 	}
 
 	onUnitDelete(e) {
