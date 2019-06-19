@@ -4,6 +4,7 @@ import { ModalWindow } from "../modalWindow/ModalWindow";
 import { CheckField } from "./CheckField";
 import { ToggleField } from "./ToggleField";
 import { InputField } from "./InputField";
+import { config } from "../../config";
 import "./BuffEditor.scss";
 
 export class BuffEditor extends ModalWindow {
@@ -170,11 +171,17 @@ export class BuffEditor extends ModalWindow {
 		this.editor.addChild(field);
 		this.fields.push(field);
 		field.addListener(Event.CHANGE, this.onChange, this);
+		this.onChange();
 		return field;
 	}
 
 	onChange(e) {
 		this.dispatch(new Event(Event.CHANGE, this));
+		if(this.fields.length >= config['max-buffs']) {
+			this.navigation.style.display = "none";
+		} else {
+			this.navigation.style.display = "block";
+		}
 	}
 
 	get value() {
