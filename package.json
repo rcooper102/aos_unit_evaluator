@@ -4,9 +4,10 @@
 	"description": "",
 	"scripts": {
 		"start": "webpack-dev-server --mode none --open",
-		"build": "npm run test && webpack --mode production",
-		"build-dev": "webpack --mode none",
-		"test": "mocha --exit --require babel-core/register"
+		"build": "npm run test && webpack --mode production && npm run copy-files",
+		"build-dev": "webpack --mode none && npm run copy-files",
+		"test": "mocha --exit --require babel-core/register",
+		"copy-files": "mkdir -p ./build && cp ./index.html ./build/index.html && cp -r ./application ./build/application && rm ./application/Application.js && rm ./application/Application.css"
 	},
 	"keywords": [],
 	"author": "",
