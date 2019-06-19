@@ -37,5 +37,11 @@
 	"buff-editor-title": "Buff Editor",
 	"buff-reroll-name": "Reroll",
 	"buff-reroll-description": "Note: The simulator only uses the <strong>first</strong> re-roll effect that it finds for a given roll level",
-	"buff-reroll-dice": "Dice Results To Reroll"
+	"buff-reroll-dice": "Dice Results To Reroll",
+	"buff-trigger-mortal-name": "Trigger Mortal Wounds",
+	"buff-trigger-mortal-description": "Triggers a number of mortal wounds when a specific die roll is rolled. Multiple trigger can be stacked.",
+	"buff-trigger-mortal-trigger": "Triggering Rolls",
+	"buff-trigger-mortal-output": "How many mortal wounds",
+	"buff-trigger-mortal-stop": "Stop Attack Sequence?",
+	"toggle-field-yes": "Yes"
 }

@@ -57,5 +57,20 @@
 				flex-grow: 1;
 			}
 		}
+
+		input-field {
+			input {
+				font-size: 20px;
+				color: #999;
+				border: 1px solid #999;
+				outline: none;
+				display: block;
+
+				&.error {
+					border-color: #cc0b0b;
+					color: #cc0b0b;
+				}
+			}
+		}
 	}
 }

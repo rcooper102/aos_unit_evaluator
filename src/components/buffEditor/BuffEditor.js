@@ -2,6 +2,8 @@ import { Utils } from "../../utils";
 import { Buff } from "../../models";
 import { ModalWindow } from "../modalWindow/ModalWindow";
 import { CheckField } from "./CheckField";
+import { ToggleField } from "./ToggleField";
+import { InputField } from "./InputField";
 import "./BuffEditor.scss";
 
 export class BuffEditor extends ModalWindow {
@@ -9,12 +11,17 @@ export class BuffEditor extends ModalWindow {
 	static get FIELD_NAMES() {
 		return {
 			DICE: "dice",
+			STOP: "stop",
+			TRIGGER: "trigger",
+			OUTPUT: "output",
 		}
 	}
 
 	static get FIELD_TYPES() {
 		return {
 			CHECK_FIELD: CheckField,
+			TOGGLE_FIELD: ToggleField,
+			INPUT_FIELD: InputField,
 		}
 	}
 
@@ -32,8 +39,32 @@ export class BuffEditor extends ModalWindow {
 				label: Locale.gen("buff-reroll-label"),
 				description: Locale.gen("buff-reroll-description"),
 				name: Locale.gen("buff-reroll-name"),
+			},
+			[Buff.TYPES.TRIGGER_MORTAL]: {
+				fields: [
+					{
+						label: Locale.gen("buff-trigger-mortal-trigger"),
+						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
+						options: [1,2,3,4,5,6],
+						name: BuffEditor.FIELD_NAMES.TRIGGER,
+					},
+					{
+						label: Locale.gen("buff-trigger-mortal-output"),
+						type: BuffEditor.FIELD_TYPES.INPUT_FIELD,
+						diceNotation: true,
+						name: BuffEditor.FIELD_NAMES.OUTPUT,
+					},
+					{
+						label: Locale.gen("buff-trigger-mortal-stop"),
+						type: BuffEditor.FIELD_TYPES.TOGGLE_FIELD,
+						name: BuffEditor.FIELD_NAMES.STOP,
+					}
+				],
+				label: Locale.gen("buff-trigger-mortal-label"),
+				description: Locale.gen("buff-trigger-mortal-description"),
+				name: Locale.gen("buff-trigger-mortal-name"),
 			}
-		}
+		};
 	}
 
 	constructor() {
