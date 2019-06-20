@@ -34,18 +34,19 @@ export class UnitSimulator extends EventDispatcher {
 	}
 
 	onComplete(e) {
-		this.dispatch(new Event(Event.COMPLETE, { highestDamage: this.highest, data: this.data, results: this.results, curve: this.generateCurve(this.results), average: this.generateAverage(this.results) }));
+		this.dispatch(new Event(Event.COMPLETE, { highestDamage: this.highest, data: this.data, results: this.results, curve: this.generateCurve(this.results), ...this.generateAverage(this.results) }));
 	}
 
 	generateAverage(results) {
 		let total = 0;
+		let mws = 0;
 		let count = 0;
 		results.forEach((item) => {
 			count ++;
+			mws += item.mortalWounds || 0,
 			total += item.total;
 		});
-		return total/count;
-
+		return { average: total/count, mortalWounds: mws/count };
 	}
 
 	generateCurve(results) {

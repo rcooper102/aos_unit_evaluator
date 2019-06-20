@@ -1,11 +1,11 @@
 import { BarGraph } from "./BarGraph.js";
 import { Utils } from "../../utils";
 
-export class AverageGraph extends Base {
+export class MortalWoundsGraph extends Base {
 
 	constructor() {
 		super();
-		this.make("average-graph");
+		this.make("mortal-wounds-graph");
 		this.addClass("bar-graph");
 	}
 
@@ -15,18 +15,17 @@ export class AverageGraph extends Base {
 		}
 		let highest = 0;
 		data.forEach((item) => {
-			highest = item.highestDamage > highest ? item.highestDamage : highest;
+			highest = item.mortalWounds > highest ? item.mortalWounds : highest;
 		});
 		const series = data.map((item) => {
 			return {
-				value: item.average,
-				inner: item.mortalWounds,
+				value: item.mortalWounds,
 				color: item.data.color,
 				format: (e) => { return Math.round(e*100)/100 },
 				scale: highest,
 			};
 		});
-		this.graph = new BarGraph(series, Locale.gen("average-graph-title"), Locale.gen("average-graph-sub-title"))
+		this.graph = new BarGraph(series, Locale.gen("mortal-wounds-graph-title"), Locale.gen("mortal-wounds-graph-sub-title"))
 		this.addChild(this.graph);
 	}
 }
