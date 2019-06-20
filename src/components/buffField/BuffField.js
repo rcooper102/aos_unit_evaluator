@@ -13,16 +13,20 @@ export class BuffField extends Base {
 	}
 
 	onClick() {
-		this.editor = new BuffEditor();
-		if(this.value) {
-			this.editor.value = this.value;
-		}
-		this.editor.addListener(Event.CHANGE, this.onChange, this);
+		this.activate();
 	}
 
 	onChange() {
 		this._value = this.editor.value;
 		this.dispatch(new Event(Event.CHANGE, this));
+	}
+
+	activate() {
+		this.editor = new BuffEditor();
+		if(this.value) {
+			this.editor.value = this.value;
+		}
+		this.editor.addListener(Event.CHANGE, this.onChange, this);
 	}
 
 	get value() {
