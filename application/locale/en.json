@@ -5,7 +5,7 @@
 	"title-iterations": "{[iterations]}",
 	"sim-config-add-unit": "Add Unit",
 	"sim-config-title": "Configure Attacks",
-	"sim-config-description": "<p>This simulator is designed to simulate real dice rolls based on attack profiles. Given that it is simulating rolls and not running statistical algorithms, the accuracy of the result increases with the number of iterations run.</p><p>Some buff fields, damage and attacks accept standard dice notation. (\"d3\",\"3\",\"2d3\", etc).</p><p><a href='https://relicwargaming.com/search/aos-simulator-instructions' target='_blank'>View detailed instructions...</a></p>",
+	"sim-config-description": "<p>This simulator is designed to simulate real dice rolls based on attack profiles. Given that it is simulating rolls and not running statistical algorithms, the accuracy of the result increases with the number of iterations run.</p><p>Some buff fields, damage and attacks accept standard dice notation. (\"d3\",\"3\",\"2d3\", etc).</p><p><a href='https://relicwargaming.com/aos-simulator-instructions' target='_blank'>View detailed instructions...</a></p>",
 	"sim-config-disclaimer": "<p>This tool is not perfect by any stretch. It isn't capable of simulating every possible attack profile in the game, and its output does not reflect every potential target.</p><p>This simulation tool is copyright &copy; <a href='http://relicwargaming.com'>Relic Wargraming</a>. Age of Sigmar is copyright Game Workshop, Relic Wargaming makes no claim to its ownership. All rights reserved.",
 	"unit-delete": "X",
 	"attacks-number": "Attacks",
