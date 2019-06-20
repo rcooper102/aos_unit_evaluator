@@ -62,6 +62,7 @@ export class Histogram extends Base {
 						    steps: 10,
 						    stepValue: 10,
                             max: 100,
+                            min: 0,
 						},
 				    }],
 				    xAxes: [{
@@ -109,6 +110,14 @@ export class Histogram extends Base {
 	get series() {
 		this._series = [];
 		this.normalize(this.data).forEach((unit) => {
+			const conf = {
+				showLine: true,
+				backgroundColor: Utils.hexToRGB(unit.data.color, 0.2),
+				lineTension: 0.3,
+				borderWidth: 2,
+				borderColor: unit.data.color
+			};
+
 			const curve = [];
 			Object.keys(unit.curve).forEach((i) => {
 				curve.push({
@@ -117,13 +126,19 @@ export class Histogram extends Base {
 				});
 			});
 			this._series.push({ 
-				showLine: true,
+				...conf,
 				label: unit.data.name,
 				data: curve,
-				backgroundColor: Utils.hexToRGB(unit.data.color, 0.2),
-				lineTension: 0.3,
-				borderWidth: 2,
-				borderColor: unit.data.color });
+			});
+			console.log(unit.average);
+			this._series.push({ 
+				...conf,
+				label: unit.data.name,
+				data: [{x:unit.average, y:0},{x:unit.average, y:100}],
+				borderColor:  Utils.hexToRGB(unit.data.color, 0.2),
+				pointRadius: 0,
+				borderWidth: 3,
+			});
 		});
 		return this._series;
 	}
