@@ -13,7 +13,7 @@ export let config = {
 		}
 	],
 	"max-units": 3,
-	"max-buffs": 4,
+	"max-buffs": 3,
 	"simulator": {
 		saves: [2,3,4,5,6,7],
 		"default-save": 5,
