@@ -1,4 +1,5 @@
 import { Toggle } from "../toggle/Toggle";
+import { Utils } from "../../utils";
 
 export class CheckField extends Base {
 	constructor(data) {
@@ -27,9 +28,11 @@ export class CheckField extends Base {
 		this.boxes.forEach((box) => {
 			box.value = false;
 		});
-		target.forEach((item) => {
+		const tar = Array.isArray(target) ? target : [target];
+		tar.forEach((item) => {
+			const value = Utils.isInteger(item) ? Number(item) : item;
 			this.boxes.forEach((box) => {
-				if(box.item === item) {
+				if(box.item === value) {
 					box.value = true;
 				}
 			});
