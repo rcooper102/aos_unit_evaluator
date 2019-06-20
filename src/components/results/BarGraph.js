@@ -62,5 +62,12 @@ class BarGraphBar extends Base {
 		const value = new Label();
 		value.text = data.format ? data.format(data.value) : data.value;
 		this.addChild(value);
+
+		if(data.inner) {
+			const inner = new Base();
+			inner.make("inner");
+			bar.addChild(inner);
+			inner.style.width = `${data.inner/data.value*100}%`;
+		}
 	}
 }

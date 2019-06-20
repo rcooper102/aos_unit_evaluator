@@ -120,6 +120,13 @@ results {
 				width: calc(100% - 100px);
 			}
 
+			inner {
+				display: block;
+				background: rgba(255,255,255,0.5);
+				height: 100%;
+				float: right;
+			}
+
 			label {
 				display: block;
 				float: left;

@@ -20,6 +20,7 @@ export class AverageGraph extends Base {
 		const series = data.map((item) => {
 			return {
 				value: item.average,
+				inner: item.mortalWounds,
 				color: item.data.color,
 				format: (e) => { return Math.round(e*100)/100 },
 				scale: highest,
