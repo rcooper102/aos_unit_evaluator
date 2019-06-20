@@ -130,7 +130,6 @@ export class Histogram extends Base {
 				label: unit.data.name,
 				data: curve,
 			});
-			console.log(unit.average);
 			this._series.push({ 
 				...conf,
 				label: unit.data.name,
