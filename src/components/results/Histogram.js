@@ -134,9 +134,9 @@ export class Histogram extends Base {
 				...conf,
 				label: unit.data.name,
 				data: [{x:unit.average, y:0},{x:unit.average, y:100}],
-				borderColor:  Utils.hexToRGB(unit.data.color, 0.2),
+				borderColor:  Utils.hexToRGB(unit.data.color, 0.4),
 				pointRadius: 0,
-				borderWidth: 3,
+				borderWidth: 1,
 			});
 		});
 		return this._series;
