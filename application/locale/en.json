@@ -21,6 +21,8 @@
 	"save-navigation-label": "Select target's save:",
 	"average-graph-title": "Average Damage",
 	"average-graph-sub-title": "The combined average damage output for all iterations.",
+	"mortal-wounds-graph-title": "Mortal Wounds",
+	"mortal-wounds-graph-sub-title": "How many mortal wounds, if any, are dealt on average.",
 	"whiff-graph-title": "Whiff Rate",
 	"whiff-graph-sub-title": "How often the unit does zero damage.",
 	"reliabiliy-graph-title": "Reliability",
