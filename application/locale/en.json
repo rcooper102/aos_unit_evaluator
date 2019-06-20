@@ -61,7 +61,7 @@
 	"buff-trigger-attacks-autohit": "Do the bonus attacks hit automatically?",
 
 	"toggle-field-yes": "Yes",
-
+	"toggle-field-no": "No",
 
 	"attack-buff-summary-reroll": "Rerolling <em>{[data]}</em> to <em>{[type]}</em>." ,
 	"attack-buff-summary-trigger-mortal": "<em>{[output]}</em> Mortal Wounds triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.<br />Stops attack sequence: <em>{[stop]}</em>",
