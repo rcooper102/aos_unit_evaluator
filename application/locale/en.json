@@ -60,5 +60,12 @@
 	"buff-trigger-attacks-stop": "Does this replace the attack that triggered it?",
 	"buff-trigger-attacks-autohit": "Do the bonus attacks hit automatically?",
 
-	"toggle-field-yes": "Yes"
+	"toggle-field-yes": "Yes",
+
+
+	"attack-buff-summary-reroll": "Rerolling <em>{[data]}</em> to <em>{[type]}</em>." ,
+	"attack-buff-summary-trigger-mortal": "<em>{[output]}</em> Mortal Wounds triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.<br />Stops attack sequence: <em>{[stop]}</em>",
+	"attack-buff-summary-trigger-attacks": "<em>{[output]}</em> attacks triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.<br />Stops attack sequence: <em>{[stop]}.<br />Auto hit: <em>{[autoHit]}</em>.</em>",
+	"attack-buff-summary-trigger-rend": "<em>{[output]}</em> rend triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.",
+	"attack-buff-summary-trigger-damage": "<em>{[output]}</em> damage triggering on <em>{[trigger]}</em> to <em>{[type]}</em>." 
 }

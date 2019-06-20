@@ -1,4 +1,5 @@
 import { NumberField, BuffField } from "../../";
+import { Buff } from "../../../models";
 import "./Attack.scss";
 
 export class Attack extends Base {
@@ -24,11 +25,20 @@ export class Attack extends Base {
 			this.fields[i].addListener(Event.CHANGE, this.onChange, this);
 		});
 
+		this.summary = new AttackBuffSummary();
+		this.addChild(this.summary);
+		this.summary.addListener(MouseEvent.CLICK, this.onBuffs, this);
+
 		this.onChange();
+	}
+
+	onBuffs() {
+		this.fields.buffs.activate();
 	}
 
 	onChange(e) {
 		this.dispatch(new Event(Event.CHANGE, this));
+		this.summary.data = this.fields.buffs.value;
 		if(this.active) {
 			this.removeClass("inactive");
 		} else {
@@ -77,6 +87,7 @@ export class Attack extends Base {
 				}
 			});
 		}
+		this.summary.data = this.fields.buffs.value;
 	}
 
 	shutDown() {
@@ -86,4 +97,57 @@ export class Attack extends Base {
 		}
 	}
 
+}
+
+
+class AttackBuffSummary extends Base {
+
+	static get SCHEMA() {
+		return {
+			[Buff.TYPES.REROLL]: "attack-buff-summary-reroll",
+			[Buff.TYPES.TRIGGER_MORTAL]: "attack-buff-summary-trigger-mortal",
+			[Buff.TYPES.TRIGGER_DAMAGE]: "attack-buff-summary-trigger-damage",
+			[Buff.TYPES.TRIGGER_REND]: "attack-buff-summary-trigger-rend",
+			[Buff.TYPES.TRIGGER_ATTACKS]: "attack-buff-summary-trigger-attacks",
+		}
+	}
+
+	constructor() {
+		super();
+		this.make("buff-summary");
+	}
+
+	get data() {
+		return this._data;
+	}
+
+	set data(target) {
+		this._data = target;
+		this.text = "";
+		this.style.display = "none";
+		if(this._data) {
+			this._data.forEach((item) => {
+				Object.keys(item).forEach((roll) => {
+					this.style.display = "block";
+					const buff = new Base();
+					buff.make("buff");
+					this.addChild(buff);
+					let data = item[roll].data;
+					if(Array.isArray(item[roll].data)) {
+						data = { data: item[roll].data.join(",") };
+					} else {
+						Object.keys(data).forEach((key) => {
+							if(Array.isArray(data[key])) {
+								data[key] = data[key].join(",");
+							}
+						});
+					}
+					buff.text = Locale.gen(AttackBuffSummary.SCHEMA[item[roll].type], {
+						...data,
+						type: roll,
+					});
+				});
+			});
+		}
+	}
 }
