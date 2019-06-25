@@ -55,8 +55,10 @@ export class Simulator extends EventDispatcher {
 			}
 		});
 		let normalized = false;
-		if (highestPoints/lowestPoints < 5) {
-			highestPoints = highestPoints * 5;
+		if (highestPoints/lowestPoints < 5 && highestPoints !== lowestPoints) {
+			if(highestPoints % lowestPoints !== 0) {
+				highestPoints = highestPoints * 5;
+			}
 			normalized = true;
 		}
 		if(!canNormalize) {
