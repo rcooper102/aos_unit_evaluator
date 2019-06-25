@@ -67,7 +67,7 @@
 
 	"attack-buff-summary-reroll": "Rerolling <em>{[data]}</em> to <em>{[type]}</em>." ,
 	"attack-buff-summary-trigger-mortal": "<em>{[output]}</em> Mortal Wounds triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.<br />Stops attack sequence: <em>{[stop]}</em>",
-	"attack-buff-summary-trigger-attacks": "<em>{[output]}</em> attacks triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.<br />Replaces the triggering attack: <em>{[stop]}</em>.<br />Auto hit: <em>{[autoHit]}</em>.",
+	"attack-buff-summary-trigger-attacks": "<em>{[output]}</em> bonus attacks triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.<br />Replaces the triggering attack: <em>{[stop]}</em>.<br />Auto hit: <em>{[autoHit]}</em>.",
 	"attack-buff-summary-trigger-rend": "<em>{[output]}</em> rend triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.",
 	"attack-buff-summary-trigger-damage": "<em>{[output]}</em> damage triggering on <em>{[trigger]}</em> to <em>{[type]}</em>." 
 }
