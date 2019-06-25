@@ -4,11 +4,11 @@ export class ToggleField extends CheckField {
 	constructor(data) {
 		super({ ...data, options: [ Locale.gen("toggle-field-yes")] });
 		this.data = data;
-		this.addListener(Event.CHANGE, this.onChange, this);
+		this.addListener(Event.CHANGE, this.onToggle, this);
 		this.onChange();
 	}
 
-	onChange(e) {
+	onToggle(e) {
 		if(this.value) {
 			this.boxes[0].text = Locale.gen("toggle-field-yes");
 		} else {
