@@ -111,7 +111,7 @@ export class SimConfig extends Base {
 	}
 
 	get valid() {
-		let valid = true;
+		let valid = !!this.units.length;
 		this.units.forEach((item) => { 
 			if(!item.valid) {
 				valid = false;
