@@ -6,25 +6,16 @@
 		"start": "webpack-dev-server --mode none --open",
 		"build": "npm run test && webpack --mode production && npm run copy-files",
 		"build-dev": "webpack --mode none && npm run copy-files",
-		"test": "mocha --exit --require babel-core/register",
+		"test": "mocha --exit --require esm",
 		"copy-files": "mkdir -p ./build && cp ./index.html ./build/index.html && cp -r ./application ./build/application && rm ./application/Application.js && rm ./application/Application.css"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@babel/cli": "7.1.2",
-		"@babel/core": "7.1.2",
-		"@babel/node": "7.0.0",
-		"@babel/preset-env": "7.1.0",
-		"@babel/register": "7.0.0",
-		"babel-core": "^6.26.3",
-		"babel-loader": "^8.0.6",
-		"babel-plugin-transform-decorators-legacy": "^1.3.5",
-		"babel-plugin-transform-object-rest-spread": "^6.26.0",
-		"babel-preset-env": "^1.7.0",
 		"chai": "^4.2.0",
 		"css-loader": "^0.28.11",
+		"esm": "^3.2.25",
 		"extract-text-webpack-plugin": "^4.0.0-beta.0",
 		"mocha": "^6.1.4",
 		"mocha-webpack": "^1.1.0",
@@ -36,6 +27,14 @@
 		"webpack-dev-server": "^3.1.4"
 	},
 	"dependencies": {
+		"@babel/cli": "7.1.2",
+		"@babel/core": "7.1.2",
+		"@babel/node": "7.0.0",
+		"@babel/preset-env": "7.1.0",
+		"@babel/register": "7.0.0",
+		"babel-loader": "^8.0.6",
+		"babel-plugin-transform-object-rest-spread": "^6.26.0",
+		"babel-preset-env": "^1.7.0",
 		"chart.js": "^2.8.0",
 		"clone-deep": "^4.0.1"
 	}
