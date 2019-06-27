@@ -1,9 +1,8 @@
 {
   "presets": [
-    "env"
+    "@babel/preset-env"
   ],
   "plugins": [
-    "transform-decorators-legacy",
     "transform-object-rest-spread"
   ]
 }
