@@ -32,7 +32,7 @@ const download = (url, dest, cb) => {
     });
 };
 
-download(CDN_LINK, OUTPUT, (e)=>{
-    shell.exec(`npx babel ${OUTPUT} -o ${OUTPUT}`);
+download(CDN_LINK , OUTPUT, (e)=>{
+    shell.exec(`npx babel ${OUTPUT} -o ${OUTPUT} >/dev/null 2>&1`);
 });
 

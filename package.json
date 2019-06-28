@@ -7,7 +7,7 @@
 		"build": "npm run test && webpack --mode production && npm run copy-files",
 		"build-dev": "npm run build-osiris && webpack --mode none && npm run copy-files",
 		"test": "npm run build-osiris && mocha --exit --require esm",
-		"build-osiris": "node ./scripts/osiris.js >/dev/null 2>&1",
+		"build-osiris": "node ./scripts/osiris.js",
 		"copy-files": "mkdir -p ./build && cp ./index.html ./build/index.html && cp -r ./application ./build/application && rm ./application/Application.js && rm ./application/Application.css"
 	},
 	"keywords": [],
