@@ -5,10 +5,10 @@
 	"scripts": {
 		"start": "npm run build-osiris && webpack-dev-server --mode none --open",
 		"build": "npm run test && webpack --mode production && npm run copy-files",
-		"build-dev": "npm run build-osiris && webpack --mode none && npm run copy-files",
+		"build-dev": "npm run copy-files && npm run build-osiris && webpack --mode none",
 		"test": "npm run build-osiris && mocha --exit --require esm",
 		"build-osiris": "node ./scripts/osiris.js",
-		"copy-files": "mkdir -p ./build && cp ./index.html ./build/index.html && cp -r ./application ./build/application && rm ./application/Application.js && rm ./application/Application.css"
+		"copy-files": "rm -r ./build && mkdir -p ./build && cp ./index.html ./build/index.html && cp -r ./application ./build/application && rm ./application/Application.js && rm ./application/Application.css"
 	},
 	"keywords": [],
 	"author": "",
