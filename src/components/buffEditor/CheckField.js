@@ -25,6 +25,9 @@ export class CheckField extends Base {
 	}
 
 	set value(target) {
+		if(typeof target === "string") {
+			target = target.split(",");
+		}
 		this.boxes.forEach((box) => {
 			box.value = false;
 		});
