@@ -3,10 +3,11 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"start": "webpack-dev-server --mode none --open",
+		"start": "npm run build-osiris && webpack-dev-server --mode none --open",
 		"build": "npm run test && webpack --mode production && npm run copy-files",
-		"build-dev": "webpack --mode none && npm run copy-files",
-		"test": "mocha --exit --require esm",
+		"build-dev": "npm run build-osiris && webpack --mode none && npm run copy-files",
+		"test": "npm run build-osiris && mocha --exit --require esm",
+		"build-osiris": "node ./scripts/osiris.js >/dev/null 2>&1",
 		"copy-files": "mkdir -p ./build && cp ./index.html ./build/index.html && cp -r ./application ./build/application && rm ./application/Application.js && rm ./application/Application.css"
 	},
 	"keywords": [],
@@ -24,7 +25,8 @@
 		"style-loader": "^0.21.0",
 		"webpack": "^4.34.0",
 		"webpack-cli": "^3.1.2",
-		"webpack-dev-server": "^3.1.4"
+		"webpack-dev-server": "^3.1.4",
+		"shelljs": "^0.8.3"
 	},
 	"dependencies": {
 		"@babel/cli": "7.1.2",
