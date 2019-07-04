@@ -167,8 +167,32 @@ describe('Utils', function () {
                 expect(Utils.multiplyDiceValue(item.test, item.multiply)).to.equal(item.expect);  
             }); 
         });
+    }); 
+    describe('lowestCommonMultiple', function () { 
+        const cases = [
+            { test: [10, 20, 40], expect: 40 },
+            { test: [30, 50, 40], expect: 600 },
+            { test: [1, 3, 7], expect: 21 },
+            { test: [1, 4, 7], expect: 28 },
+            { test: [20], expect: 20 },
+            { test: [20, 20], expect: 20 },
+            { test: [], expect: 0 },
+            { test: "test", expect: 0 },
+            { test: ["test"], expect: 0 },
+            { test: ["1", 0], expect: 0 },
+            { test: null, expect: 0 },
+            { test: {}, expect: 0 },
+        ];
+
+        cases.forEach((item) => {
+            it(`Should properly computer lowest multiple, case: ${String(item.test)}, expect: ${item.expect}`, function () {
+                expect(Utils.lowestCommonMultiple(item.test)).to.equal(item.expect);  
+            }); 
+        });
     });   
 });
+
+
 
 
 

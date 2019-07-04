@@ -116,4 +116,23 @@ export class Utils {
 		return '';
 	}
 
+	static lowestCommonMultiple	(target) {
+		if(!Array.isArray(target) || target.length === 0) {
+			return 0;
+		}
+		for(let i = 0; i<target.length; i++) {
+			if(typeof target[i] !== "number") {
+				return 0;
+			}
+		}
+    	let numbers = target.sort();
+    	let common = 0;
+    	let failed = numbers;
+    	while(failed.length > 0) {
+    		common += numbers[0];
+    		failed = numbers.filter((item) => common < item || common % item !== 0);
+    	}
+    	return common;
+	}
+
 }

@@ -43,33 +43,24 @@ export class Simulator extends EventDispatcher {
 
 	normalizePoints(data) {
 		let canNormalize = true;
-		let highestPoints = 0;
-		let lowestPoints = 0;
+		let points = [];
 		data.forEach((item) => {
 			if(!item.points) {
 				canNormalize = false;
 			} else {
-				const points = Number(item.points);
-				highestPoints =points > highestPoints ? points : highestPoints;
-				lowestPoints = points < lowestPoints || !lowestPoints ? points : lowestPoints;
+				points.push(Number(item.points));
 			}
 		});
-		let normalized = false;
-		if (highestPoints/lowestPoints < 5 && highestPoints !== lowestPoints) {
-			if(highestPoints % lowestPoints !== 0) {
-				highestPoints = highestPoints * 5;
-			}
-			normalized = true;
-		}
+		let normalizedPoint = Utils.lowestCommonMultiple(points);		
 		if(!canNormalize) {
 			return data;
 		} else {
 			const newData = cloneDeep(data);
 			newData.forEach((item) => {
-				const ratio = highestPoints / item.points;
+				const ratio = normalizedPoint / item.points;
 				item.attacks.forEach((attack) => {
 					attack['number'] = Utils.multiplyDiceValue(attack['number'], ratio);
-					item['normalizedPoints'] = normalized ? highestPoints : null;
+					item['normalizedPoints'] = normalizedPoint ? normalizedPoint : null;
 				});
 			});
 			return newData;
