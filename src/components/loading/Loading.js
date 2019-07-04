@@ -10,7 +10,7 @@ export class Loading extends Base {
 
 	set progress(target) {
 		this._progress = target;
-		this.text = Locale.gen("loading-message", { progress: `${Math.round(target*100)}%` });
+		this.text = Locale.gen("loading-message", { progress: `${Math.round(target*100)}` });
 	}
 
 	get progress() {

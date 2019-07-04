@@ -1,11 +1,26 @@
 loading {
-	font-size:36px;
+	font-size:30px;
 	padding:80px;
 	text-align: center;
-	color:#999;
+	color:#CCC;
 	line-height:1.3;
 	display: block;
 	float:right;
 	width:70%;
-	box-sizing: border-box;	
+	box-sizing: border-box;
+
+	&:before {
+		content:"";
+		display: block;
+		width: 200px;
+		height: 200px;
+		background: url(https://relicwargaming.com/templates/images/relic-wargaming-skull-mono.png) center;
+		background-size: contain;
+		background-repeat: no-repeat;
+		margin: 0 auto;	
+		opacity: 0.1;
+		margin-bottom: -130px;
+		position: relative;
+		left: 3px;
+	}
 }

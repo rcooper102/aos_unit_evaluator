@@ -15,11 +15,25 @@ title {
 	}
 
 	h2 {
-		color: #cc0b0b;
+		color: #fff;
 		font-size: 16px;
+		opacity: 0.5;
+		position: relative;
 
 		a {
-			color: #cc0b0b;
+			overflow: hidden;
+			text-indent: -5000px;
+			width: 400px;
+			height: 20px;
+			background: url(https://relicwargaming.com/templates/images/relic-wargaming-mono.png);
+			background-size: contain;
+			background-repeat: no-repeat;	
+			display: inline-block;
+			position: absolute;
+			left: 23px;
+			top: -2px;
+			filter: invert(1);
+			
 		}		
 	}
 
