@@ -186,7 +186,7 @@ describe('Utils', function () {
         ];
 
         cases.forEach((item) => {
-            it(`Should properly computer lowest multiple, case: ${String(item.test)}, expect: ${item.expect}`, function () {
+            it(`Should properly compute lowest multiple, case: ${String(item.test)}, expect: ${item.expect}`, function () {
                 expect(Utils.lowestCommonMultiple(item.test)).to.equal(item.expect);  
             }); 
         });
