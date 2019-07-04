@@ -20,4 +20,5 @@ export let config = {
 		iterations: [30000, 10000, 5000, 1000],
 		"default-iterations": 5000,
 	},	
+	"hide-point-threshold": 40,
 };

@@ -1,4 +1,5 @@
 import { Utils } from "../../utils";
+import { config } from "../../config.js";
 const Chart = require("chart.js");
 const cloneDeep = require('clone-deep');
 
@@ -115,7 +116,8 @@ export class Histogram extends Base {
 				backgroundColor: Utils.hexToRGB(unit.data.color, 0.2),
 				lineTension: 0.3,
 				borderWidth: 2,
-				borderColor: unit.data.color
+				borderColor: unit.data.color,
+				pointRadius: Object.keys(unit.curve).length > config['hide-point-threshold'] ? 0 : 1,
 			};
 
 			const curve = [];
