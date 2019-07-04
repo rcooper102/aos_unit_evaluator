@@ -45,7 +45,7 @@ export class Simulator extends EventDispatcher {
 		let canNormalize = true;
 		let points = [];
 		data.forEach((item) => {
-			if(!item.points) {
+			if(!item.points || data.length === 1) {
 				canNormalize = false;
 			} else {
 				points.push(Number(item.points));
