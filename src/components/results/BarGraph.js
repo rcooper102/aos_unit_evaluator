@@ -27,6 +27,9 @@ export class BarGraph extends Base {
 		data.forEach((item) => {
 			max = item.value > max ? item.value : max;
 		});
+		if(max === 0) {
+			max = 1;
+		}
 
 		data.forEach((item) => {
 			const bar = new BarGraphBar(item,max);
