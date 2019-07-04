@@ -121,7 +121,7 @@ export class Utils {
 			return 0;
 		}
 		for(let i = 0; i<target.length; i++) {
-			if(typeof target[i] !== "number") {
+			if(typeof target[i] !== "number" || target[i] % 1 !== 0) {
 				return 0;
 			}
 		}

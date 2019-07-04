@@ -182,6 +182,7 @@ describe('Utils', function () {
             { test: ["1", 0], expect: 0 },
             { test: null, expect: 0 },
             { test: {}, expect: 0 },
+            { test: [1.5], expect: 0 },
         ];
 
         cases.forEach((item) => {
