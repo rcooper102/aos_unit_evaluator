@@ -33,6 +33,7 @@
 	"potential-graph-sub-title": "Highest damage recorded during simulation.",
 	"results-title": "Simulation Results <strong>({[iterations]} Iterations)</strong>",
 	"results-normalized": "Points normalized to: <strong>{[points]}pts</strong>",
+	"results-normalized-details": "When normalized, all units are multiplied to the lowest common multiplier of their pts costs in order to facilitate a fair comparison. (Note this can often lead to very high normalized points that would never exist in the real world. If you wish to disable points normalization, simply don't input points values for all the units.)", 
 	"buff-add": "Add {[name]} Field",
 	"buff-editor-field-hit": "Triggers By Hit Roll",
 	"buff-editor-field-wound": "Trigger By Wound Roll",

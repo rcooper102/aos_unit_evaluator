@@ -26,6 +26,7 @@ export class Results extends Base {
 			const norm = new Base;
 			norm.make("normalized");
 			norm.text = Locale.gen("results-normalized", { points: normalizedPoints });
+			norm.title = Locale.gen("results-normalized-details");
 			this.addChild(norm);
 		}
 
