@@ -26,6 +26,7 @@ export class Unit extends Base {
 
 		this.unitPoints = new Input();
 		this.unitPoints.obj.placeholder = Locale.gen("unit-points");
+		this.unitPoints.title = Locale.gen("unit-points-details");
 		this.unitPoints.addClass("points");
 		this.unitPoints.addListener(InputEvent.CHANGE, this.onChange, this);
 		this.addChild(this.unitPoints);
