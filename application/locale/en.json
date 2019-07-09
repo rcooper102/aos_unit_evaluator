@@ -21,6 +21,7 @@
 	"save-navigation-label": "Select target's save:",
 	"average-graph-title": "Average Damage",
 	"average-graph-sub-title": "The combined average damage output, including mortals, for all iterations.",
+	"average-graph-detail": "The average graph is defined as the amount of damage dealt AFTER save rolls have been deducted. This includes final calculations on variable damage and mortal wounds. When mortal wounds are present the bar is split into two tones, the lighter tone reflects damage done by mortal wounds.",
 	"mortal-wounds-graph-title": "Mortal Wounds",
 	"mortal-wounds-graph-sub-title": "How many mortal wounds, if any, are dealt on average.",
 	"whiff-graph-title": "Whiff Rate",

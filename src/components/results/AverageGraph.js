@@ -7,6 +7,7 @@ export class AverageGraph extends Base {
 		super();
 		this.make("average-graph");
 		this.addClass("bar-graph");
+		this.title = Locale.gen("average-graph-detail");
 	}
 
 	update(data) {
