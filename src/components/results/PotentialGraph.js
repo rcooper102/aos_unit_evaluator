@@ -7,6 +7,7 @@ export class PotentialGraph extends Base {
 		super();
 		this.make("potential-graph");
 		this.addClass("bar-graph");
+		this.title = Locale.gen("potential-graph-detail");
 	}
 
 	update(data) {

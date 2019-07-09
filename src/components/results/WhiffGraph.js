@@ -7,6 +7,7 @@ export class WhiffGraph extends Base {
 		super();
 		this.make("whiff-graph");
 		this.addClass("bar-graph");
+		this.title = Locale.gen("whiff-graph-detail");
 	}
 
 	update(data) {

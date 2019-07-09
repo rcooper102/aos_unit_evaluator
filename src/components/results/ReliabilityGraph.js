@@ -7,6 +7,7 @@ export class ReliabilityGraph extends Base {
 		super();
 		this.make("reliabiliy-graph");
 		this.addClass("bar-graph");
+		this.title = Locale.gen("reliabiliy-graph-detail");
 	}
 
 	update(data) {
