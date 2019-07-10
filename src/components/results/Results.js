@@ -6,6 +6,7 @@ import { WhiffGraph } from "./WhiffGraph.js";
 import { ReliabilityGraph } from "./ReliabilityGraph.js";
 import { PotentialGraph } from "./PotentialGraph.js";
 import { MortalWoundsGraph } from "./MortalWoundsGraph.js";
+import { DependabilityGraph } from "./DependabilityGraph.js";
 import "./Results.scss";
 
 export class Results extends Base {
@@ -41,6 +42,7 @@ export class Results extends Base {
 			new WhiffGraph(),
 			new PotentialGraph(),
 			new MortalWoundsGraph(),
+			new DependabilityGraph(),
 		];
 
 		this.components.forEach((item) => {

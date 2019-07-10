@@ -138,13 +138,18 @@ results {
 				width:100px;
 				border-top-left-radius: 20px;
 				border-bottom-left-radius: 20px;
-			
-				text-align:right;
+				text-align: right;
 				font-size: 16px;
 				color: #333;
 				padding:13px 10px;
 				box-sizing: border-box;
 				background: #FFF;
+				span {
+					opacity: 0.5;
+					font-size: 11px;
+					position: relative;
+					top: -2px;
+				}
 			}
 		}
 	}
