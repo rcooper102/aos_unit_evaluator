@@ -32,7 +32,7 @@ export class DependabilityGraph extends Base {
 				inner: 1-(out.length / item.results.length),
 				color: item.data.color,
 				format: (e) => { return `${e} <span>(${Utils.formatPercent(out.length / item.results.length)})</span>` },
-				scale: threshold,
+				scale: highest,
 			};
 		});
 		this.graph = new BarGraph(series, Locale.gen("dependability-graph-title"), Locale.gen("dependability-graph-sub-title"))
