@@ -29,7 +29,6 @@ export class DependabilityGraph extends Base {
 
 			return {
 				value: threshold,
-				inner: 1-(out.length / item.results.length),
 				color: item.data.color,
 				format: (e) => { return `${e} <span>(${Utils.formatPercent(out.length / item.results.length)})</span>` },
 				scale: highest,
