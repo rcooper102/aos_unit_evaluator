@@ -21,7 +21,7 @@ export class DependabilityGraph extends Base {
 
 		const series = data.map((item) => {
 			let top = [...item.results.sort((a,b) => a.total - b.total)];
-			top.splice(0,Math.floor(top.length*0.05));
+			top.splice(0,Math.floor(top.length*0.1));
 			top = top.filter((item) => item.total > 0)
 			const threshold = top[0].total;
 

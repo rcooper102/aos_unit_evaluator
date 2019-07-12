@@ -29,7 +29,7 @@
 	"whiff-graph-sub-title": "How often the unit does zero damage.",
 	"dependability-graph-title": "Dependability",
 	"dependability-graph-sub-title": "What percentage of attacks meet a minimum threshold or more.",
-	"dependability-graph-detail": "The dependability graph determines the minimum amount of damage that occurs in the top 95% of all attacks that do more than zero damage. It then display a bar representing the percentage of time that this damage threshold or higher is achieved. The goal of this graph is to communicate how often you can count on the unit to achieve a minimum threshold of damage. This allows you to measure what you can expect from the unit, even if you roll poorly. The ratio is communicated as a fill of the full bar.", 
+	"dependability-graph-detail": "The dependability graph determines the minimum amount of damage that occurs in the top 90% of all attacks that do more than zero damage. It then display a bar representing the percentage of time that this damage threshold or higher is achieved. The goal of this graph is to communicate how often you can count on the unit to achieve a minimum threshold of damage. This allows you to measure what you can expect from the unit, even if you roll poorly. The ratio is communicated as a fill of the full bar.", 
 	"whiff-graph-detail": "For many units, the most common outcome of a given attack is 0 damage. Units with the high whiff rate may be considered a poor option even if their average damage is high as they are likely to fail you during an important situation.",
 	"reliabiliy-graph-title": "Reliability",
 	"reliabiliy-graph-sub-title": "How often the unit deals average damage or better.",
