@@ -7,6 +7,7 @@ import { ReliabilityGraph } from "./ReliabilityGraph.js";
 import { PotentialGraph } from "./PotentialGraph.js";
 import { MortalWoundsGraph } from "./MortalWoundsGraph.js";
 import { DependabilityGraph } from "./DependabilityGraph.js";
+import { SaveComparison } from "./SaveComparison.js";
 import "./Results.scss";
 
 export class Results extends Base {
@@ -43,6 +44,7 @@ export class Results extends Base {
 			new PotentialGraph(),
 			new MortalWoundsGraph(),
 			new DependabilityGraph(),
+			new SaveComparison(this.data),
 		];
 
 		this.components.forEach((item) => {
