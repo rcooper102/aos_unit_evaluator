@@ -10,13 +10,21 @@ results {
 	h3 {
 		color: #999;
 		font-size: 20px;
-		margin-bottom: 20px;
+		margin-bottom: 5px;
 	}
 
 	h4 {
 		font-size: 16px;
 		color: #333;
 		margin-bottom:5px;
+	}
+
+	rolls {
+		display: block;
+		font-size: 12px;
+		margin-bottom: 20px;
+		color: #BBB;
+		font-weight: bold;
 	}
 
 	p {
@@ -30,7 +38,7 @@ results {
 		display:block;
 		margin-bottom: 20px;
 		color: #333;
-		margin-top: -15px;
+		margin-top: -5px;
 
 		strong {
 			color: #cc0b0b;

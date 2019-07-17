@@ -1,3 +1,5 @@
+let rolls = 0;
+
 export class Utils {
 
 	static isInteger(target) {
@@ -44,6 +46,7 @@ export class Utils {
 		var howmany = diesplit[0] * 1; //Number of dice to roll
 		var diesize = diesplit[1] * 1; //How many sides per die
 		var total = 0; //Total starts as 0
+		rolls += howmany;
 
 		for (var i = 0; i < howmany; i++) { //Loop a number of times equal to the number of dice
 			total += Math.floor(Math.random() * diesize) + 1; //Random number between 1 and diesize
@@ -51,6 +54,14 @@ export class Utils {
 		total += modifier; //Add the modifier
 
 		return total; //Return the final total
+	}
+
+	static get rollCount() {
+		return rolls;
+	}
+
+	static resetRollCount() {
+		rolls = 0;
 	}
 
 	static generateRandomColor() {
@@ -74,6 +85,14 @@ export class Utils {
 		if(x <= 1000000000) { return Math.round((x/1000000)) + "M";	}
 		if(x <= 1000000000000) {	return Math.round((x/1000000000)) + "B"; }
 		return x;
+	}
+
+	static commaNumberFormat(x) {
+	    x = x.toString();
+	    const pattern = /(-?\d+)(\d{3})/;
+	    while (pattern.test(x))
+	        x = x.replace(pattern, "$1,$2");
+	    return x;
 	}
 
 	static hexToRGB(hex, alpha) {

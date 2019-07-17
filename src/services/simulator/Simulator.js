@@ -7,6 +7,7 @@ export class Simulator extends EventDispatcher {
 
 	constructor(data, iterations) {
 		super();
+		Utils.resetRollCount();
 		this.config = config.simulator;
 		this.data = this.normalizePoints(data);
 		this.results = {};

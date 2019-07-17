@@ -23,6 +23,11 @@ export class Results extends Base {
 		title.text = Locale.gen("results-title", { iterations: Utils.bigNumberFormat(data[Object.keys(data)[0]][0].results.length) });
 		this.addChild(title);
 
+		const sub = new Base();
+		sub.make("rolls");
+		sub.text = Locale.gen("results-sub-title", { rolls:Utils.commaNumberFormat(Utils.rollCount) });
+		this.addChild(sub);
+
 		const normalizedPoints = data[Object.keys(data)[0]][0].data.normalizedPoints || null;
 		if(normalizedPoints) {
 			const norm = new Base;
