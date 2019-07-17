@@ -34,7 +34,7 @@ export class SaveComparison extends Base {
 		  		responsive: true,
 		  		maintainAspectRatio: false,
 		  		animation: false,
-		  		fill: true,
+		  		fill: false,
 		  		elements: {
                     point:{
                         radius: 1
@@ -81,11 +81,11 @@ export class SaveComparison extends Base {
 				if(!series[unit.data.color]) {
 					const conf = {
 						showLine: true,
-						backgroundColor: Utils.hexToRGB(unit.data.color, 0.2),
+						backgroundColor: "rgba(0,0,0,0)",
 						lineTension: 0.3,
 						borderWidth: 2,
 						borderColor: unit.data.color,
-						pointRadius: 1,
+						pointRadius: 2,
 					};
 					series[unit.data.color] = {
 						...conf,
