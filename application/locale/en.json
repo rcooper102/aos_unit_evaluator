@@ -33,7 +33,7 @@
 	"whiff-graph-detail": "For many units, the most common outcome of a given attack is 0 damage. Units with the high whiff rate may be considered a poor option even if their average damage is high as they are likely to fail you during an important situation.",
 	"reliabiliy-graph-title": "Consistency",
 	"reliabiliy-graph-sub-title": "How often the unit deals average damage or better.",
-	"reliabiliy-graph-detail": "The reliability graph is meant to communicate an expectation of how consistently a given unit is able to deal average damage. The calculation is as simple as determining how often the unit deals average damage or better. This metric is critical in evaluating the weakness of units with high average damage but are prone to spikes of high damage but usually do very little.",
+	"reliabiliy-graph-detail": "The consistency graph is meant to communicate an expectation of how consistently a given unit is able to deal average damage. The calculation is as simple as determining how often the unit deals average damage or better. This metric is critical in evaluating the weakness of units with high average damage but are prone to spikes of high damage but usually do very little.",
 	"save-comparison-title": "Save Comparison",
 	"save-comparison-sub-title": "A visual representation of how different save levels impact average damage.",
 	"save-comparison-damage": "Average Damage",
