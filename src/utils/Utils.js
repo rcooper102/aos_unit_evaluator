@@ -11,7 +11,7 @@ export class Utils {
 		if(Utils.isInteger(target)) {
 			return true;
 		}
-		if (/^[\d+]*d\d+[\+|\-]?\d*$/.test(String(target).toLowerCase())) {
+		if (/^[\d+]*d\d+[\+|\-]?\d*$/i.test(String(target))) {
 			return true;
 		}
 		return false;
@@ -46,12 +46,12 @@ export class Utils {
 		let total = 0; //Total starts as 0
 		rolls += howmany;
 
-		for (let i = 0; i < howmany; i++) { //Loop a number of times equal to the number of dice
+		let i;
+		for (i = 0; i < howmany; i++) { //Loop a number of times equal to the number of dice
 			total += Math.floor(Math.random() * diesize) + 1; //Random number between 1 and diesize
 		}
-		total += modifier; //Add the modifier
 
-		return total; //Return the final total
+		return total + modifier; //Return the final total
 	}
 
 	static get rollCount() {
