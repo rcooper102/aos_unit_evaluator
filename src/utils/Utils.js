@@ -27,24 +27,24 @@ export class Utils {
 		}
 
 		let modifier = 0;
-		let dicesplit = [dice];
+		let diceSplit = [dice];
 		if (dice.indexOf("-") !== -1) { //If no minus sign (XdY+Z)
-			dicesplit = dice.split('-'); //Split for plus sign
-			modifier = +(dicesplit[1]) * -1; //Number to add to total
+			diceSplit = dice.split('-'); //Split for plus sign
+			modifier = -(diceSplit[1]); //Number to add to total
 		} else if(dice.indexOf("+") !== -1) { //If there is a minus sign (XdY-Z)
-			dicesplit = dice.split('+'); //Split for minus sign
-			modifier = +(dicesplit[1]); //Number to add to total
+			diceSplit = dice.split('+'); //Split for minus sign
+			modifier = +(diceSplit[1]); //Number to add to total
 		}
 
-		const diesplit = dicesplit[0].split('d'); //Take the first section (XdY) and split for d
-		const howmany = diesplit[0] ? +(diesplit[0]) : 1; //Number of dice to roll
-		const diesize = +(diesplit[1]); //How many sides per die
+		const dieSplit = diceSplit[0].split('d'); //Take the first section (XdY) and split for d
+		const howMany = dieSplit[0] ? +(dieSplit[0]) : 1; //Number of dice to roll
+		const dieSize = +(dieSplit[1]); //How many sides per die
 		let total = 0; //Total starts as 0
-		rolls += howmany;
+		rolls += howMany;
 
 		let i;
-		for (i = 0; i < howmany; i++) { //Loop a number of times equal to the number of dice
-			total += Math.floor(Math.random() * diesize) + 1; //Random number between 1 and diesize
+		for (i = 0; i < howMany; i++) { //Loop a number of times equal to the number of dice
+			total += Math.floor(Math.random() * dieSize) + 1; //Random number between 1 and diesize
 		}
 
 		return total + modifier; //Return the final total
