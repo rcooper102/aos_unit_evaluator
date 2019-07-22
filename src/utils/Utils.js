@@ -122,7 +122,7 @@ export class Utils {
 		if(typeof ratio === 'number') {
 			if(Utils.isDiceNotation(target)) {
 				ratio = Math.round(ratio);
-				let broken = String(target).toLowerCase().split("d");
+				const broken = String(target).toLowerCase().split("d");
 				broken[0] = broken[0] === "" ? 1 : broken[0];
 				broken[0] = Math.round(broken[0] * ratio);
 				return broken.join("d");
