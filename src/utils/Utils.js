@@ -26,10 +26,6 @@ export class Utils {
 			return +(dice);
 		}
 
-		if(dice[0]=="d") { //If the first character is a d (dY)
-			dice = "1"+dice; //Add a 1
-		}
-
 		let modifier = 0;
 		let dicesplit = [dice];
 		if (dice.indexOf("-") !== -1) { //If no minus sign (XdY+Z)
@@ -41,7 +37,7 @@ export class Utils {
 		}
 
 		const diesplit = dicesplit[0].split('d'); //Take the first section (XdY) and split for d
-		const howmany = +(diesplit[0]); //Number of dice to roll
+		const howmany = diesplit[0] ? +(diesplit[0]) : 1; //Number of dice to roll
 		const diesize = +(diesplit[1]); //How many sides per die
 		let total = 0; //Total starts as 0
 		rolls += howmany;
