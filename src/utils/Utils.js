@@ -23,32 +23,30 @@ export class Utils {
 			return 0; //Return if input invalid
 		}
 		if(Utils.isInteger(dice)) {
-			return Number(dice);
+			return +(dice);
 		}
 
 		if(dice[0]=="d") { //If the first character is a d (dY)
 			dice = "1"+dice; //Add a 1
 		}
-		var minus = dice.search(/\-/); //Search for minus sign
 
-		if (minus == -1 && dice.search(/\+/) == -1) { //If no minus sign and no plus sign (XdY)
-			dice += '+0'; //Add a +0
-		}
-		if (minus == -1) { //If no minus sign (XdY+Z)
-			var dicesplit = dice.split('+'); //Split for plus sign
-			var modifier = dicesplit[1] * 1; //Number to add to total
-		} else { //If there is a minus sign (XdY-Z)
-			var dicesplit = dice.split('-'); //Split for minus sign
-			var modifier = ("-" + dicesplit[1]) * 1; //Number to add to total
+		let modifier = 0;
+		let dicesplit = [dice];
+		if (dice.indexOf("-") !== -1) { //If no minus sign (XdY+Z)
+			dicesplit = dice.split('-'); //Split for plus sign
+			modifier = +(dicesplit[1]) * -1; //Number to add to total
+		} else if(dice.indexOf("+") !== -1) { //If there is a minus sign (XdY-Z)
+			dicesplit = dice.split('+'); //Split for minus sign
+			modifier = +(dicesplit[1]); //Number to add to total
 		}
 
-		var diesplit = dicesplit[0].split('d'); //Take the first section (XdY) and split for d
-		var howmany = diesplit[0] * 1; //Number of dice to roll
-		var diesize = diesplit[1] * 1; //How many sides per die
-		var total = 0; //Total starts as 0
+		const diesplit = dicesplit[0].split('d'); //Take the first section (XdY) and split for d
+		const howmany = +(diesplit[0]); //Number of dice to roll
+		const diesize = +(diesplit[1]); //How many sides per die
+		let total = 0; //Total starts as 0
 		rolls += howmany;
 
-		for (var i = 0; i < howmany; i++) { //Loop a number of times equal to the number of dice
+		for (let i = 0; i < howmany; i++) { //Loop a number of times equal to the number of dice
 			total += Math.floor(Math.random() * diesize) + 1; //Random number between 1 and diesize
 		}
 		total += modifier; //Add the modifier

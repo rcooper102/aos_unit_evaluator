@@ -61,6 +61,8 @@ describe('Utils', function () {
             { test: "1", expect: 1 },
             { test: "3d3", expect: 6 },
             { test: "d6", expect: 3.5 },
+            { test: "d6+1", expect: 4.5 },
+            { test: "d6-1", expect: 2.5 },
             { test: "D3", expect: 2 },
             { test: " ", expect: 0 },
             { test: "d3d", expect: 0 },
