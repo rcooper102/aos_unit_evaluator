@@ -44,15 +44,15 @@ export class Simulator extends EventDispatcher {
 
 	normalizePoints(data) {
 		let canNormalize = true;
-		let points = [];
+		const points = [];
 		data.forEach((item) => {
 			if(!item.points || data.length === 1) {
 				canNormalize = false;
 			} else {
-				points.push(Number(item.points));
+				points.push(+(item.points));
 			}
 		});
-		let normalizedPoint = Utils.lowestCommonMultiple(points);		
+		const normalizedPoint = Utils.lowestCommonMultiple(points);		
 		if(!canNormalize) {
 			return data;
 		} else {

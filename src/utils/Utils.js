@@ -3,15 +3,15 @@ let rolls = 0;
 export class Utils {
 
 	static isInteger(target) {
-		const tar = String(target);
-		return tar !== '' && !!tar.match(/^[0-9]*$/);
+		const val = target && target.trim ? target.trim() : target;
+		return !!val && !!Number.isInteger(+val);
 	}
 
 	static isDiceNotation(target) {
 		if(Utils.isInteger(target)) {
 			return true;
 		}
-		if (/^[\d+]*d\d+[\+|\-]?\d*$/.test(String(target).toLowerCase())) {
+		if (/^[\d+]*d\d+[\+|\-]?\d*$/i.test(String(target))) {
 			return true;
 		}
 		return false;
@@ -23,37 +23,31 @@ export class Utils {
 			return 0; //Return if input invalid
 		}
 		if(Utils.isInteger(dice)) {
-			return Number(dice);
+			return +(dice);
 		}
 
-		if(dice[0]=="d") { //If the first character is a d (dY)
-			dice = "1"+dice; //Add a 1
-		}
-		var minus = dice.search(/\-/); //Search for minus sign
-
-		if (minus == -1 && dice.search(/\+/) == -1) { //If no minus sign and no plus sign (XdY)
-			dice += '+0'; //Add a +0
-		}
-		if (minus == -1) { //If no minus sign (XdY+Z)
-			var dicesplit = dice.split('+'); //Split for plus sign
-			var modifier = dicesplit[1] * 1; //Number to add to total
-		} else { //If there is a minus sign (XdY-Z)
-			var dicesplit = dice.split('-'); //Split for minus sign
-			var modifier = ("-" + dicesplit[1]) * 1; //Number to add to total
+		let modifier = 0;
+		let diceSplit = [dice];
+		if (dice.indexOf("-") !== -1) { //If no minus sign (XdY+Z)
+			diceSplit = dice.split('-'); //Split for plus sign
+			modifier = -(diceSplit[1]); //Number to add to total
+		} else if(dice.indexOf("+") !== -1) { //If there is a minus sign (XdY-Z)
+			diceSplit = dice.split('+'); //Split for minus sign
+			modifier = +(diceSplit[1]); //Number to add to total
 		}
 
-		var diesplit = dicesplit[0].split('d'); //Take the first section (XdY) and split for d
-		var howmany = diesplit[0] * 1; //Number of dice to roll
-		var diesize = diesplit[1] * 1; //How many sides per die
-		var total = 0; //Total starts as 0
-		rolls += howmany;
+		const dieSplit = diceSplit[0].split('d'); //Take the first section (XdY) and split for d
+		const howMany = dieSplit[0] ? +(dieSplit[0]) : 1; //Number of dice to roll
+		const dieSize = +(dieSplit[1]); //How many sides per die
+		let total = 0; //Total starts as 0
+		rolls += howMany;
 
-		for (var i = 0; i < howmany; i++) { //Loop a number of times equal to the number of dice
-			total += Math.floor(Math.random() * diesize) + 1; //Random number between 1 and diesize
+		let i;
+		for (i = 0; i < howMany; i++) { //Loop a number of times equal to the number of dice
+			total += Math.floor(Math.random() * dieSize) + 1; //Random number between 1 and diesize
 		}
-		total += modifier; //Add the modifier
 
-		return total; //Return the final total
+		return total + modifier; //Return the final total
 	}
 
 	static get rollCount() {
@@ -102,7 +96,7 @@ export class Utils {
 		if(hex.substr(0,1) === "#") {
 			hex =hex.substr(1);
 		}
-	    var r = parseInt(hex.substr(0, 1)+"0", 16),
+	    let r = parseInt(hex.substr(0, 1)+"0", 16),
 	        g = parseInt(hex.substr(1, 1)+"0", 16),
 	        b = parseInt(hex.substr(2, 1)+"0", 16);
 
@@ -124,7 +118,7 @@ export class Utils {
 		if(typeof ratio === 'number') {
 			if(Utils.isDiceNotation(target)) {
 				ratio = Math.round(ratio);
-				let broken = String(target).toLowerCase().split("d");
+				const broken = String(target).toLowerCase().split("d");
 				broken[0] = broken[0] === "" ? 1 : broken[0];
 				broken[0] = Math.round(broken[0] * ratio);
 				return broken.join("d");

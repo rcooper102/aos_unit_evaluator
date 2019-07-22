@@ -22,12 +22,13 @@ export class AttackSimulator {
 	}
 
 	makeAttacks(attacks, canSpawnAttacks = true, autoHit = false, autoWound = false) {
-		for(let i = 0; i < attacks; i++) {
+		let i;
+		for(i = 0; i < attacks; i++) {
 			const hit = this.comparisonRoll(this.data.hit, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.hit, canSpawnAttacks, autoHit);
 			if(hit.result) {
 				const wound = this.comparisonRoll(this.data.wound, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.wound, canSpawnAttacks);	
 				if(wound.result) {
-					const rend = hit.rendOverride || wound.rendOverride || Number(this.data.rend);
+					const rend = hit.rendOverride || wound.rendOverride || +(this.data.rend);
 					const damage = hit.damageOverride || wound.damageOverride || this.magnitudeRoll(this.data.damage);
 					if(this.comparisonRoll(this.save + rend, AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
 						this._damage += damage;
@@ -39,7 +40,7 @@ export class AttackSimulator {
 
 	comparisonRoll(difficulty, type, buffs, canSpawnAttacks, auto = false) {
 		if(auto) { return { result: true } }
-		const diff = Number(difficulty);
+		const diff = +(difficulty);
 		let roll = Utils.rollDice();
 		let result = false;
 		
