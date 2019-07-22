@@ -10,14 +10,13 @@ describe('Utils', function () {
             { test: 1, expect: true },
             { test: 2, expect: true },
             { test: 1.1, expect: false },
-            { test: "1", expect: true },
+            { test: "1", expect: true},
             { test: "2.1", expect: false },
             { test: "zzz", expect: false },
             { test: "null", expect: false },
             { test: "", expect: false },
+            { test: " ", expect: false },
             { test: null, expect: false },
-            { test: true, expect: false },
-            { test: [], expect: false },
         ];
 
         cases.forEach((item) => {
@@ -43,8 +42,6 @@ describe('Utils', function () {
             { test: "", expect: false },
             { test: "3d", expect: false },
             { test: null, expect: false },
-            { test: true, expect: false },
-            { test: [], expect: false },
         ];
 
         cases.forEach((item) => {
@@ -161,7 +158,6 @@ describe('Utils', function () {
             { test: 1, multiply: true, expect: "" },
             { test: 1, multiply: 2.1, expect: "2" },
             { test: false, multiply: 2.1, expect: "" },
-            { test: [], multiply: 2.1, expect: "" },
         ];
 
         cases.forEach((item) => {

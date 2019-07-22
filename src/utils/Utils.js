@@ -3,8 +3,8 @@ let rolls = 0;
 export class Utils {
 
 	static isInteger(target) {
-		const tar = String(target);
-		return tar !== '' && !!tar.match(/^[0-9]*$/);
+		const val = target && target.trim ? target.trim() : target;
+		return !!val && !!Number.isInteger(+val);
 	}
 
 	static isDiceNotation(target) {
