@@ -188,6 +188,26 @@ describe('Utils', function () {
                 expect(Utils.lowestCommonMultiple(item.test)).to.equal(item.expect);  
             }); 
         });
+    });  
+     describe('commaNumberFormat', function () { 
+        const cases = [
+            { test: 1, expect: "1" },
+            { test: "1", expect: "1" },
+            { test: 1000, expect: "1,000" },
+            { test: "1000", expect: "1,000" },
+            { test: 1000000, expect: "1,000,000" },
+            { test: 1000000.5, expect: "1,000,000.5" },
+            { test: 10040290732630400000, expect: "10,040,290,732,630,400,000" },
+            { test: null, expect: "" },
+            { test: false, expect: "" },
+            { test: [], expect: "" },
+        ];
+
+        cases.forEach((item) => {
+            it(`Should properly format a numer with commas, case: ${String(item.test)}, expect: ${item.expect}`, function () {
+                expect(Utils.commaNumberFormat(item.test)).to.equal(item.expect);  
+            }); 
+        });
     });   
 });
 

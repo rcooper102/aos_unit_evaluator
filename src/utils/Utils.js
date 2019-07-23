@@ -82,7 +82,8 @@ export class Utils {
 	}
 
 	static commaNumberFormat(x) {
-	    x = x.toString();
+		if(!x) { return ''; }
+	    x = typeof x === "string" || typeof x === "number" ? `${x}` : "";
 	    const pattern = /(-?\d+)(\d{3})/;
 	    while (pattern.test(x))
 	        x = x.replace(pattern, "$1,$2");
