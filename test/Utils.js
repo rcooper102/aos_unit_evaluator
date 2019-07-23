@@ -204,7 +204,7 @@ describe('Utils', function () {
         ];
 
         cases.forEach((item) => {
-            it(`Should properly format a numer with commas, case: ${String(item.test)}, expect: ${item.expect}`, function () {
+            it(`Should properly format a number with commas, case: ${String(item.test)}, expect: ${item.expect}`, function () {
                 expect(Utils.commaNumberFormat(item.test)).to.equal(item.expect);  
             }); 
         });
