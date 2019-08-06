@@ -118,7 +118,6 @@ export class SimConfig extends Base {
 		if(e){
 			this.saveToLocal();
 		}
-		console.log("ding");
 		this.dispatch(new Event(Event.CHANGE, this));
 	}
 
