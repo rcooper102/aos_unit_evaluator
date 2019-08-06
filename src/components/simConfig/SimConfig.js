@@ -126,7 +126,7 @@ export class SimConfig extends Base {
 
 			const names = this.value.map(item => item.name);
 			for(let i = 0; i<names.length;i++) {
-				if(trim(names[i]) === "") {
+				if(names[i].trim() === "") {
 					return;
 				}
 			}
