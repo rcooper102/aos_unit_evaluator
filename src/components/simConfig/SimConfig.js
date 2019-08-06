@@ -1,5 +1,6 @@
 import { Unit } from "../";
 import { config } from "../../config.js";
+import { UnitLoader } from "../unitLoader/UnitLoader.js";
 import "./SimConfig.scss";
 
 export class SimConfig extends Base {
@@ -8,6 +9,7 @@ export class SimConfig extends Base {
 		super();
 		this.make("sim-config");
 		this.build();
+		window.simConfig = this;
 	}
 
 	build() {
@@ -24,6 +26,11 @@ export class SimConfig extends Base {
 		this.createButton.make("button");
 		this.createButton.text = Locale.gen("sim-config-add-unit");
 		this.createButton.addListener(MouseEvent.CLICK, this.onAddUnit, this);
+
+		this.loadButton = new Base();
+		this.loadButton.make("button");
+		this.loadButton.text = Locale.gen("sim-config-load-unit");
+		this.loadButton.addListener(MouseEvent.CLICK, this.onLoadUnit, this);
 
 		this.disclaimer = new Base();
 		this.disclaimer.make("description");
@@ -86,8 +93,14 @@ export class SimConfig extends Base {
 			if(this.createButton.obj.parentNode) {
 				this.removeChild(this.createButton)
 			}
+			if(this.loadButton.obj.parentNode) {
+				this.removeChild(this.loadButton)
+			}
 		} else {
 			this.addChild(this.createButton);
+			if(this.localSaves.length > 0) {
+				this.addChild(this.loadButton);
+			}
 		}
 		this.addChild(this.disclaimer);
 	}
@@ -101,13 +114,77 @@ export class SimConfig extends Base {
 
 	onUnitChange(e) {
 		const data = this.value;
-		history.pushState(null, null, `#${btoa(JSON.stringify(this.value))}`);
+		history.pushState(null, null, `#${this.encodedData}`);
+		if(e){
+			this.saveToLocal();
+		}
 		this.dispatch(new Event(Event.CHANGE, this));
 	}
 
+	get encodedData() {
+		return btoa(JSON.stringify(this.value));
+	}
+
+
+	saveToLocal() {	
+		if(!this.localDebounce) {
+			Window.addListener(WindowEvent.FRAME, this.onSaveToLocal, this);
+		}
+		this.localDebounce = 1;
+	}
+
+	onSaveToLocal() {
+		this.localDebounce ++;
+		if(this.localDebounce > 100) {
+			this.localDebounce = null;
+			Window.removeListener(WindowEvent.FRAME, this.onSaveToLocal);
+
+			this.value.forEach((item) => {
+				if(item.name.trim()) {
+					localStorage[this.generateLocalName(item.name)] = JSON.stringify(item);
+				}
+			});
+
+			this.refreshAddButton();
+		}
+	}
+
+	generateLocalName(target) {
+		return `aos|${target.toLowerCase()}`;
+	}
+
+	loadLocal(target) {
+		const name = this.generateLocalName(target);
+		if(localStorage[name]) {
+			this.addUnit(JSON.parse(localStorage[this.generateLocalName(target)]));
+		}
+	}
+
+	onLoadUnit() {
+		const loader = new UnitLoader(this.localSaves);
+		loader.addListener(Event.ACTIVATE, this.onLoadUnitComplete, this);
+		loader.addListener(Event.CLEAR, this.onLoadUnitRemove, this);
+	}
+
+	onLoadUnitComplete(e) {
+		this.loadLocal(e.target);
+	}
+
+	onLoadUnitRemove(e) {
+		localStorage.removeItem(this.generateLocalName(e.target));
+	}
+
+	get localSaves() {
+		return Object.keys(localStorage).filter((item) => {
+			const name = item.split(this.generateLocalName(""));
+			return name.length > 1;
+		}).map((item) => {
+			return item.split(this.generateLocalName(""))[1];
+		});
+	}
+
 	get value() {
-		return this.units
-			.map((item) => item.value);
+		return this.units.map((item) => item.value);
 	}
 
 	get valid() {

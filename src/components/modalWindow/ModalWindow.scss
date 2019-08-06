@@ -32,6 +32,11 @@ modal-window {
 			display: block;
 			padding: 24px;
 
+			input {
+				font-size: 16px;
+				padding: 5px;
+			}
+
 			h3 {
 				font-size: 30px;
 				color: #999;
