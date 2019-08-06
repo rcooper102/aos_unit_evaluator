@@ -25,6 +25,11 @@ export class SimConfig extends Base {
 		this.createButton.text = Locale.gen("sim-config-add-unit");
 		this.createButton.addListener(MouseEvent.CLICK, this.onAddUnit, this);
 
+		this.loadButton = new Base();
+		this.loadButton.make("button");
+		this.loadButton.text = Locale.gen("sim-config-load-unit");
+		this.loadButton.addListener(MouseEvent.CLICK, this.onLoadUnit, this);
+
 		this.disclaimer = new Base();
 		this.disclaimer.make("description");
 		this.disclaimer.text = Locale.gen("sim-config-disclaimer");
@@ -85,9 +90,11 @@ export class SimConfig extends Base {
 		if(this.units.length > config['max-units'] - 1) {
 			if(this.createButton.obj.parentNode) {
 				this.removeChild(this.createButton)
+				this.removeChild(this.loadButton)
 			}
 		} else {
 			this.addChild(this.createButton);
+			this.addChild(this.loadButton);
 		}
 		this.addChild(this.disclaimer);
 	}
@@ -124,13 +131,11 @@ export class SimConfig extends Base {
 			this.localDebounce = null;
 			Window.removeListener(WindowEvent.FRAME, this.onSaveToLocal);
 
-			const names = this.value.map(item => item.name);
-			for(let i = 0; i<names.length;i++) {
-				if(names[i].trim() === "") {
-					return;
+			this.value.forEach((item) => {
+				if(item.name.trim()) {
+					localStorage[this.generateLocalName(item.name)] = JSON.stringify(item);
 				}
-			}
-			localStorage[this.generateLocalName(names.join(", "))] = `${new Date().getTime()}|${this.encodedData}`;
+			});
 		}
 	}
 
@@ -141,9 +146,12 @@ export class SimConfig extends Base {
 	loadLocal(target) {
 		const name = this.generateLocalName(target);
 		if(localStorage[name]) {
-			history.pushState(null, null, `#${localStorage[name].split("|")[1]}`);
-			window.location.reload();
+			console.log(target);
 		}
+	}
+
+	onLoadUnit() {
+		
 	}
 
 	get localSaves() {

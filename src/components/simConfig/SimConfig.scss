@@ -30,17 +30,19 @@ sim-config {
 		&.disclaimer {
 			margin-top:20px;
 			display: block;
+			clear: both;
 		}
 	}
 
 	> button {
-		display: block;
+		display: inline-block;
 		background: #cc0b0b;
-		width: 100%;
 		margin-top: 20px;
+		margin-top: bottom;
 		padding:10px;
 		font-size: 16px;
 		color: #fff;
 		border: none;
+		margin-right: 10px;
 	}
 }
