@@ -146,6 +146,15 @@ export class SimConfig extends Base {
 		}
 	}
 
+	get localSaves() {
+		return Object.keys(localStorage).filter((item) => {
+			const name = item.split(this.generateLocalName(""));
+			return name.length > 1;
+		}).map((item) => {
+			return item.split(this.generateLocalName(""))[1];
+		});
+	}
+
 	get value() {
 		return this.units
 			.map((item) => item.value);
