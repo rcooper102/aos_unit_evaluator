@@ -92,11 +92,15 @@ export class SimConfig extends Base {
 		if(this.units.length > config['max-units'] - 1) {
 			if(this.createButton.obj.parentNode) {
 				this.removeChild(this.createButton)
+			}
+			if(this.loadButton.obj.parentNode) {
 				this.removeChild(this.loadButton)
 			}
 		} else {
 			this.addChild(this.createButton);
-			this.addChild(this.loadButton);
+			if(this.localSaves.length > 0) {
+				this.addChild(this.loadButton);
+			}
 		}
 		this.addChild(this.disclaimer);
 	}
@@ -111,7 +115,9 @@ export class SimConfig extends Base {
 	onUnitChange(e) {
 		const data = this.value;
 		history.pushState(null, null, `#${this.encodedData}`);
-		this.saveToLocal();
+		if(e){
+			this.saveToLocal();
+		}
 		this.dispatch(new Event(Event.CHANGE, this));
 	}
 
@@ -138,6 +144,8 @@ export class SimConfig extends Base {
 					localStorage[this.generateLocalName(item.name)] = JSON.stringify(item);
 				}
 			});
+
+			this.refreshAddButton();
 		}
 	}
 
