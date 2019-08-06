@@ -148,12 +148,22 @@ export class SimConfig extends Base {
 	loadLocal(target) {
 		const name = this.generateLocalName(target);
 		if(localStorage[name]) {
-			console.log(target);
+			this.addUnit(JSON.parse(localStorage[this.generateLocalName(target)]));
 		}
 	}
 
 	onLoadUnit() {
-		new UnitLoader(this.localSaves);
+		const loader = new UnitLoader(this.localSaves);
+		loader.addListener(Event.ACTIVATE, this.onLoadUnitComplete, this);
+		loader.addListener(Event.CLEAR, this.onLoadUnitRemove, this);
+	}
+
+	onLoadUnitComplete(e) {
+		this.loadLocal(e.target);
+	}
+
+	onLoadUnitRemove(e) {
+		localStorage.removeItem(this.generateLocalName(e.target));
 	}
 
 	get localSaves() {
@@ -166,8 +176,7 @@ export class SimConfig extends Base {
 	}
 
 	get value() {
-		return this.units
-			.map((item) => item.value);
+		return this.units.map((item) => item.value);
 	}
 
 	get valid() {
