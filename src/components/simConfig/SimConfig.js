@@ -130,7 +130,7 @@ export class SimConfig extends Base {
 					return;
 				}
 			}
-			localStorage[this.generateLocalName(names.join(", ")] = `${new Date().getTime()}|${this.encodedData}`;
+			localStorage[this.generateLocalName(names.join(", "))] = `${new Date().getTime()}|${this.encodedData}`;
 		}
 	}
 
