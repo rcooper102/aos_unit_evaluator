@@ -118,6 +118,7 @@ export class SimConfig extends Base {
 		if(e){
 			this.saveToLocal();
 		}
+		console.log("ding");
 		this.dispatch(new Event(Event.CHANGE, this));
 	}
 
@@ -168,6 +169,7 @@ export class SimConfig extends Base {
 		const name = this.generateLocalName(target);
 		if(localStorage[name]) {
 			this.addUnit(JSON.parse(localStorage[this.generateLocalName(target)]));
+			this.onUnitChange();
 		}
 	}
 
