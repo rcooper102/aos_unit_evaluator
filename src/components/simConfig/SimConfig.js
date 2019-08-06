@@ -142,7 +142,7 @@ export class SimConfig extends Base {
 	}
 
 	generateLocalName(target) {
-		return `aos|${target}`;
+		return `aos|${target.toLowerCase()}`;
 	}
 
 	loadLocal(target) {
