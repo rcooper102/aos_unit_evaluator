@@ -101,8 +101,44 @@ export class SimConfig extends Base {
 
 	onUnitChange(e) {
 		const data = this.value;
-		history.pushState(null, null, `#${btoa(JSON.stringify(this.value))}`);
+		history.pushState(null, null, `#${this.encodedData}`);
+		this.saveToLocal();
 		this.dispatch(new Event(Event.CHANGE, this));
+	}
+
+	get encodedData() {
+		return btoa(JSON.stringify(this.value));
+	}
+
+
+	saveToLocal() {	
+		if(!this.localDebounce) {
+			Window.addListener(WindowEvent.FRAME, this.onSaveToLocal, this);
+		}
+		this.localDebounce = 1;
+	}
+
+	onSaveToLocal() {
+		this.localDebounce ++;
+		if(this.localDebounce > 100) {
+			this.localDebounce = null;
+			Window.removeListener(WindowEvent.FRAME, this.onSaveToLocal);
+
+			const names = this.value.map(item => item.name).join(", ");
+			localStorage[this.generateLocalName(names)] = `${new Date().getTime()}|${this.encodedData}`;
+		}
+	}
+
+	generateLocalName(target) {
+		return `aos|${target}`;
+	}
+
+	loadLocal(target) {
+		const name = this.generateLocalName(target);
+		if(localStorage[name]) {
+			history.pushState(null, null, `#${localStorage[name].split("|")[1]}`);
+			window.location.reload();
+		}
 	}
 
 	get value() {
