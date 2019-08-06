@@ -9,7 +9,7 @@ export class SimConfig extends Base {
 		super();
 		this.make("sim-config");
 		this.build();
-		window.simConfig = this;
+		window.sim = this;
 	}
 
 	build() {
@@ -123,6 +123,17 @@ export class SimConfig extends Base {
 
 	get encodedData() {
 		return btoa(JSON.stringify(this.value));
+	}
+
+	get localData() {
+		return btoa(JSON.stringify(localStorage));
+	}
+
+	set localData(target) {
+		const d = JSON.parse(atob(target));
+		Object.keys(d).forEach((i) => {
+			localStorage[i] = d[i];
+		});
 	}
 
 
