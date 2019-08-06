@@ -33,11 +33,11 @@ export class UnitLoader extends ModalWindow {
 	}
 
 	search(term) {
-		this.term = term;
+		this.term = term ? term.toLowerCase() : null;
 		this.container.text = "";
 		let units = this.units;
-		if(term) {
-			units = units.filter(item => item.name.indexOf(term) > -1);
+		if(this.term) {
+			units = units.filter(item => item.name.toLowerCase().indexOf(this.term) > -1);
 		}
 		units = units.sort((a,b) => a.name>b.name ? 1 : -1);
 		units.forEach((item) => {
