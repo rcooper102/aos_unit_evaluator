@@ -124,8 +124,13 @@ export class SimConfig extends Base {
 			this.localDebounce = null;
 			Window.removeListener(WindowEvent.FRAME, this.onSaveToLocal);
 
-			const names = this.value.map(item => item.name).join(", ");
-			localStorage[this.generateLocalName(names)] = `${new Date().getTime()}|${this.encodedData}`;
+			const names = this.value.map(item => item.name);
+			for(let i = 0; i<names.length;i++) {
+				if(trim(names[i]) === "") {
+					return;
+				}
+			}
+			localStorage[this.generateLocalName(names.join(", ")] = `${new Date().getTime()}|${this.encodedData}`;
 		}
 	}
 
