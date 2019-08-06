@@ -39,6 +39,7 @@ export class UnitLoader extends ModalWindow {
 		if(term) {
 			units = units.filter(item => item.name.indexOf(term) > -1);
 		}
+		units = units.sort((a,b) => a.name>b.name ? 1 : -1);
 		units.forEach((item) => {
 			this.container.addChild(item);
 		});
