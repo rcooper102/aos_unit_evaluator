@@ -10,12 +10,33 @@ export class UnitLoader extends ModalWindow {
 		super();
 		this.units = [];
 
+		this.searchBox = new Input();
+		this.windowHeader.addChild(this.searchBox);
+		this.searchBox.obj.placeholder = Locale.gen("search-placeholder");
+		this.searchBox.addListener(InputEvent.CHANGE, this.onSearch, this);
+
 		units.forEach((item) => { 
 			const unit = new UnitLoaderItem(item);
 			unit.addListener(Event.ACTIVATE, this.onActivate, this);
 			unit.addListener(Event.CLEAR, this.onClear, this);
 			this.units.push(unit);
-			this.container.addChild(unit);
+		});
+
+		this.search();
+	}
+
+	onSearch(e) {
+		this.search(this.searchBox.value);
+	}
+
+	search(term) {
+		this.container.text = "";
+		let units = this.units;
+		if(term) {
+			units = units.filter(item => item.name.indexOf(term) > -1);
+		}
+		units.forEach((item) => {
+			this.container.addChild(item);
 		});
 	}
 

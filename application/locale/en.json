@@ -2,6 +2,7 @@
 	"app-title": "Attack Simulator",
 	"app-sub-title": "by <a href='http://relicwargaming.com'>Relic Wargaming</a>",
 	"app-cta": "Run Simulation:",
+	"search-placeholder": "search...",
 	"title-iterations": "{[iterations]}",
 	"sim-config-add-unit": "Add Unit",
 	"sim-config-load-unit": "Load Unit",

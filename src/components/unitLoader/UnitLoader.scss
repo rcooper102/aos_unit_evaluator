@@ -20,6 +20,7 @@ unit-loader-item {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		line-height: 20px;
+		cursor:pointer;
 	}
 
 	remove {
@@ -31,6 +32,6 @@ unit-loader-item {
 		background: #cc0b0b;
 		text-align: center;
 		line-height: 40px;
-
+		cursor:pointer;
 	}
 }
