@@ -22,6 +22,9 @@ export class UnitLoader extends ModalWindow {
 			this.units.push(unit);
 		});
 
+		this.empty = new Paragraph();
+		this.empty.text = Locale.gen("unit-loader-empty");
+
 		this.search();
 	}
 
@@ -30,6 +33,7 @@ export class UnitLoader extends ModalWindow {
 	}
 
 	search(term) {
+		this.term = term;
 		this.container.text = "";
 		let units = this.units;
 		if(term) {
@@ -38,6 +42,9 @@ export class UnitLoader extends ModalWindow {
 		units.forEach((item) => {
 			this.container.addChild(item);
 		});
+		if(units.length === 0) {
+			this.container.addChild(this.empty);
+		}
 	}
 
 	onActivate(e) {
@@ -46,14 +53,14 @@ export class UnitLoader extends ModalWindow {
 	}
 
 	onClear(e) {
-		this.units.filter((item) => {
+		this.units = this.units.filter((item) => {
 			if(item.name === e.target) {
-				this.container.removeChild(item);
 				return false;
 			}
 			return true;
 		});
 		this.dispatch(new Event(Event.CLEAR, e.target));
+		this.search(this.term);
 	}
 
 	
