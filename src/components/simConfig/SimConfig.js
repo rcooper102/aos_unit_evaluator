@@ -1,5 +1,6 @@
 import { Unit } from "../";
 import { config } from "../../config.js";
+import { UnitLoader } from "../unitLoader/UnitLoader.js";
 import "./SimConfig.scss";
 
 export class SimConfig extends Base {
@@ -8,6 +9,7 @@ export class SimConfig extends Base {
 		super();
 		this.make("sim-config");
 		this.build();
+		window.simConfig = this;
 	}
 
 	build() {
@@ -151,7 +153,7 @@ export class SimConfig extends Base {
 	}
 
 	onLoadUnit() {
-		
+		new UnitLoader(this.localSaves);
 	}
 
 	get localSaves() {
