@@ -72,6 +72,7 @@ export class Combat extends View {
 	}
 
 	onAllSimulate(e) {
+		this.simulating = false;
 		this.loading.shutDown();
 		this.results = new AllResults(e.target.results);
 		this.addChild(this.results);

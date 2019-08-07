@@ -14,4 +14,10 @@ export class AllResults extends Base {
 		this.addChild(graph);
 		graph.update(data);	
 	}
+
+	shutDown() {
+		if(this.obj.parentNode) {
+			this.obj.parentNode.removeChild(this.obj);
+		}
+	}
 }
