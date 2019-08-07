@@ -25,7 +25,7 @@ export class AllGraph extends Base {
 			return {
 				value: item.normalized,
 				color: item.data.color,
-				format: () => `${item.data.name} - ${ Number(Math.round(item.score * 10)/10).toFixed(1) }`,
+				format: () => `${item.data.name} - ${ Number(Math.round(item.score)) }`,
 				scale: highest,
 			}
 		});
