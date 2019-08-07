@@ -1,5 +1,6 @@
 import { BarGraph } from "./BarGraph.js";
 import { Utils } from "../../utils";
+import { config } from "../../config";
 
 export class AllGraph extends Base {
 
@@ -24,7 +25,7 @@ export class AllGraph extends Base {
 			return {
 				value: item.normalized,
 				color: item.data.color,
-				format: () => item.data.name,
+				format: () => `${item.data.name} - ${ Number(Math.round(item.normalized / config['all-sim'].normalize * 10000)/10).toFixed(1) }`,
 				scale: highest,
 			}
 		});
