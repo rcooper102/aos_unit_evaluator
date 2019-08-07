@@ -63,6 +63,12 @@ title {
 		margin-left:10px;
 		border-radius: 5px;
 		width: 85px;
+		cursor:pointer;
+
+		&.all {
+			background: #EEE;
+			color: #333;
+		}
 
 		&.inactive {
 			opacity: 0.5;

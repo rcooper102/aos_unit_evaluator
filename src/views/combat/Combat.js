@@ -1,6 +1,6 @@
 import { View } from "../../../velocity/View/View.js";
-import { Title, SimConfig, Results, Loading } from "../../components";
-import { Simulator } from "../../services";
+import { Title, SimConfig, Results, Loading, AllResults } from "../../components";
+import { Simulator, AllSimulator } from "../../services";
 import { config } from "../../config.js";
 import "./Combat.scss";
 
@@ -14,6 +14,7 @@ export class Combat extends View {
 	build() {
 		this.appTitle = new Title();
 		this.appTitle.addListener(Event.RELOAD, this.onReload, this);
+		this.appTitle.addListener(Event.PREVIEW, this.onAllSim, this);
 
 		this.simConfig = new SimConfig();
 		this.simConfig.addListener(Event.CHANGE, this.onConfigChange, this);
@@ -29,10 +30,16 @@ export class Combat extends View {
 		});
 
 		this.onConfigChange();
+		this.updateLocalButton();
+	}
+
+	updateLocalButton() {
+		this.appTitle.allButtonActive = this.simConfig.localSaves.length > 0 && this.simConfig.hasLocalPoints;
 	}
 
 	onConfigChange(e) {
 		this.appTitle.buttonActive = this.simConfig.valid;
+		this.updateLocalButton();
 	}
 
 	onReload(e) {
@@ -48,6 +55,26 @@ export class Combat extends View {
 			sim.addListener(Event.COMPLETE, this.onSimulate, this);
 			sim.addListener(Event.PROGRESS, this.onProgess, this);
 		}
+	}
+
+	onAllSim(e) {
+		if(!this.simulating) {
+			this.simulating = true;
+			if(this.results) {
+				this.results.shutDown();
+			}
+			this.loading = new Loading();
+			this.addChild(this.loading);
+			const sim = new AllSimulator();
+			sim.addListener(Event.COMPLETE, this.onAllSimulate, this);
+			sim.addListener(Event.PROGRESS, this.onProgess, this);
+		}
+	}
+
+	onAllSimulate(e) {
+		this.loading.shutDown();
+		this.results = new AllResults(e.target.results);
+		this.addChild(this.results);
 	}
 
 	onProgess(e) {

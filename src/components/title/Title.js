@@ -12,6 +12,14 @@ export class Title extends Base {
 
 	build() {
 		this.buttons = [];
+
+		this.allButton = new Base();
+		this.allButton.make("button");
+		this.allButton.addClass("all");
+		this.allButton.text = Locale.gen("title-sim-all");
+		this.addChild(this.allButton);
+		this.allButton.addListener(MouseEvent.CLICK, this.onAll, this);
+
 		config.simulator.iterations.forEach((item) => {
 			const button = new Base();
 			button.make("button");
@@ -50,8 +58,25 @@ export class Title extends Base {
 		return this._buttonActive;
 	}
 
+	set allButtonActive(target) {
+		this._allButtonActive = target;
+		if(target) {
+			this.allButton.removeClass("inactive");
+		} else {
+			this.allButton.addClass("inactive");
+		}
+	}
+
+	get allButtonActive() {
+		return this._allButtonActive;
+	}
+
 	onSimulate(e) {
 		this.dispatch(new Event(Event.RELOAD, Number(e.target.name)));
+	}
+
+	onAll(e) {
+		this.dispatch(new Event(Event.PREVIEW, Number(e.target.name)));
 	}
 
 }

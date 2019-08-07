@@ -19,6 +19,11 @@ export let config = {
 		"default-save": 5,
 		iterations: [30000, 10000, 5000, 1000],
 		"default-iterations": 5000,
+	},
+	"all-sim": {
+		save: 4,
+		iterations: 2000,
+		normalize: 5000,
 	},	
 	"hide-point-threshold": 40,
 };
