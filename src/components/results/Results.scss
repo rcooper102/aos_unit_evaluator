@@ -167,7 +167,6 @@ results {
 			width: 100%;
 			float: none;
 			clear: both;
-			padding-top: 40px;
 		}
 
 		label {
@@ -176,6 +175,10 @@ results {
 
 		rail {
 			width: 50%;
+		}
+
+		histogram {
+			margin-bottom: 20px;
 		}
 	}
 }

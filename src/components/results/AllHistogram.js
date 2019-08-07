@@ -9,14 +9,6 @@ export class AllHistogram extends Base {
 		super();
 		this.make("histogram");
 
-		const graphTitle = new Header(4);
-		graphTitle.text = Locale.gen("all-histogram-title");
-		this.addChild(graphTitle);
-
-		const graphSubTitle = new Paragraph();
-		graphSubTitle.text = Locale.gen("all-histogram-sub-title");;
-		this.addChild(graphSubTitle);
-
 		this.container = new Base();
 		this.container.make("canvas");
 		this.addChild(this.container);
