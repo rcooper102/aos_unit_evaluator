@@ -151,7 +151,7 @@ export class SimConfig extends Base {
 			Window.removeListener(WindowEvent.FRAME, this.onSaveToLocal);
 
 			this.value.forEach((item) => {
-				if(item.name.trim()) {
+				if(item.name.trim() && item.valid) {
 					localStorage[this.generateLocalName(item.name)] = JSON.stringify(item);
 				}
 			});

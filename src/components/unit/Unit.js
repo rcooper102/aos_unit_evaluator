@@ -92,6 +92,7 @@ export class Unit extends Base {
 
 	get value() {
 		return {
+			valid: this.valid,
 			name: this.unitName.value,
 			points: this.unitPoints.value !== "" ? this.unitPoints.value : null,
 			color: this.color,
