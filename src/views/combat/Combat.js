@@ -30,10 +30,16 @@ export class Combat extends View {
 		});
 
 		this.onConfigChange();
+		this.updateLocalButton();
+	}
+
+	updateLocalButton() {
+		this.appTitle.allButtonActive = this.simConfig.localSaves.length > 0 && this.simConfig.hasLocalPoints;
 	}
 
 	onConfigChange(e) {
 		this.appTitle.buttonActive = this.simConfig.valid;
+		this.updateLocalButton();
 	}
 
 	onReload(e) {

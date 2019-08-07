@@ -156,6 +156,7 @@ export class SimConfig extends Base {
 				}
 			});
 
+			this.dispatch(new Event(Event.CHANGE, this));
 			this.refreshAddButton();
 		}
 	}
@@ -184,6 +185,15 @@ export class SimConfig extends Base {
 
 	onLoadUnitRemove(e) {
 		localStorage.removeItem(this.generateLocalName(e.target));
+	}
+
+	get hasLocalPoints() {
+		for(let i = 0; i<this.localSaves.length;i++) {
+			if(JSON.parse(localStorage[this.generateLocalName(this.localSaves[i])]).points) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	get localSaves() {
