@@ -12,6 +12,14 @@ export class Title extends Base {
 
 	build() {
 		this.buttons = [];
+
+		const button = new Base();
+		button.make("button");
+		button.addClass("all");
+		button.text = Locale.gen("title-sim-all");
+		this.addChild(button);
+		button.addListener(MouseEvent.CLICK, this.onAll, this);
+
 		config.simulator.iterations.forEach((item) => {
 			const button = new Base();
 			button.make("button");
@@ -52,6 +60,10 @@ export class Title extends Base {
 
 	onSimulate(e) {
 		this.dispatch(new Event(Event.RELOAD, Number(e.target.name)));
+	}
+
+	onAll(e) {
+		this.dispatch(new Event(Event.PREVIEW, Number(e.target.name)));
 	}
 
 }

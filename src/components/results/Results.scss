@@ -161,4 +161,18 @@ results {
 			}
 		}
 	}
+
+	&.all-results {
+		.bar-graph {
+			width: 100%;
+		}
+
+		label {
+			width: 50%;
+		}
+
+		rail {
+			width: 50%;
+		}
+	}
 }
