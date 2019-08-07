@@ -22,7 +22,7 @@ export let config = {
 	},
 	"all-sim": {
 		save: 4,
-		iterations: 2000,
+		iterations: 4000,
 		normalize: 5000,
 	},	
 	"hide-point-threshold": 40,
