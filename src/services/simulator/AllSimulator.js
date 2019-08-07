@@ -41,6 +41,7 @@ export class AllSimulator extends EventDispatcher {
 				normalized: item.average * ratio,
 				points: Number(item.data.points),
 				data: item.data,
+				score: item.average * ratio / config['all-sim'].normalize * 1000,
 			};
 		});
 		this.dispatch(new Event(Event.COMPLETE, { results: results }));

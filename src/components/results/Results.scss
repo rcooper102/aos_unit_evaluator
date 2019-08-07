@@ -165,6 +165,9 @@ results {
 	&.all-results {
 		.bar-graph {
 			width: 100%;
+			float: none;
+			clear: both;
+			padding-top: 40px;
 		}
 
 		label {

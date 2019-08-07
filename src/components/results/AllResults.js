@@ -1,5 +1,6 @@
 import { Utils } from "../../utils";
 import { AllGraph } from "./AllGraph.js";
+import { AllHistogram } from "./AllHistogram.js";
 import "./Results.scss";
 
 export class AllResults extends Base {
@@ -9,6 +10,10 @@ export class AllResults extends Base {
 		super();
 		this.make("results");
 		this.addClass("all-results");
+
+		const histogram = new AllHistogram();
+		this.addChild(histogram);
+		histogram.update(data);	
 
 		const graph = new AllGraph();
 		this.addChild(graph);
