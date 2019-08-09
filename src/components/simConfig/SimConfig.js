@@ -142,7 +142,7 @@ export class SimConfig extends Base {
 		return btoa(JSON.stringify(localStorage));
 	}
 
-	set localData(target) {
+	importLocalData(target) {
 		const d = JSON.parse(atob(target));
 		Object.keys(d).forEach((i) => {
 			localStorage[i] = d[i];
