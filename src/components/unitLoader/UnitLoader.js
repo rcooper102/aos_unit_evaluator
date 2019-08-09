@@ -14,6 +14,7 @@ export class UnitLoader extends ModalWindow {
 		this.windowHeader.addChild(this.searchBox);
 		this.searchBox.obj.placeholder = Locale.gen("search-placeholder");
 		this.searchBox.addListener(InputEvent.CHANGE, this.onSearch, this);
+		this.searchBox.obj.focus();
 
 		units.forEach((item) => { 
 			const unit = new UnitLoaderItem(item);

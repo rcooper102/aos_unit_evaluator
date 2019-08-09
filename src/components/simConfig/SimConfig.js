@@ -1,6 +1,7 @@
 import { Unit } from "../";
 import { config } from "../../config.js";
 import { UnitLoader } from "../unitLoader/UnitLoader.js";
+import { DataManager } from "../dataManager/DataManager.js";
 import "./SimConfig.scss";
 
 export class SimConfig extends Base {
@@ -44,6 +45,11 @@ export class SimConfig extends Base {
 		this.disclaimer.make("description");
 		this.disclaimer.text = Locale.gen("sim-config-disclaimer");
 		this.disclaimer.addClass("disclaimer");
+
+		this.manage = new Base();
+		this.manage.make("manage");
+		this.manage.text = Locale.gen("sim-config-manage");
+		this.manage.addListener(MouseEvent.CLICK, this.onManageData, this);
 
 		this.units = [];
 
@@ -112,6 +118,7 @@ export class SimConfig extends Base {
 			}
 		}
 		this.addChild(this.disclaimer);
+		this.addChild(this.manage);
 	}
 
 	onUnitDelete(e) {
@@ -161,6 +168,7 @@ export class SimConfig extends Base {
 		Object.keys(d).forEach((i) => {
 			localStorage[i] = d[i];
 		});
+		this.dispatch(new Event(Event.LOAD,this));
 	}
 
 
@@ -174,6 +182,10 @@ export class SimConfig extends Base {
 		this.dispatch(new Event(Event.CHANGE, this));
 		this.refreshAddButton();
 		this.controls.removeChild(this.saveButton);
+	}
+
+	onManageData() {
+		new DataManager();
 	}
 
 	generateLocalName(target) {
