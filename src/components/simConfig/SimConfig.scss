@@ -34,6 +34,13 @@ sim-config {
 		}
 	}
 
+	manage {
+		font-size: 12px;
+		text-decoration: underline;
+		cursor: pointer;
+		color: #999;
+	}
+
 	> controls > button {
 		display: inline-block;
 		background: #cc0b0b;

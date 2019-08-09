@@ -27,4 +27,5 @@ export let config = {
 	},	
 	"hide-point-threshold": 40,
 	"data-source": `https://raw.githubusercontent.com/rcooper102/aos_unit_eval_data/master/`,
+	"data-source-all": 'all.txt',
 };
