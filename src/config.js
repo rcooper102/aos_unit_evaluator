@@ -26,4 +26,5 @@ export let config = {
 		normalize: 5000,
 	},	
 	"hide-point-threshold": 40,
+	"data-source": `https://raw.githubusercontent.com/rcooper102/aos_unit_eval_data/master/`,
 };

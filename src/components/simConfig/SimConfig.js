@@ -142,7 +142,21 @@ export class SimConfig extends Base {
 		return btoa(JSON.stringify(localStorage));
 	}
 
-	importLocalData(target) {
+	importLocalData(target, reset=false) {
+		if(reset) { localStorage.clear() };
+		const broken = target.split(".");
+		if(broken[broken.length - 1] === "txt") {
+			let loader = new TextLoader();
+			loader.addListener(DataEvent.LOAD, (e) => {
+				this.mergeLocalData(e.data);
+			}, this);
+			loader.load(`${config['data-source']}${target}`);
+		} else {
+			this.mergeLocalData(target);
+		}
+	}
+
+	mergeLocalData(target) {
 		const d = JSON.parse(atob(target));
 		Object.keys(d).forEach((i) => {
 			localStorage[i] = d[i];
