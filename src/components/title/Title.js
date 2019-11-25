@@ -1,6 +1,7 @@
 import "./Title.scss";
 import { Utils } from "../../utils";
 import { config } from "../../config.js";
+import { User } from "../../services";
 
 export class Title extends Base {
 
@@ -13,12 +14,14 @@ export class Title extends Base {
 	build() {
 		this.buttons = [];
 
-		this.allButton = new Base();
-		this.allButton.make("button");
-		this.allButton.addClass("all");
-		this.allButton.text = Locale.gen("title-sim-all");
-		this.addChild(this.allButton);
-		this.allButton.addListener(MouseEvent.CLICK, this.onAll, this);
+		if(User.hasFeature(User.FEATURES.SAVE_UNITS)) {
+			this.allButton = new Base();
+			this.allButton.make("button");
+			this.allButton.addClass("all");
+			this.allButton.text = Locale.gen("title-sim-all");
+			this.addChild(this.allButton);
+			this.allButton.addListener(MouseEvent.CLICK, this.onAll, this);
+		}
 
 		config.simulator.iterations.forEach((item) => {
 			const button = new Base();
@@ -60,10 +63,12 @@ export class Title extends Base {
 
 	set allButtonActive(target) {
 		this._allButtonActive = target;
-		if(target) {
-			this.allButton.removeClass("inactive");
-		} else {
-			this.allButton.addClass("inactive");
+		if(this.allButton) {
+			if(target) {
+				this.allButton.removeClass("inactive");
+			} else {
+				this.allButton.addClass("inactive");
+			}
 		}
 	}
 

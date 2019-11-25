@@ -2,6 +2,7 @@ import { Unit } from "../";
 import { config } from "../../config.js";
 import { UnitLoader } from "../unitLoader/UnitLoader.js";
 import { DataManager } from "../dataManager/DataManager.js";
+import { User } from "../../services/";
 import "./SimConfig.scss";
 
 export class SimConfig extends Base {
@@ -28,15 +29,17 @@ export class SimConfig extends Base {
 		this.createButton.text = Locale.gen("sim-config-add-unit");
 		this.createButton.addListener(MouseEvent.CLICK, this.onAddUnit, this);
 
-		this.loadButton = new Base();
-		this.loadButton.make("button");
-		this.loadButton.text = Locale.gen("sim-config-load-unit");
-		this.loadButton.addListener(MouseEvent.CLICK, this.onLoadUnit, this);
+		if(User.hasFeature(User.FEATURES.SAVE_UNITS)) {
+			this.loadButton = new Base();
+			this.loadButton.make("button");
+			this.loadButton.text = Locale.gen("sim-config-load-unit");
+			this.loadButton.addListener(MouseEvent.CLICK, this.onLoadUnit, this);
 
-		this.saveButton = new Base();
-		this.saveButton.make("button");
-		this.saveButton.text = Locale.gen("sim-config-save-unit");
-		this.saveButton.addListener(MouseEvent.CLICK, this.onSaveUnit, this);
+			this.saveButton = new Base();
+			this.saveButton.make("button");
+			this.saveButton.text = Locale.gen("sim-config-save-unit");
+			this.saveButton.addListener(MouseEvent.CLICK, this.onSaveUnit, this);
+		}
 
 		this.controls = new Base();
 		this.controls.make('controls');
@@ -46,10 +49,12 @@ export class SimConfig extends Base {
 		this.disclaimer.text = Locale.gen("sim-config-disclaimer");
 		this.disclaimer.addClass("disclaimer");
 
-		this.manage = new Base();
-		this.manage.make("manage");
-		this.manage.text = Locale.gen("sim-config-manage");
-		this.manage.addListener(MouseEvent.CLICK, this.onManageData, this);
+		if(User.hasFeature(User.FEATURES.MANAGE_DATA)) {
+			this.manage = new Base();
+			this.manage.make("manage");
+			this.manage.text = Locale.gen("sim-config-manage");
+			this.manage.addListener(MouseEvent.CLICK, this.onManageData, this);
+		}
 
 		this.units = [];
 
@@ -108,17 +113,19 @@ export class SimConfig extends Base {
 			if(this.createButton.obj.parentNode) {
 				this.controls.removeChild(this.createButton)
 			}
-			if(this.loadButton.obj.parentNode) {
+			if(this.loadButton && this.loadButton.obj.parentNode) {
 				this.controls.removeChild(this.loadButton)
 			}
 		} else {
 			this.controls.addChild(this.createButton);
-			if(this.localSaves.length > 0) {
+			if(this.loadButton && this.localSaves.length > 0) {
 				this.controls.addChild(this.loadButton);
 			}
 		}
 		this.addChild(this.disclaimer);
-		this.addChild(this.manage);
+		if(this.manage) {
+			this.addChild(this.manage);
+		}
 	}
 
 	onUnitDelete(e) {
@@ -131,7 +138,7 @@ export class SimConfig extends Base {
 	onUnitChange(e, displaySave = true) {
 		const data = this.value;
 		history.pushState(null, null, `#${this.encodedData}`);
-		if(displaySave && this.valid){
+		if(this.saveButton && displaySave && this.valid){
 			this.controls.addChild(this.saveButton);
 		}
 		this.dispatch(new Event(Event.CHANGE, this));
@@ -181,7 +188,9 @@ export class SimConfig extends Base {
 
 		this.dispatch(new Event(Event.CHANGE, this));
 		this.refreshAddButton();
-		this.controls.removeChild(this.saveButton);
+		if(this.saveButton) {
+			this.controls.removeChild(this.saveButton);
+		}
 	}
 
 	onManageData() {
