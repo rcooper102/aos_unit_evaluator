@@ -63,7 +63,7 @@ class BarGraphBar extends Base {
 		bar.style.backgroundColor = `${data.color}`;
 
 		const value = new Label();
-		value.text = data.format ? data.format(data.value) : data.value;
+		value.text = `${data.format ? data.format(data.value) : data.value} - <strong>${ data.name || `Unit ${data.key+1}` }</strong>`;
 		this.addChild(value);
 
 		if(data.inner) {
