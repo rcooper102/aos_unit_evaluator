@@ -12,7 +12,7 @@ export let config = {
 			view: Combat
 		}
 	],
-	"max-units": 3,
+	"max-units": 5,
 	"max-buffs": 3,
 	"simulator": {
 		saves: [2,3,4,5,6,7],
