@@ -38,18 +38,18 @@ export class Results extends Base {
 		}
 
 		this.saveNav = new SaveNavigation();
-		this.addChild(this.saveNav);
 		this.saveNav.addListener(Event.ACTIVATE, this.onChangeSave, this);
 
 		this.components = [
-			new Histogram(iterations, highestDamage),
+			new SaveComparison(this.data),
+			this.saveNav,
 			new AverageGraph(),
 			new ReliabilityGraph(),			
 			new WhiffGraph(),
 			new PotentialGraph(),
 			new MortalWoundsGraph(),
 			new DependabilityGraph(),
-			new SaveComparison(this.data),
+			new Histogram(iterations, highestDamage),
 		];
 
 		this.components.forEach((item) => {
@@ -61,7 +61,9 @@ export class Results extends Base {
 		this._save = target;
 		if(this.data[target]) {
 			this.components.forEach((item) => {
-				item.update(this.data[target]);
+				if(item.update) {
+					item.update(this.data[target]);
+				}
 			});
 		}
 		this.saveNav.value = target;
