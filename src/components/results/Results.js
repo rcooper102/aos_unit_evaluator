@@ -43,13 +43,14 @@ export class Results extends Base {
 		this.components = [
 			new SaveComparison(this.data),
 			this.saveNav,
+			new Histogram(iterations, highestDamage),
 			new AverageGraph(),
 			new ReliabilityGraph(),			
 			new WhiffGraph(),
 			new PotentialGraph(),
 			new MortalWoundsGraph(),
 			new DependabilityGraph(),
-			new Histogram(iterations, highestDamage),
+			
 		];
 
 		this.components.forEach((item) => {
