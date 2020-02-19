@@ -118,10 +118,23 @@ results {
 
 	results-header {
 		margin-bottom: 20px;
-		display: none;
+		display: block;
+
+		button {
+			display: block;
+			float: right;
+			background: transparent;
+			color: #cc0b0b;
+			border: none;
+			overflow: hidden;
+			border-radius: 5px;
+			font-weight: bold;
+			text-decoration: underline;
+			cursor: pointer;
+		}
 
 		info {
-			display: block;
+			display: none;
 
 			&:after {
 				clear: both;
@@ -365,9 +378,9 @@ results {
 			border-radius: 5px;
 		}
 
-		save-navigation, h3, rolls { display: none; }
+		save-navigation, h3, rolls, button { display: none; }
 
-		results-header { display: block; }
+		results-header info { display: block; }
 
 	}
 }

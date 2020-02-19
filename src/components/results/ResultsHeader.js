@@ -1,6 +1,7 @@
 import { Utils } from "../../utils";
 import { config } from "../../config.js";
 import { AttackBuffSummary } from "../unit/attack/Attack";
+import { Screenshot } from "../../services";
 
 export class ResultsHeader extends Base {
 
@@ -12,8 +13,23 @@ export class ResultsHeader extends Base {
 		this.rolls = rolls;
 	}
 
+	onSave() {
+		new Screenshot(Screenshot.MODES.RESULTS);
+	}
+
 	update(data, save) {
-		this.text = `
+		this.text = "";
+
+		let btn = new Base();
+		btn.make("button");
+		btn.text = Locale.gen("results-header-save-image");
+		this.addChild(btn);
+		btn.addListener(MouseEvent.CLICK, this.onSave, this);
+
+		let results = new Div();
+		this.addChild(results);
+
+		results.text = `
 			<h3>${ Locale.gen("results-title", { iterations: this.iterations }) }</h3>
 			<rolls>${ Locale.gen("results-sub-title", { rolls: this.rolls }) }</rolls>
 			<info>

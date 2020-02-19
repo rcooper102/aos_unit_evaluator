@@ -98,6 +98,7 @@
 	"results-header-points": "({[points]}pts)",
 	"results-header-attack": "Attacks: {[number]}, To Hit: {[hit]}+, To Wound: {[wound]}+, Rend: {[rend]}, Damage: {[damage]}",
 	"results-header-target-save": "Target Save: <strong>{[save]}+</strong>",
+	"results-header-save-image": "Save Report as Image",
 
 	"attack-buff-summary-reroll": "Rerolling <em>{[data]}</em> to <em>{[type]}</em>." ,
 	"attack-buff-summary-trigger-mortal": "<em>{[output]}</em> Mortal Wounds triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.<br />Stops attack sequence: <em>{[stop]}</em>",
