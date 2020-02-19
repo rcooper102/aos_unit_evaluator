@@ -22,6 +22,10 @@ export class Screenshot extends EventDispatcher {
         	scrollY: 0,
       	}).then((canvas) => {
 		    location.appendChild(canvas);
+		    canvas.className = "screenshot";
+		    if(mode) {
+				mode.cleanup();
+			}
 
 		    setTimeout(() => {
 				const link = document.createElement('a');
@@ -33,9 +37,7 @@ export class Screenshot extends EventDispatcher {
 				location.removeChild(canvas);
 				location.removeChild(link);
 
-				if(mode) {
-					mode.cleanup();
-				}
+				
 
 				this.dispatch(new Event(Event.COMPLETE, this));
 			}, 1);
@@ -44,11 +46,15 @@ export class Screenshot extends EventDispatcher {
 
 	static fixResults() {
 		document.body.style.overflow = "auto";
-		document.querySelector("results").style.height = "auto";
+		const results = document.querySelector("results");
+		results.style.height = "auto";
+		results.className = "screenshot";
 	}
 
 	static cleanResults() {
 		document.body.style.overflow = "hidden";
-		document.querySelector("results").style.height = "calc(100vh - 69px)";
+		const results = document.querySelector("results");
+		results.style.height = "calc(100vh - 69px)";
+		results.className = "";
 	}
 }
