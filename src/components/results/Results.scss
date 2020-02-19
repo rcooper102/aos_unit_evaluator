@@ -60,6 +60,50 @@ results {
 		}
 	}
 
+	results-table{
+
+
+		table {
+			background: rgba(255,255,255,0.5);
+			font-size: 20px;
+			margin: 0 auto;
+			margin-bottom: 20px;
+			border-collapse: collapse;
+			text-align: center;
+			width: 100%;
+
+			td {
+				color: #333;
+			}
+
+			th, td {
+				padding: 5px 20px;
+			}
+
+			table, th, td {
+			  border: 1px solid rgba(0,0,0,0.3);
+			}
+
+			th {
+				font-weight: normal;
+				color: rgba(0,0,0,0.3);
+			}
+
+			tr:nth-child(2n) {
+				background: rgba(0,0,0,0.02);
+			}
+
+			icon {
+				width: 16px;
+				height: 16px;
+				display: block;
+				overflow: hidden;
+				border-radius: 16px;
+				margin: 0 auto;
+			}
+		}
+	}
+
 	save-navigation {
 		display: flex;
 		padding:0px;

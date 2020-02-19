@@ -8,6 +8,7 @@ import { PotentialGraph } from "./PotentialGraph.js";
 import { MortalWoundsGraph } from "./MortalWoundsGraph.js";
 import { DependabilityGraph } from "./DependabilityGraph.js";
 import { SaveComparison } from "./SaveComparison.js";
+import { SaveComparisonTable } from "./SaveComparisonTable.js";
 import "./Results.scss";
 
 export class Results extends Base {
@@ -42,6 +43,7 @@ export class Results extends Base {
 
 		this.components = [
 			new SaveComparison(this.data),
+			new SaveComparisonTable(this.data),
 			this.saveNav,
 			new Histogram(iterations, highestDamage),
 			new AverageGraph(),

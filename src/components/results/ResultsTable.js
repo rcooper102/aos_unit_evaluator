@@ -21,7 +21,7 @@ export class ResultsTable extends Base {
 
 					data.rows.map((item,i) => {
 						return `<tr>
-							<td><span style='background-color:${data.colors[i]}'>&nbsp;</span></td>
+							<td><icon style='background-color:${data.colors[i]}'></icon></td>
 							${
 							item.map((cell,j) => {
 								return `<td class="${ j === 0 ? 'name' : '' }">${cell}</td>`;
