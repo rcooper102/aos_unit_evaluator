@@ -37,8 +37,6 @@ export class Screenshot extends EventDispatcher {
 				location.removeChild(canvas);
 				location.removeChild(link);
 
-				
-
 				this.dispatch(new Event(Event.COMPLETE, this));
 			}, 1);
 		});
