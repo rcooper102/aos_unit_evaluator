@@ -8,7 +8,7 @@ export class Screenshot extends EventDispatcher {
 		};
 	}
 
-	constructor (mode, name = "screen.jpg") {
+	constructor (mode, name = "relic-wargaming-attack-simulator-report.jpg") {
 		super();
 
 		if(mode) {
@@ -48,6 +48,7 @@ export class Screenshot extends EventDispatcher {
 		document.body.style.overflow = "auto";
 		const results = document.querySelector("results");
 		results.style.height = "auto";
+		results.style.width = "1000px";
 		results.className = "screenshot";
 	}
 
@@ -55,6 +56,7 @@ export class Screenshot extends EventDispatcher {
 		document.body.style.overflow = "hidden";
 		const results = document.querySelector("results");
 		results.style.height = "calc(100vh - 69px)";
+		results.style.width = "70%";
 		results.className = "";
 	}
 }
