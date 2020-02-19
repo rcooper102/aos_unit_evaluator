@@ -77,7 +77,12 @@ results {
 			}
 
 			th, td {
-				padding: 5px 20px;
+				padding: 5px;
+			}
+
+			td span {
+				display: block;
+				text-align: left;
 			}
 
 			table, th, td {

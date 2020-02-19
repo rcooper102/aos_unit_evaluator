@@ -10,7 +10,7 @@ export class ResultsTable extends Base {
 	set data(data) {
 		this.text = `
 			<table>
-				<tr><th></th>
+				<tr>
 					${
 						data.columns.map((item) => {
 							return `<th>${item}</th>`;
@@ -21,7 +21,6 @@ export class ResultsTable extends Base {
 
 					data.rows.map((item,i) => {
 						return `<tr>
-							<td><icon style='background-color:${data.colors[i]}'></icon></td>
 							${
 							item.map((cell,j) => {
 								return `<td class="${ j === 0 ? 'name' : '' }">${cell}</td>`;

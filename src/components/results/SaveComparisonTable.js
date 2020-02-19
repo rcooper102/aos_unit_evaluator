@@ -19,22 +19,19 @@ export class SaveComparisonTable extends Base {
 	}
 
 	get table() {
-		const colors = [];
 		const saves = [''];
 		const units = [];
 		Object.keys(this.data).forEach((save) => {
 			saves.push(`${save}+`);
 			this.data[save].forEach((unit,i) => {
-				colors[i] = unit.data.color;
 				if(!units[i]) {
-					units[i] = [unit.data.name || `Unit`];
+					units[i] = [`<span style='color:${unit.data.color}'>${unit.data.name || Locale.gen("unit")}</span>`];
 				}
 				units[i][save-1] = Math.round(unit.average*100)/100;
 			});
 		});
 
 		return {
-			colors: colors,
 			rows: units,
 			columns: saves,
 		};

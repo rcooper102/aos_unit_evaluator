@@ -29,6 +29,7 @@
 	"attacks-rend": "Rend",
 	"attacks-damage": "Damage",
 	"unit-name": "Unit Name",
+	"unit": "Unit",
 	"unit-points": "Points",
 	"unit-points-details": "The points cost represented by a single instance of the attacks for this unit. Make sure to set accordingly if you have set the attack profile of a single model, the points value should represent the cost of that single model. Note that points are an optional field and are only used when normalizing a comparison between multiple units of differing points values.",
 	"histogram-damage": "Total Damage",

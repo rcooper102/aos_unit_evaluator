@@ -42,8 +42,7 @@ export class Results extends Base {
 		this.saveNav.addListener(Event.ACTIVATE, this.onChangeSave, this);
 
 		this.components = [
-			new SaveComparison(this.data),
-			new SaveComparisonTable(this.data),
+
 			this.saveNav,
 			new Histogram(iterations, highestDamage),
 			new AverageGraph(),
@@ -52,6 +51,8 @@ export class Results extends Base {
 			new PotentialGraph(),
 			new MortalWoundsGraph(),
 			new DependabilityGraph(),
+			new SaveComparison(this.data),
+			new SaveComparisonTable(this.data),
 			
 		];
 
