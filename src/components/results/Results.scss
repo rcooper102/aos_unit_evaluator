@@ -44,6 +44,12 @@ results {
 		strong {
 			color: #cc0b0b;
 		}
+		span {
+			display: block;
+			font-size: 12px;
+			margin-top:5px;
+			color: #999;
+		}
 	}
 
 	histogram {
@@ -107,6 +113,93 @@ results {
 				border-radius: 16px;
 				margin: 0 auto;
 			}
+		}
+	} 
+
+	results-header {
+		margin-bottom: 20px;
+		display: none;
+
+		info {
+			display: block;
+
+			&:after {
+				clear: both;
+				content: "";
+				display: block;
+			}
+
+			summary {
+				display: block;
+				float: left;
+				width: calc(100% - 140px);
+
+				h4 {
+					color: #666;
+				}	
+
+				li {
+					display: block;
+					padding: 20px;
+					background: #FFF;
+					border-radius: 5px;
+					overflow: hidden;
+					margin-bottom: 10px;
+
+					name {
+						font-size: 16px;
+						font-weight: bold;
+						display: block;
+					}
+
+					attack {
+						display: block;
+						color: #999;
+						font-size: 16px;
+						margin-top: 10px;
+
+						profile {
+							
+							display: block;
+							color:#333;
+						}
+					}
+
+					buff {
+						display: block;
+						margin-top: 5px;
+						font-size: 12px;
+
+						em {
+							font-weight: bold;
+							color: #666;
+							font-style: normal;
+						}
+					}
+				}
+			}
+
+			save {
+				display: block;
+				float: right;
+				width: 130px;
+				padding-left: 20px;
+				text-align: center;
+				font-size: 12px;
+				color: #999;
+				padding: 20px;
+				background: #FFF;
+				border-radius: 5px;
+				overflow: hidden;
+				box-sizing: border-box;
+				strong {
+					margin-top: 10px;
+					display: block;
+					font-size: 56px;
+					color: #cc0b0b;
+				}
+			}
+
 		}
 	}
 
@@ -273,6 +366,8 @@ results {
 		}
 
 		save-navigation, h3, rolls { display: none; }
+
+		results-header { display: block; }
 
 	}
 }

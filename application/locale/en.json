@@ -61,7 +61,7 @@
 	"potential-graph-detail": "The highest damage recorded during the simulation is meant to reflect the high end of a potential attack sequence from a given unit. Given the nature of probability, particularily with stacked procs, it is possible that there are incredibly rare damage spikes that are possible but do not show up in a single simulation, even in hundreds of thousands of iterations. Those likely will not be represented in this graph but are still possible, albeit, unlikely. If you wish to know the theoretical maximum possible damage for a given unit you should calculate it manually.",
 	"results-title": "Simulation Results <strong>({[iterations]} Iterations)</strong>",
 	"results-sub-title": "You just rolled {[rolls]} dice.",
-	"results-normalized": "Points normalized to: <strong>{[points]}pts</strong>",
+	"results-normalized": "Points normalized to: <strong>{[points]}pts</strong><span>When normalized, unit results are multiplied to the lowest common pts multiplier to create a fair comparison.</span>",
 	"results-normalized-details": "When normalized, all units are multiplied to the lowest common multiplier of their pts costs in order to facilitate a fair comparison. (Note this can often lead to very high normalized points that would never exist in the real world. If you wish to disable points normalization, simply don't input points values for all the units.)", 
 	"buff-add": "Add {[name]} Field",
 	"buff-editor-field-hit": "Triggers By Hit Roll",
@@ -94,6 +94,10 @@
 
 	"toggle-field-yes": "Yes",
 	"toggle-field-no": "No",
+
+	"results-header-points": "({[points]}pts)",
+	"results-header-attack": "Attacks: {[number]}, To Hit: {[hit]}+, To Wound: {[wound]}+, Rend: {[rend]}, Damage: {[damage]}",
+	"results-header-target-save": "Target Save: <strong>{[save]}+</strong>",
 
 	"attack-buff-summary-reroll": "Rerolling <em>{[data]}</em> to <em>{[type]}</em>." ,
 	"attack-buff-summary-trigger-mortal": "<em>{[output]}</em> Mortal Wounds triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.<br />Stops attack sequence: <em>{[stop]}</em>",
