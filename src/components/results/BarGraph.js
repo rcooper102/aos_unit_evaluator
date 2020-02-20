@@ -62,8 +62,10 @@ class BarGraphBar extends Base {
 		bar.style.width = `calc(${data.value/( data.scale ? data.scale : max )*100}%)`
 		bar.style.backgroundColor = `${data.color}`;
 
+		const name = data.name && data.name.length > 15 ? `${data.name.substr(0,15)}...` : data.name;
+
 		const value = new Label();
-		value.text = `<strong>${ data.name || Locale.gen("unit") }</strong> - ${data.format ? data.format(data.value) : data.value}`;
+		value.text = `<strong>${ name || Locale.gen("unit") }</strong> - ${data.format ? data.format(data.value) : data.value}`;
 		this.addChild(value);
 
 		if(data.inner) {
