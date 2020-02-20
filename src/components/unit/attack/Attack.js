@@ -100,7 +100,7 @@ export class Attack extends Base {
 }
 
 
-class AttackBuffSummary extends Base {
+export class AttackBuffSummary extends Base {
 
 	static get SCHEMA() {
 		return {

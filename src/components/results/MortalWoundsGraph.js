@@ -17,12 +17,14 @@ export class MortalWoundsGraph extends Base {
 		data.forEach((item) => {
 			highest = item.mortalWounds > highest ? item.mortalWounds : highest;
 		});
-		const series = data.map((item) => {
+		const series = data.map((item, i) => {
 			return {
 				value: item.mortalWounds,
 				color: item.data.color,
 				format: (e) => { return Math.round(e*100)/100 },
 				scale: highest,
+				name: item.data.name,
+				key: i,
 			};
 		});
 		this.graph = new BarGraph(series, Locale.gen("mortal-wounds-graph-title"), Locale.gen("mortal-wounds-graph-sub-title"))

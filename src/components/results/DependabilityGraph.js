@@ -19,7 +19,7 @@ export class DependabilityGraph extends Base {
 			highest = item.highestDamage > highest ? item.highestDamage : highest;
 		});
 
-		const series = data.map((item) => {
+		const series = data.map((item, i) => {
 			let top = [...item.results.sort((a,b) => a.total - b.total)];
 			top.splice(0,Math.floor(top.length*0.1));
 			top = top.filter((item) => item.total > 0)
@@ -32,6 +32,8 @@ export class DependabilityGraph extends Base {
 				color: item.data.color,
 				format: (e) => { return `${e} <span>(${Utils.formatPercent(out.length / item.results.length)})</span>` },
 				scale: highest,
+				name: item.data.name,
+				key: i,
 			};
 		});
 		this.graph = new BarGraph(series, Locale.gen("dependability-graph-title"), Locale.gen("dependability-graph-sub-title"))

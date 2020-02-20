@@ -8,6 +8,8 @@ import { PotentialGraph } from "./PotentialGraph.js";
 import { MortalWoundsGraph } from "./MortalWoundsGraph.js";
 import { DependabilityGraph } from "./DependabilityGraph.js";
 import { SaveComparison } from "./SaveComparison.js";
+import { ResultsHeader } from "./ResultsHeader.js";
+import { SaveComparisonTable } from "./SaveComparisonTable.js";
 import "./Results.scss";
 
 export class Results extends Base {
@@ -19,29 +21,25 @@ export class Results extends Base {
 		this._save = null;
 		this.data = data;
 
-		const title = new Header(3);
-		title.text = Locale.gen("results-title", { iterations: Utils.bigNumberFormat(data[Object.keys(data)[0]][0].results.length) });
-		this.addChild(title);
-
-		const sub = new Base();
-		sub.make("rolls");
-		sub.text = Locale.gen("results-sub-title", { rolls:Utils.commaNumberFormat(Utils.rollCount) });
-		this.addChild(sub);
+		const count = Utils.bigNumberFormat(data[Object.keys(data)[0]][0].results.length);
+		const rolls = Utils.commaNumberFormat(Utils.rollCount);
 
 		const normalizedPoints = data[Object.keys(data)[0]][0].data.normalizedPoints || null;
+		let norm;
 		if(normalizedPoints) {
-			const norm = new Base;
+			norm = new Base;
 			norm.make("normalized");
 			norm.text = Locale.gen("results-normalized", { points: normalizedPoints });
 			norm.title = Locale.gen("results-normalized-details");
-			this.addChild(norm);
 		}
 
 		this.saveNav = new SaveNavigation();
-		this.addChild(this.saveNav);
 		this.saveNav.addListener(Event.ACTIVATE, this.onChangeSave, this);
 
 		this.components = [
+			new ResultsHeader(count, rolls),
+			norm,
+			this.saveNav,
 			new Histogram(iterations, highestDamage),
 			new AverageGraph(),
 			new ReliabilityGraph(),			
@@ -50,10 +48,14 @@ export class Results extends Base {
 			new MortalWoundsGraph(),
 			new DependabilityGraph(),
 			new SaveComparison(this.data),
+			new SaveComparisonTable(this.data),
+			
 		];
 
 		this.components.forEach((item) => {
-			this.addChild(item);
+			if(item) {
+				this.addChild(item);
+			}
 		});
 	}
 
@@ -61,7 +63,9 @@ export class Results extends Base {
 		this._save = target;
 		if(this.data[target]) {
 			this.components.forEach((item) => {
-				item.update(this.data[target]);
+				if(item && item.update) {
+					item.update(this.data[target],target);
+				}
 			});
 		}
 		this.saveNav.value = target;

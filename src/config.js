@@ -12,17 +12,17 @@ export let config = {
 			view: Combat
 		}
 	],
-	"max-units": 3,
+	"max-units": 5,
 	"max-buffs": 3,
 	"simulator": {
 		saves: [2,3,4,5,6,7],
 		"default-save": 5,
-		iterations: [30000, 10000, 5000, 1000],
+		iterations: [30000, 10000, 5000],
 		"default-iterations": 5000,
 	},
 	"all-sim": {
 		save: 4,
-		iterations: 6000,
+		iterations: 5000,
 		normalize: 5000,
 	},	
 	"hide-point-threshold": 40,

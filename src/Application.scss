@@ -9,3 +9,7 @@ body {
 	background: $background;
 	overflow: hidden;
 }
+
+canvas.screenshot {
+	opacity: 0;
+}

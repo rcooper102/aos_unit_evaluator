@@ -18,13 +18,15 @@ export class AverageGraph extends Base {
 		data.forEach((item) => {
 			highest = item.highestDamage > highest ? item.highestDamage : highest;
 		});
-		const series = data.map((item) => {
+		const series = data.map((item, i) => {
 			return {
 				value: item.average,
 				inner: item.mortalWounds,
 				color: item.data.color,
 				format: (e) => { return Math.round(e*100)/100 },
 				scale: highest,
+				name: item.data.name,
+				key: i,
 			};
 		});
 		this.graph = new BarGraph(series, Locale.gen("average-graph-title"), Locale.gen("average-graph-sub-title"))

@@ -70,9 +70,8 @@ export class SaveComparison extends Base {
 				    }]
 				}
 		    }
-		});	
+		});
 	}
-
 
 	get series() {
 		let series = {}
