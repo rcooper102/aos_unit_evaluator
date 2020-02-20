@@ -48,7 +48,7 @@ export class ResultsHeader extends Base {
 	renderUnit(data) {
 		return `
 		<li>
-			<name style='color:${data.color}'>${data.name} ${ data.points ? Locale.gen("results-header-points", {points: data.points}) : "" }</name>
+			<name style='color:${data.color}'>${data.name || Locale.gen("unit") } ${ data.points ? Locale.gen("results-header-points", {points: data.points}) : "" }</name>
 			<attacks>
 				${ data.attacks.map((item) => this.renderAttacks(item)).join("") }
 			</attacks>
