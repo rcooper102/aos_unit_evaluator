@@ -24,7 +24,7 @@ export class AverageGraph extends Base {
 				inner: item.mortalWounds,
 				color: item.data.color,
 				format: (e) => { return Math.round(e*100)/100 },
-				scale: highest,
+				//scale: highest,
 				name: item.data.name,
 				key: i,
 			};
