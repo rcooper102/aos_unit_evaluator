@@ -8,6 +8,7 @@ export class AllHistogram extends Base {
 	constructor() {
 		super();
 		this.make("histogram");
+		this.addClass("histogram");
 
 		this.container = new Base();
 		this.container.make("canvas");

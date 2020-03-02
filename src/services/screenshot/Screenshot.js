@@ -5,6 +5,7 @@ export class Screenshot extends EventDispatcher {
 	static get MODES() {
 		return  {
 			RESULTS: { query: "results", fix: Screenshot.fixResults, cleanup: Screenshot.cleanResults },
+			RESULTS_SMALL: { query: "results", fix: Screenshot.fixSmallResults, cleanup: Screenshot.cleanResults },
 		};
 	}
 
@@ -48,6 +49,11 @@ export class Screenshot extends EventDispatcher {
 		results.style.height = "auto";
 		results.style.width = "1000px";
 		results.className = "screenshot";
+		return results;
+	}
+
+	static fixSmallResults() {
+		Screenshot.fixResults().className = "screenshot screenshot-small";
 	}
 
 	static cleanResults() {

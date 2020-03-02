@@ -17,6 +17,10 @@ export class ResultsHeader extends Base {
 		new Screenshot(Screenshot.MODES.RESULTS);
 	}
 
+	onSaveSmall() {
+		new Screenshot(Screenshot.MODES.RESULTS_SMALL);
+	}
+
 	update(data, save) {
 		this.text = "";
 
@@ -25,6 +29,12 @@ export class ResultsHeader extends Base {
 		btn.text = Locale.gen("results-header-save-image");
 		this.addChild(btn);
 		btn.addListener(MouseEvent.CLICK, this.onSave, this);
+
+		let small = new Base();
+		small.make("button");
+		small.text = Locale.gen("results-header-save-image-small");
+		this.addChild(small);
+		small.addListener(MouseEvent.CLICK, this.onSaveSmall, this);
 
 		let results = new Div();
 		this.addChild(results);

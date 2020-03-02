@@ -8,6 +8,7 @@ export class Histogram extends Base {
 	constructor(iterations, highestDamage) {
 		super();
 		this.make("histogram");
+		this.addClass("histogram");
 		this.iterations = iterations;
 
 		const graphTitle = new Header(4);

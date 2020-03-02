@@ -383,4 +383,10 @@ results {
 		results-header info { display: block; }
 
 	}
+
+	&.screenshot-small {
+		&:after, results-header, .bar-graph, .histogram {
+			display: none, 
+		}
+	}
 }
