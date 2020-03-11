@@ -15,7 +15,7 @@ export class SaveComparisonTable extends Base {
 	}
 
 	update() {
-		this.tableDisplay.data = this.table;	
+		this.tableDisplay.data = this.table;
 	}
 
 	get table() {

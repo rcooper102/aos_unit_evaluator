@@ -261,6 +261,25 @@ results {
 		margin-right: 20px;
 	}
 
+	damage-odds-table {
+		display: block;
+		margin-top: 40px;
+
+		control {
+			display: block;
+			margin-bottom: 10px;
+
+			number-field {
+				display: inline-block;
+				width: 60px;
+			}
+			label {
+				display: inline-block;
+				margin-right: 10px;
+			}
+		}
+	}
+
 	bar-graph {
 		display: block;
 		margin-bottom: 40px;
@@ -385,7 +404,7 @@ results {
 	}
 
 	&.screenshot-small {
-		&:after, results-header, .bar-graph, .histogram {
+		&:after, results-header, .bar-graph, .histogram, damage-odds-table {
 			display: none, 
 		}
 	}

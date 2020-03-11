@@ -101,6 +101,10 @@
 	"results-header-save-image": "Save Report",
 	"results-header-save-image-small": "Save Summary",
 
+	"damage-odds-table-title": "Damage Odds",
+	"damage-odds-table-sub-title": "The odds of achieving a certain threshold of damage or more.",
+	"damage-odds-table-control": "Threshold:",
+
 	"attack-buff-summary-reroll": "Rerolling <em>{[data]}</em> to <em>{[type]}</em>." ,
 	"attack-buff-summary-trigger-mortal": "<em>{[output]}</em> Mortal Wounds triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.<br />Stops attack sequence: <em>{[stop]}</em>",
 	"attack-buff-summary-trigger-attacks": "<em>{[output]}</em> bonus attacks triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.<br />Replaces the triggering attack: <em>{[stop]}</em>.<br />Auto hit: <em>{[autoHit]}</em>.",
