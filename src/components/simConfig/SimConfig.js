@@ -157,7 +157,11 @@ export class SimConfig extends Base {
 	}
 
 	importLocalData(target, reset=false) {
-		if(reset) { localStorage.clear() };
+		if(reset) { 
+			const key = localStorage['AOS_SIM_KEY'];
+			localStorage.clear();
+			localStorage['AOS_SIM_KEY'] = key;
+		};
 		const broken = target.split(".");
 		if(broken[broken.length - 1] === "txt") {
 			let loader = new TextLoader();

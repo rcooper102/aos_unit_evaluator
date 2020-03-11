@@ -58,7 +58,9 @@ export class DataManager extends ModalWindow {
 	}
 
 	onClear() {
+		const key = localStorage['AOS_SIM_KEY'];
 		localStorage.clear();
+		localStorage['AOS_SIM_KEY'] = key;
 		window.location.reload();
 	}
 
