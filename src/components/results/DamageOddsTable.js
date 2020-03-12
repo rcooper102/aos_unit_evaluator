@@ -83,6 +83,6 @@ export class DamageOddsTable extends Base {
 				count ++;
 			}
 		}
-		return count / l;
+		return Math.round(count / l*100)/100;
 	}
 }
