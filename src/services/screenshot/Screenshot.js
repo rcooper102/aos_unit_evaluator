@@ -17,32 +17,30 @@ export class Screenshot extends EventDispatcher {
 		}
 
 		const location = document.body;
+		
+		html2Canvas(document.querySelector(mode.query), {
+        	scrollX: 0,
+        	scrollY: 0,
+      	}).then((canvas) => {
+		    location.appendChild(canvas);
+		    canvas.className = "screenshot";
+		    if(mode) {
+				mode.cleanup();
+			}
 
-		setTimeout(() => {
-			html2Canvas(document.querySelector(mode.query), {
-	        	scrollX: 0,
-	        	scrollY: 0,
-	      	}).then((canvas) => {
-			    location.appendChild(canvas);
-			    canvas.className = "screenshot";
-			    if(mode) {
-					mode.cleanup();
-				}
+		    setTimeout(() => {
+				const link = document.createElement('a');
+				location.appendChild(link);
+				link.setAttribute('download', name);
+				link.setAttribute('href', canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"));
+				link.click();
 
-			    setTimeout(() => {
-					const link = document.createElement('a');
-					location.appendChild(link);
-					link.setAttribute('download', name);
-					link.setAttribute('href', canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"));
-					link.click();
+				location.removeChild(canvas);
+				location.removeChild(link);
 
-					location.removeChild(canvas);
-					location.removeChild(link);
-
-					this.dispatch(new Event(Event.COMPLETE, this));
-				}, 1);
-			});
-      	}, 50);
+				this.dispatch(new Event(Event.COMPLETE, this));
+			}, 1);
+		});
 	}
 
 	static fixResults() {
