@@ -81,7 +81,8 @@ export class Histogram extends Base {
 				    }]
 				}
 		    }
-		});	
+		});
+		window.simulator.charts.histogram = myChart;
 	}
 
 	/*

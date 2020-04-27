@@ -49,11 +49,21 @@ export class Screenshot extends EventDispatcher {
 		results.style.height = "auto";
 		results.style.width = "1000px";
 		results.className = "screenshot";
+		Screenshot.redrawGraphs();
 		return results;
 	}
 
 	static fixSmallResults() {
 		Screenshot.fixResults().className = "screenshot screenshot-small";
+		Screenshot.redrawGraphs();
+	}
+
+	static redrawGraphs() {
+		for(let i in window.simulator.charts) {
+			if(window.simulator.charts[i].update) {
+				window.simulator.charts[i].update();
+			}
+		}
 	}
 
 	static cleanResults() {
@@ -62,5 +72,6 @@ export class Screenshot extends EventDispatcher {
 		results.style.height = "calc(100vh - 69px)";
 		results.style.width = "70%";
 		results.className = "";
+		Screenshot.redrawGraphs();
 	}
 }

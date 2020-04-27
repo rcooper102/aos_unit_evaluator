@@ -12,7 +12,12 @@ class Application extends VelocityApplication {
 	constructor() {
 		super(config);
 		this.user = new User();
-		window.screen = Screenshot;
+		window.simulator = {
+			screen: Screenshot,
+			charts: {
+
+			}
+		}
 	}	
 
 }

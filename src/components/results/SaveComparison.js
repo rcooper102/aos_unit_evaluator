@@ -71,6 +71,7 @@ export class SaveComparison extends Base {
 				}
 		    }
 		});
+		window.simulator.charts.saveComparison = myChart;
 	}
 
 	get series() {
