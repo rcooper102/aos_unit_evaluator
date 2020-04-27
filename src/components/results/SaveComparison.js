@@ -18,9 +18,13 @@ export class SaveComparison extends Base {
 		graphSubTitle.text = Locale.gen("save-comparison-sub-title");;
 		this.addChild(graphSubTitle);
 
+		this.chartContainer = new Div();
+		this.chartContainer.make("chart");
+		this.addChild(this.chartContainer);
+
 		this.container = new Base();
 		this.container.make("canvas");
-		this.addChild(this.container);
+		this.chartContainer.addChild(this.container);
 	}
 
 	update() {

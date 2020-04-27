@@ -19,9 +19,13 @@ export class Histogram extends Base {
 		graphSubTitle.text = Locale.gen("histogram-sub-title");;
 		this.addChild(graphSubTitle);
 
+		this.chartContainer = new Div();
+		this.chartContainer.make("chart");
+		this.addChild(this.chartContainer);
+
 		this.container = new Base();
 		this.container.make("canvas");
-		this.addChild(this.container);
+		this.chartContainer.addChild(this.container);
 		this.highestDamage = highestDamage;
 	}
 
