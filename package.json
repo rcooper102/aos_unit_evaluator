@@ -37,7 +37,7 @@
 		"webpack-dev-server": "^3.1.4"
 	},
 	"dependencies": {
-		"chart.js": "^2.9.3",
+		"chart.js": "^2.9.4",
 		"clone-deep": "^4.0.1",
 		"html2canvas": "^1.0.0-rc.5"
 	}
