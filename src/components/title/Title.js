@@ -41,9 +41,9 @@ export class Title extends Base {
 		appName.text = Locale.gen("app-title");
 		this.addChild(appName);
 
-		const appSubName = new Header(2);
-		appSubName.text = Locale.gen("app-sub-title");
-		this.addChild(appSubName);	
+		// const appSubName = new Header(2);
+		// appSubName.text = Locale.gen("app-sub-title");
+		// this.addChild(appSubName);	
 	}
 
 	set buttonActive(target) {
