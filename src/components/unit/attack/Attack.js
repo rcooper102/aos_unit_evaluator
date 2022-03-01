@@ -109,6 +109,7 @@ export class AttackBuffSummary extends Base {
 			[Buff.TYPES.TRIGGER_DAMAGE]: "attack-buff-summary-trigger-damage",
 			[Buff.TYPES.TRIGGER_REND]: "attack-buff-summary-trigger-rend",
 			[Buff.TYPES.TRIGGER_ATTACKS]: "attack-buff-summary-trigger-attacks",
+			[Buff.TYPES.TRIGGER_WOUND]: "attack-buff-summary-trigger-wound",
 		}
 	}
 

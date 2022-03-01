@@ -85,6 +85,20 @@ export class BuffEditor extends ModalWindow {
 				description: Locale.gen("buff-trigger-damage-description"),
 				name: Locale.gen("buff-trigger-damage-name"),
 			},
+			[Buff.TYPES.TRIGGER_WOUND]: {
+				fields: [
+					{
+						label: Locale.gen("buff-trigger-wound-trigger"),
+						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
+						options: [1,2,3,4,5,6],
+						name: BuffEditor.FIELD_NAMES.TRIGGER,
+					},
+				],
+				hitOnly: true,
+				label: Locale.gen("buff-trigger-wound-label"),
+				description: Locale.gen("buff-trigger-wound-description"),
+				name: Locale.gen("buff-trigger-wound-name"),
+			},
 			[Buff.TYPES.TRIGGER_REND]: {
 				fields: [
 					{
@@ -253,6 +267,15 @@ class BuffEditorField extends Base {
 			this.fields.push(field);
 			field.addListener(Event.CHANGE, this.onChange, this);
 		});
+
+		this.checkForHitOnly();
+	}
+
+	checkForHitOnly() {
+		if(this.data.hitOnly) {
+			this.options.value = [BuffEditorField.OPTIONS.HIT];
+			this.options.obj.style.display = "none";
+		}
 	}
 
 	onChange() {
@@ -275,7 +298,7 @@ class BuffEditorField extends Base {
 	set value(target) {
 		this.options.value = Object.keys(target).map((item) => BuffEditorField.OPTIONS[item.toUpperCase()]) || null;
 		const val = target[Object.keys(target)[0]];
-		if(this.fields.length === 1) {
+		if(this.fields.length === 1 && !this.data.hitOnly) {
 			this.fields[0].value = val.data;
 		} else {
 			this.fields.forEach((field) => {
@@ -286,11 +309,12 @@ class BuffEditorField extends Base {
 				});
 			});
 		}
+		this.checkForHitOnly();
 	}
 
 	generateValue() {	
 		const buff = new Buff(this.schema);
-		if(this.fields.length === 1) {
+		if(this.fields.length === 1 && !this.data.hitOnly) {
 			buff.data = this.fields[0].value;
 		} else {
 			const data = {};
