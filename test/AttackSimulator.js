@@ -328,9 +328,21 @@ describe('AttackSimulator', function () {
             wound: [],          
         });
         expectWithinPercentage(sim.damage, (ATTACKS_COUNT/6 * 0.5) + (ATTACKS_COUNT/3 * 0.5 * 2 ), ERROR_MARGIN);     
+    });  
+    it('Should simulate statistical average for attacks that do 2 damage on a 6 to wound', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 1, 
+            wound: 5, 
+            rend: 0, 
+            damage: '1',
+        }, 7,{
+            hit: [] ,
+            wound: [ new Buff(Buff.TYPES.TRIGGER_DAMAGE, { trigger: [6], output: '2' }) ],          
+        });
+        expectWithinPercentage(sim.damage, (ATTACKS_COUNT/6*2)+(ATTACKS_COUNT/6), ERROR_MARGIN);     
     });      
 });
-
 
 
 
