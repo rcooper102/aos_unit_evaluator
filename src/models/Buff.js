@@ -39,6 +39,13 @@ export class Buff {
 			}
 			**/
 			TRIGGER_DAMAGE: "TRIGGER_DAMAGE",
+			/**
+			{
+				trigger: [6], //Which dice rolls trigger the auto wound
+				Note: NO WOUND ROLL IS MADE.
+			}
+			**/
+			TRIGGER_WOUND: "TRIGGER_WOUND",
 
 		};
 	}

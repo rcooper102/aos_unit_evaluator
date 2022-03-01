@@ -11,7 +11,7 @@ const ATTACKS_COUNT = 50000;
 const ERROR_MARGIN = 0.05;
 let sim;
 
-describe('AttackSimulator', function () {	
+describe.only('AttackSimulator', function () {	
  	it('Should simulate statistical average for 4+/4+ attacks with no rend', function () {
         sim = new AttackSimulator({
         	number: ATTACKS_COUNT,
@@ -341,6 +341,32 @@ describe('AttackSimulator', function () {
             wound: [ new Buff(Buff.TYPES.TRIGGER_DAMAGE, { trigger: [6], output: '2' }) ],          
         });
         expectWithinPercentage(sim.damage, (ATTACKS_COUNT/2/6*2)+(ATTACKS_COUNT/2/6), ERROR_MARGIN);     
+    });  
+    it('Should simulate statistical average for attacks that autowound on a 6 to hit', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 5, 
+            wound: 4, 
+            rend: 0, 
+            damage: '1',
+        }, 7,{
+            hit: [ new Buff(Buff.TYPES.TRIGGER_WOUND, { trigger: [6] }) ] ,
+            wound: [],          
+        });
+        expectWithinPercentage(sim.damage, ATTACKS_COUNT/6 + ATTACKS_COUNT/6*0.5, ERROR_MARGIN);     
+    });  
+    it('Should simulate statistical average for attacks that autowound on a 6 to hit but no wound triggers', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '1',
+        }, 7,{
+            hit: [ new Buff(Buff.TYPES.TRIGGER_WOUND, { trigger: [4,5,6] }) ] ,
+            wound: [    new Buff(Buff.TYPES.TRIGGER_DAMAGE, { trigger: [6], output: '2' }) ],          
+        });
+        expectWithinPercentage(sim.damage, ATTACKS_COUNT/2, ERROR_MARGIN);     
     });      
 });
 
