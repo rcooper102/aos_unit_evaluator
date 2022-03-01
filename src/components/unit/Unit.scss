@@ -48,6 +48,10 @@ unit {
 		float: right;
 		width: 40px;
 		margin-bottom: 10px;
+
+		&.clone {
+			margin-right: 5px;
+		}
 	}
 
 	> input {
@@ -56,7 +60,7 @@ unit {
 		font-size: 16px;
 		border: none;
 		float: left;
-		width: calc(100% - 198px);
+		width: calc(100% - 235px);
 		margin-bottom: 10px;
 		margin-right: 5px;
 	}

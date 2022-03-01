@@ -3,6 +3,7 @@ import { config } from "../../config.js";
 import { UnitLoader } from "../unitLoader/UnitLoader.js";
 import { DataManager } from "../dataManager/DataManager.js";
 import { User } from "../../services/";
+import { Utils } from "../../utils";
 import "./SimConfig.scss";
 
 export class SimConfig extends Base {
@@ -101,6 +102,7 @@ export class SimConfig extends Base {
 		unit.value = value;
 		unit.addListener(Event.CHANGE, this.onUnitChange, this);
 		unit.addListener(Event.REMOVE, this.onUnitDelete, this);
+		unit.addListener("CLONE", this.onUnitClone, this);
 
 		this.refreshAddButton();
 
@@ -131,6 +133,13 @@ export class SimConfig extends Base {
 	onUnitDelete(e) {
 		e.target.shutDown();
 		this.units = this.units.filter((item) => e.target !== item);
+		this.onUnitChange();
+		this.refreshAddButton();	
+	}
+
+	onUnitClone(e) {
+		const unit = this.addUnit(e.target.value);
+		unit.color = Utils.generateRandomColor();
 		this.onUnitChange();
 		this.refreshAddButton();	
 	}

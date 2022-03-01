@@ -22,6 +22,7 @@
 	"data-manager-title": "Data Manager",
 	"data-manager-intro": "An import does not completely replace existing data. It merges it with any current data you have. (presuming the imported data to be the authority in cases of conflict)<br /><br />Use this tool at your own risk. It is easy to accidently obliterate your own local data. If the simulator is broken after using this tool you may need to clear browser data to fix it.",
 	"unit-delete": "X",
+	"unit-clone": "+",
 	"unit-loader-empty": "There are no units saved in your local cache. Configure and name units to have them show up here.",
 	"attacks-number": "Attacks",
 	"attacks-hit": "Hit",

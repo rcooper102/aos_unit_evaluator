@@ -37,11 +37,23 @@ export class Unit extends Base {
 		this.delete.addListener(MouseEvent.CLICK, this.onDelete, this);
 		this.addChild(this.delete);
 
+		this.clone = new Base();
+		this.clone.make("button");
+		this.clone.addClass("clone");
+		this.clone.text = Locale.gen("unit-clone");
+		this.clone.addListener(MouseEvent.CLICK, this.onClone, this);
+		this.addChild(this.clone);
+		
+
 		this.attacks = [];
 	}
 
 	onDelete() {
 		this.dispatch(new Event(Event.REMOVE, this));		
+	}
+
+	onClone() {
+		this.dispatch(new Event("CLONE", this));		
 	}
 
 	onSwatchChange() {
