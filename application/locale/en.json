@@ -94,9 +94,9 @@
 	"buff-trigger-attacks-autohit": "Do the bonus attacks hit automatically?",
 
 	"buff-trigger-wound-trigger": "Triggering Rolls",
-	"buff-trigger-wound-label": "Autowound",
+	"buff-trigger-wound-label": "Auto Wound",
 	"buff-trigger-wound-description": "Trigger an automatic wound on certain hit roll. Note: Any wound triggers are bypassed if a wound is automatic.",
-	"buff-trigger-wound-name": "Autowound",
+	"buff-trigger-wound-name": "Auto Wound",
 
 	"toggle-field-yes": "Yes",
 	"toggle-field-no": "No",
