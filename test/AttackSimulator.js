@@ -11,7 +11,7 @@ const ATTACKS_COUNT = 50000;
 const ERROR_MARGIN = 0.05;
 let sim;
 
-describe.only('AttackSimulator', function () {	
+describe('AttackSimulator', function () {	
  	it('Should simulate statistical average for 4+/4+ attacks with no rend', function () {
         sim = new AttackSimulator({
         	number: ATTACKS_COUNT,
