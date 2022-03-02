@@ -9,7 +9,7 @@ export class Screenshot extends EventDispatcher {
 		};
 	}
 
-	constructor (mode, name = "relic-wargaming-attack-simulator-report.jpg") {
+	constructor (mode, name = "attack-simulator-report.jpg") {
 		super();
 
 		if(mode) {
