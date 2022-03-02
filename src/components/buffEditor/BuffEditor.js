@@ -126,23 +126,27 @@ export class BuffEditor extends ModalWindow {
 						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
 						options: [1,2,3,4,5,6],
 						name: BuffEditor.FIELD_NAMES.TRIGGER,
+						default: [6],
 					},
 					{
 						label: Locale.gen("buff-trigger-disease-output"),
 						type: BuffEditor.FIELD_TYPES.INPUT_FIELD,
 						diceNotation: true,
 						name: BuffEditor.FIELD_NAMES.OUTPUT,
+						default: 1,
 					},
 					{
 						label: Locale.gen("buff-trigger-disease-virulence"),
 						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
 						options: [1,2,3,4,5,6],
 						name: BuffEditor.FIELD_NAMES.VIRULENCE,
+						default: [4,5,6],
 					},
 				],
 				label: Locale.gen("buff-trigger-disease-label"),
 				description: Locale.gen("buff-trigger-disease-description"),
 				name: Locale.gen("buff-trigger-disease-name"),
+				default: [BuffEditorField.OPTIONS.HIT],
 			},
 			[Buff.TYPES.TRIGGER_ATTACKS]: {
 				fields: [
@@ -282,6 +286,10 @@ class BuffEditorField extends Base {
 		this.options = new CheckField({ options: Object.keys(BuffEditorField.OPTIONS).map((i) => BuffEditorField.OPTIONS[i])});
 		this.addChild(this.options);
 		this.options.addListener(Event.CHANGE, this.onChange, this);
+		
+		if(this.data.default) {
+			this.options.value = this.data.default;
+		}
 
 		this.data.fields.forEach((item) => {
 			const label = new Header(4);
@@ -292,6 +300,10 @@ class BuffEditorField extends Base {
 			this.addChild(field);
 			this.fields.push(field);
 			field.addListener(Event.CHANGE, this.onChange, this);
+
+			if(item.default) {
+				field.value = item.default;
+			}
 		});
 
 		this.checkForHitOnly();
