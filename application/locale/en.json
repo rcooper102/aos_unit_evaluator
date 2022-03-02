@@ -87,7 +87,7 @@
 	"buff-trigger-rend-output": "How much rend? (Accepts Dice Notation)",
 
 	"buff-trigger-disease-name": "Disease Points",
-	"buff-trigger-disease-description": "Adds disease points to the target when triggered.",
+	"buff-trigger-disease-description": "Adds disease points to the target when triggered. The simulator presumes that target has no disease points to begin with. Maximum of 7 disease points can be applied to a target.",
 	"buff-trigger-disease-trigger": "Triggering Rolls",
 	"buff-trigger-disease-output": "How many disease points?",
 	"buff-trigger-disease-virulence": "Roll required for the disease point to cause a mortal wound.",

@@ -368,32 +368,36 @@ describe('AttackSimulator', function () {
         });
         expectWithinPercentage(sim.damage, ATTACKS_COUNT/2, ERROR_MARGIN);     
     }); 
-    it('Should simulate statistical average for attacks that apply disease on a 6 to hit', function () {
-        sim = new AttackSimulator({
-            number: ATTACKS_COUNT,
-            hit: 4, 
-            wound: 4, 
-            rend: 0, 
-            damage: '1',
-        }, 7,{
-            hit: [ new Buff(Buff.TYPES.TRIGGER_DISEASE, { trigger: [6], output: '1', "virulence": [4,5,6] }) ] ,
-            wound: [],          
-        });
-        expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 0.5 + ATTACKS_COUNT/6 * 0.5, ERROR_MARGIN);     
-    });
     it('Should simulate statistical average for attacks that apply disease on a 6 to wound with 3+ virulence', function () {
+        let total = 0;
+        for(let i = 0; i < ATTACKS_COUNT; i++){
+            sim = new AttackSimulator({
+                number: 1,
+                hit: 4, 
+                wound: 4, 
+                rend: 0, 
+                damage: '1',
+            }, 7,{
+                hit: [] ,
+                wound: [ new Buff(Buff.TYPES.TRIGGER_DISEASE, { trigger: [6], output: '1', "virulence": [3,4,5,6] }) ],          
+            });
+            total += sim.damage
+        }
+        expectWithinPercentage(total, ATTACKS_COUNT * 0.5 * 0.5 + ATTACKS_COUNT/2/6 * 2/3, ERROR_MARGIN);     
+    }); 
+    it('Should ensure no more than 7 disease points', function () {
         sim = new AttackSimulator({
-            number: ATTACKS_COUNT,
-            hit: 4, 
-            wound: 4, 
+            number: 10,
+            hit: 1, 
+            wound: 1, 
             rend: 0, 
-            damage: '1',
+            damage: '0',
         }, 7,{
             hit: [] ,
-            wound: [ new Buff(Buff.TYPES.TRIGGER_DISEASE, { trigger: [6], output: '1', "virulence": [3,4,5,6] }) ],          
+            wound: [ new Buff(Buff.TYPES.TRIGGER_DISEASE, { trigger: [1,2,3,4,5,6], output: '1', "virulence": [1,2,3,4,5,6] }) ],          
         });
-        expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 0.5 + ATTACKS_COUNT/2/6 * 2/3, ERROR_MARGIN);     
-    });       
+        expectWithinPercentage(sim.damage, 7, 0);     
+    });  
 });
 
 

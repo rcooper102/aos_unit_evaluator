@@ -17,7 +17,7 @@ export class AttackSimulator {
 		this._damage = 0;
 		this._mortalWounds = 0;
 		const attacks = this.magnitudeRoll(this.data.number);
-
+		this.diseasePoints = 0;
 		this.makeAttacks(attacks);
 	}
 
@@ -87,10 +87,13 @@ export class AttackSimulator {
 						}
 					break;
 					case Buff.TYPES.TRIGGER_DISEASE:
-						if(buff.data.trigger.indexOf(roll) > -1 && buff.data.virulence.indexOf(Utils.rollDice()) > -1) {
-							const wounds = this.magnitudeRoll(buff.data.output);
-							this._mortalWounds += wounds;
-							this._damage += wounds;
+						if(buff.data.trigger.indexOf(roll) > -1) {
+							this.diseasePoints ++;
+							if(buff.data.virulence.indexOf(Utils.rollDice()) > -1 && this.diseasePoints <= 7) {
+								const wounds = this.magnitudeRoll(buff.data.output);
+								this._mortalWounds += wounds;
+								this._damage += wounds;
+							}
 						}
 					break;
 					case Buff.TYPES.TRIGGER_ATTACKS:
