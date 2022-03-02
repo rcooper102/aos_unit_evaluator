@@ -10,7 +10,11 @@ export class AttackSimulator {
 		};
 	}
 
-	constructor(data, save, buffs = { hit: [], wound: [] }, diseasePoints = 0) {
+	static get MAX_DISEASE() {
+		return 7;
+	}
+
+	constructor(data, save, buffs = { hit: [], wound: [] }, diseasePoints = 0, normalizedRatio = 1) {
 		this.data = data;
 		this.save = save;
 		this.buffs = buffs;
@@ -18,6 +22,7 @@ export class AttackSimulator {
 		this._mortalWounds = 0;
 		const attacks = this.magnitudeRoll(this.data.number);
 		this.diseasePoints = diseasePoints;
+		this.normalizedRatio = normalizedRatio;
 		this.makeAttacks(attacks);
 	}
 
@@ -89,7 +94,7 @@ export class AttackSimulator {
 					case Buff.TYPES.TRIGGER_DISEASE:
 						if(buff.data.trigger.indexOf(roll) > -1) {
 							this.diseasePoints ++;
-							if(buff.data.virulence.indexOf(Utils.rollDice()) > -1 && this.diseasePoints <= 7) {
+							if(buff.data.virulence.indexOf(Utils.rollDice()) > -1 && this.diseasePoints <= (AttackSimulator.MAX_DISEASE*this.normalizedRatio)) {
 								const wounds = this.magnitudeRoll(buff.data.output);
 								this._mortalWounds += wounds;
 								this._damage += wounds;

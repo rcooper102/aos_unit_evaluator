@@ -15,7 +15,7 @@ export class UnitSimulator extends EventDispatcher {
 			let list = [];
 			this.diseasePoints = 0;
 			data.attacks.forEach((attack) => {
-				const attackSimulator = new AttackSimulator(attack, save, this.transformBuffs(attack.buffs), this.diseasePoints || 0);
+				const attackSimulator = new AttackSimulator(attack, save, this.transformBuffs(attack.buffs), this.diseasePoints || 0, this.data['normalizedRatio'] || 1);
 				total += attackSimulator.damage;
 				mortalWounds += attackSimulator.mortalWounds;
 				list.push(attackSimulator.damage);

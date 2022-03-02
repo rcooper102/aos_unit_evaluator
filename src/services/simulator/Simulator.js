@@ -62,8 +62,10 @@ export class Simulator extends EventDispatcher {
 				item.attacks.forEach((attack) => {
 					attack['number'] = Utils.multiplyDiceValue(attack['number'], ratio);
 					item['normalizedPoints'] = normalizedPoint ? normalizedPoint : null;
+					item['normalizedRatio'] = ratio;
 				});
 			});
+
 			return newData;
 		}
 	}
