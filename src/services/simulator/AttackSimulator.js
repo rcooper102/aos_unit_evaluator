@@ -10,14 +10,14 @@ export class AttackSimulator {
 		};
 	}
 
-	constructor(data, save, buffs = { hit: [], wound: [] }) {
+	constructor(data, save, buffs = { hit: [], wound: [] }, diseasePoints = 0) {
 		this.data = data;
 		this.save = save;
 		this.buffs = buffs;
 		this._damage = 0;
 		this._mortalWounds = 0;
 		const attacks = this.magnitudeRoll(this.data.number);
-		this.diseasePoints = 0;
+		this.diseasePoints = diseasePoints;
 		this.makeAttacks(attacks);
 	}
 

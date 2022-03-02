@@ -13,11 +13,14 @@ export class UnitSimulator extends EventDispatcher {
 			let total = 0;
 			let mortalWounds = 0;
 			let list = [];
+			this.diseasePoints = 0;
 			data.attacks.forEach((attack) => {
-				const attackSimulator = new AttackSimulator(attack, save, this.transformBuffs(attack.buffs));
+				const attackSimulator = new AttackSimulator(attack, save, this.transformBuffs(attack.buffs), this.diseasePoints || 0);
 				total += attackSimulator.damage;
 				mortalWounds += attackSimulator.mortalWounds;
 				list.push(attackSimulator.damage);
+				
+				this.diseasePoints = attackSimulator.diseasePoints;
 			});
 			if(total > this.highest) {
 				this.highest = total;
