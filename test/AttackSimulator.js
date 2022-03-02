@@ -367,7 +367,33 @@ describe('AttackSimulator', function () {
             wound: [    new Buff(Buff.TYPES.TRIGGER_DAMAGE, { trigger: [6], output: '2' }) ],          
         });
         expectWithinPercentage(sim.damage, ATTACKS_COUNT/2, ERROR_MARGIN);     
-    });      
+    }); 
+    it('Should simulate statistical average for attacks that apply disease on a 6 to hit', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '1',
+        }, 7,{
+            hit: [ new Buff(Buff.TYPES.TRIGGER_DISEASE, { trigger: [6], output: '1', "virulence": [4,5,6] }) ] ,
+            wound: [],          
+        });
+        expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 0.5 + ATTACKS_COUNT/6 * 0.5, ERROR_MARGIN);     
+    });
+    it('Should simulate statistical average for attacks that apply disease on a 6 to wound with 3+ virulence', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '1',
+        }, 7,{
+            hit: [] ,
+            wound: [ new Buff(Buff.TYPES.TRIGGER_DISEASE, { trigger: [6], output: '1', "virulence": [3,4,5,6] }) ],          
+        });
+        expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 0.5 + ATTACKS_COUNT/2/6 * 2/3, ERROR_MARGIN);     
+    });       
 });
 
 

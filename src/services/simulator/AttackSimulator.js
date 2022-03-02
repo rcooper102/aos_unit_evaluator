@@ -86,6 +86,13 @@ export class AttackSimulator {
 							}
 						}
 					break;
+					case Buff.TYPES.TRIGGER_DISEASE:
+						if(buff.data.trigger.indexOf(roll) > -1 && buff.data.virulence.indexOf(Utils.rollDice()) > -1) {
+							const wounds = this.magnitudeRoll(buff.data.output);
+							this._mortalWounds += wounds;
+							this._damage += wounds;
+						}
+					break;
 					case Buff.TYPES.TRIGGER_ATTACKS:
 						if(canSpawnAttacks && buff.data.trigger.indexOf(roll) > -1) {
 							this.makeAttacks(this.magnitudeRoll(buff.data.output), false, buff.data.autoHit, buff.data.autoWound);

@@ -46,6 +46,13 @@ export class Buff {
 			}
 			**/
 			TRIGGER_WOUND: "TRIGGER_WOUND",
+			/**
+			{
+				trigger: [5, 6], //Which dice rolls trigger the dp
+				output: "D3", //Dice notation of integer of how many DP are caused.
+			}
+			**/
+			TRIGGER_DISEASE: "TRIGGER_DISEASE",
 
 		};
 	}

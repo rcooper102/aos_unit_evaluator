@@ -86,6 +86,12 @@
 	"buff-trigger-rend-trigger": "Triggering Rolls",
 	"buff-trigger-rend-output": "How much rend? (Accepts Dice Notation)",
 
+	"buff-trigger-disease-name": "Disease Points",
+	"buff-trigger-disease-description": "Adds disease points to the target when triggered.",
+	"buff-trigger-disease-trigger": "Triggering Rolls",
+	"buff-trigger-disease-output": "How many disease points?",
+	"buff-trigger-disease-virulence": "Roll required for the disease point to cause a mortal wound.",
+
 	"buff-trigger-attacks-name": "Additional Attacks",
 	"buff-trigger-attacks-description": "Triggers a number of bonus attacks when a specific die roll is rolled. Multiple triggers can be stacked.",
 	"buff-trigger-attacks-trigger": "Triggering Rolls",
@@ -115,6 +121,7 @@
 	"attack-buff-summary-trigger-mortal": "<em>{[output]}</em> Mortal Wounds triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.<br />Stops attack sequence: <em>{[stop]}</em>",
 	"attack-buff-summary-trigger-attacks": "<em>{[output]}</em> bonus attacks triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.<br />Replaces the triggering attack: <em>{[stop]}</em>.<br />Auto hit: <em>{[autoHit]}</em>.",
 	"attack-buff-summary-trigger-rend": "<em>{[output]}</em> rend triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.",
+	"attack-buff-summary-trigger-disease": "<em>{[output]}</em> disease points triggering on <em>{[trigger]}</em> to <em>{[type]}</em> that become mortal wounds on a disease roll of <em>{[virulence]}</em>.",
 	"attack-buff-summary-trigger-wound": "Autowound triggering on <em>{[trigger]}</em> to hit.", 
 	"attack-buff-summary-trigger-damage": "<em>{[output]}</em> damage triggering on <em>{[trigger]}</em> to <em>{[type]}</em>." 
 }

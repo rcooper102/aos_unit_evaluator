@@ -15,6 +15,7 @@ export class BuffEditor extends ModalWindow {
 			STOP: "stop",
 			TRIGGER: "trigger",
 			OUTPUT: "output",
+			VIRULENCE: "virulence",
 			AUTO_HIT: "autoHit",
 		}
 	}
@@ -117,6 +118,31 @@ export class BuffEditor extends ModalWindow {
 				label: Locale.gen("buff-trigger-rend-label"),
 				description: Locale.gen("buff-trigger-rend-description"),
 				name: Locale.gen("buff-trigger-rend-name"),
+			},
+			[Buff.TYPES.TRIGGER_DISEASE]: {
+				fields: [
+					{
+						label: Locale.gen("buff-trigger-disease-trigger"),
+						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
+						options: [1,2,3,4,5,6],
+						name: BuffEditor.FIELD_NAMES.TRIGGER,
+					},
+					{
+						label: Locale.gen("buff-trigger-disease-output"),
+						type: BuffEditor.FIELD_TYPES.INPUT_FIELD,
+						diceNotation: true,
+						name: BuffEditor.FIELD_NAMES.OUTPUT,
+					},
+					{
+						label: Locale.gen("buff-trigger-disease-virulence"),
+						type: BuffEditor.FIELD_TYPES.CHECK_FIELD,
+						options: [1,2,3,4,5,6],
+						name: BuffEditor.FIELD_NAMES.VIRULENCE,
+					},
+				],
+				label: Locale.gen("buff-trigger-disease-label"),
+				description: Locale.gen("buff-trigger-disease-description"),
+				name: Locale.gen("buff-trigger-disease-name"),
 			},
 			[Buff.TYPES.TRIGGER_ATTACKS]: {
 				fields: [
