@@ -25,7 +25,7 @@ export class SaveComparisonTable extends Base {
 			saves.push(`${save}+`);
 			this.data[save].forEach((unit,i) => {
 				if(!units[i]) {
-					units[i] = [`<span style='color:${unit.data.color}'>${unit.data.name || Locale.gen("unit")}</span>`];
+					units[i] = [`<span style='color:${unit.data.color}'>${Utils.generateName(unit.data)}</span>`];
 				}
 				units[i][save-1] = Math.round(unit.average*100)/100;
 			});

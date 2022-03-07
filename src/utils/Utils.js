@@ -2,6 +2,13 @@ let rolls = 0;
 
 export class Utils {
 
+	static generateName (data) {
+		if(data['normalizedRatio'] && data['normalizedRatio'] > 1){
+			return `${data['name'] || Locale.gen("Unit")} (${data['normalizedRatio']})`;
+		}
+		return data['name'] || Locale.gen("Unit");
+	}
+
 	static isInteger(target) {
 		const val = target && target.trim ? target.trim() : target;
 		return !!val && !!Number.isInteger(+val);

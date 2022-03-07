@@ -23,7 +23,7 @@ export class MortalWoundsGraph extends Base {
 				color: item.data.color,
 				format: (e) => { return Math.round(e*100)/100 },
 				scale: highest,
-				name: item.data.name,
+				name: Utils.generateName(item.data),
 				key: i,
 			};
 		});

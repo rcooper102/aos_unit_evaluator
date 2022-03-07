@@ -18,6 +18,7 @@ export class AverageGraph extends Base {
 		data.forEach((item) => {
 			highest = item.highestDamage > highest ? item.highestDamage : highest;
 		});
+
 		const series = data.map((item, i) => {
 			return {
 				value: item.average,
@@ -25,7 +26,7 @@ export class AverageGraph extends Base {
 				color: item.data.color,
 				format: (e) => { return Math.round(e*100)/100 },
 				//scale: highest,
-				name: item.data.name,
+				name: Utils.generateName(item.data),
 				key: i,
 			};
 		});

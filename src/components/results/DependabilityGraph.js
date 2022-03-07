@@ -32,7 +32,7 @@ export class DependabilityGraph extends Base {
 				color: item.data.color,
 				format: (e) => { return `${e} <span>(${Utils.formatPercent(out.length / item.results.length)})</span>` },
 				scale: highest,
-				name: item.data.name,
+				name: Utils.generateName(item.data),
 				key: i,
 			};
 		});

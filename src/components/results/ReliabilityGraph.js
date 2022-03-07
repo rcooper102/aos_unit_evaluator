@@ -21,7 +21,7 @@ export class ReliabilityGraph extends Base {
 				color: item.data.color,
 				format: Utils.formatPercent,
 				scale: 1,
-				name: item.data.name,
+				name: Utils.generateName(item.data),
 				key: i,
 			}
 		});
