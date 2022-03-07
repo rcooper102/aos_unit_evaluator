@@ -46,6 +46,7 @@ export class Simulator extends EventDispatcher {
 		let canNormalize = true;
 		const points = [];
 		data.forEach((item) => {
+			item['normalizedRatio'] = 1;
 			if(!item.points || data.length === 1) {
 				canNormalize = false;
 			} else {
@@ -60,7 +61,6 @@ export class Simulator extends EventDispatcher {
 			newData.forEach((item) => {
 				const ratio = normalizedPoint / item.points;
 				item.attacks.forEach((attack) => {
-					attack['number'] = Utils.multiplyDiceValue(attack['number'], ratio);
 					item['normalizedPoints'] = normalizedPoint ? normalizedPoint : null;
 					item['normalizedRatio'] = ratio;
 				});

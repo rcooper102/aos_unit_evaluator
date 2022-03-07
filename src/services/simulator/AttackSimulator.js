@@ -41,7 +41,7 @@ export class AttackSimulator {
 					const rend = hit.rendOverride || wound.rendOverride || +(this.data.rend);
 					const damage = hit.damageOverride || wound.damageOverride || this.magnitudeRoll(this.data.damage);
 					if(this.comparisonRoll(this.save + rend, AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
-						this._damage += damage;
+						this._damage += damage * this.normalizedRatio;
 					}
 				}
 			}
@@ -84,8 +84,8 @@ export class AttackSimulator {
 					case Buff.TYPES.TRIGGER_MORTAL:
 						if(buff.data.trigger.indexOf(roll) > -1) {
 							const wounds = this.magnitudeRoll(buff.data.output);
-							this._mortalWounds += wounds;
-							this._damage += wounds;
+							this._mortalWounds += wounds * this.normalizedRatio;
+							this._damage += wounds * this.normalizedRatio;
 							if(buff.data.stop) {
 								result = false;
 							}
@@ -96,8 +96,8 @@ export class AttackSimulator {
 							this.diseasePoints ++;
 							if(buff.data.virulence.indexOf(Utils.rollDice()) > -1 && this.diseasePoints <= (AttackSimulator.MAX_DISEASE*this.normalizedRatio)) {
 								const wounds = this.magnitudeRoll(buff.data.output);
-								this._mortalWounds += wounds;
-								this._damage += wounds;
+								this._mortalWounds += wounds  * this.normalizedRatio;
+								this._damage += wounds  * this.normalizedRatio;
 							}
 						}
 					break;
