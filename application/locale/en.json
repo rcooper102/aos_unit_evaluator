@@ -128,12 +128,12 @@
 	"enemy-unit-wounds": "Enemy Wounds:",
 
 	"kills-graph-title": "Enemy Models Slain",
-	"kills-graph-sub-title": "The average number of enemies killed based on the enemy wounds.",
-	"kills-graph-detail": "Kills are determined by comparing damage done to the total wound count to determine how many models are killed. If splash is disabled the kill count accounts for no roll over of excess damage. Mortal wound contribution is added after all normal damage is accounted for to emulate fast dice rolling.",
+	"kills-graph-sub-title": "The average number of enemies slain based on the enemy wounds.",
+	"kills-graph-detail": "Slain enemies are determined by comparing damage done to the total wound count to determine how many models are killed. If splash is disabled the kill count accounts for no roll over of excess damage. Mortal wound contribution is added after all normal damage is accounted for to emulate fast dice rolling.",
 
-	"kills-comparison-title": "Kills Comparison",
-	"kills-comparison-sub-title": "A visual representation of how different save levels impact average kills.",
+	"kills-comparison-title": "Slain Enemies Comparison",
+	"kills-comparison-sub-title": "A visual representation of how different save levels impact average slain enemies.",
 
-	"kill-odds-table-title": "Kill Odds",
-	"kill-odds-table-sub-title": "The odds of achieving a certain threshold of kills or more."
+	"kill-odds-table-title": "Slain Enemies Odds",
+	"kill-odds-table-sub-title": "The odds of achieving a certain threshold of slain enemies or more."
 }
