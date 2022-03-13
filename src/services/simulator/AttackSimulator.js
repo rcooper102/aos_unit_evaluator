@@ -47,7 +47,7 @@ export class AttackSimulator {
 					const damage = hit.damageOverride || wound.damageOverride || this.magnitudeRoll(this.data.damage);
 					if(this.comparisonRoll(this.save + rend, AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
 						this._damage += damage * this.normalizedRatio;
-						if(this.targetUnit && !this.buffs.splash) {
+						if(this.targetUnit && this.buffs.noSplash) {
 							for(let i = 0; i < this.normalizedRatio; i++) {
 								this.currentWounds -= damage;
 								if(this.currentWounds <= 0) {
@@ -62,7 +62,7 @@ export class AttackSimulator {
 		}
 
 		if(this.targetUnit) {
-			if(!this.buffs.splash) {
+			if(this.buffs.noSplash) {
 				this._kills += ((this.targetUnit.wounds - this.currentWounds) / this.targetUnit.wounds);
 				this._kills += this._mortalWounds / this.targetUnit.wounds;
 			} else {

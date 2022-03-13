@@ -406,6 +406,7 @@ describe('AttackSimulator', function () {
             rend: 0, 
             damage: '2',
         }, 7,{
+            noSplash: true,
             hit: [] ,
             wound: [],          
         },0,1,
@@ -422,6 +423,7 @@ describe('AttackSimulator', function () {
             rend: 0, 
             damage: '2',
         }, 7,{
+            noSplash: true,
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [1,2,3,4,5,6], output: '1', stop: false }) ],          
         },0,1,
@@ -438,7 +440,6 @@ describe('AttackSimulator', function () {
             rend: 0, 
             damage: '2',
         }, 7,{
-            splash: true,
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [1,2,3,4,5,6], output: '1', stop: false }) ],          
         },0,1,
