@@ -4,12 +4,13 @@ enemy-unit {
 		display: block;
 		float: left;
 		background:pink;
-		width: calc(100% - 80px);
+		width: calc(100% - 82px);
+		margin-right: 2px;
 		height:28.5px;
 		line-height: 28.5px;
 		padding-left:5px;
 		box-sizing: border-box;
-		background: #999;
+		background: #666;
 		color: #fff;
 		margin-top: 2px;
 	}
