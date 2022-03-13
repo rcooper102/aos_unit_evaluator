@@ -82,7 +82,7 @@ export class Unit extends Base {
 		const attack = new Attack();
 		this.addChild(attack);
 		this.attacks.push(attack);
-		if(this.enemyUnit && this.enemyUnit.noSplash.value) {
+		if(this.enemyUnit && this.enemyUnit.noSplash.value && !value) {
 			attack.value = {
 				...attack.value,
 				options: { noSplash: this.enemyUnit.noSplash.value },
