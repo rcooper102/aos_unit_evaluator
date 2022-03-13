@@ -432,6 +432,91 @@ describe('AttackSimulator', function () {
         });
         expectWithinPercentage(sim.kills, 2.66 + 5/3, 0.01);     
     });  
+    it('Properly determine kills for 2 damage attacks on a 3 wound target with variable stats', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '2',
+        }, 7,{
+            noSplash: true,
+            hit: [] ,
+            wound: [],          
+        },0,1,
+        {
+            wounds: 3
+        });
+        expectWithinPercentage(sim.kills, ATTACKS_COUNT * 0.5 * 0.5 / 2 + ATTACKS_COUNT * 0.5 * 0.5 % 2, ERROR_MARGIN);     
+    });
+    it('Properly determine kills for attacks that only do mortals', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '0',
+        }, 7,{
+            noSplash: true,
+            hit: [] ,
+            wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
+        },0,1,
+        {
+            wounds: 3
+        });
+        expectWithinPercentage(sim.kills, ATTACKS_COUNT * 0.5 * (1/3) / 3, ERROR_MARGIN);     
+    });
+    it('Properly determine kills for attacks that do mortals and variable stats', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '2',
+        }, 7,{
+            noSplash: true,
+            hit: [] ,
+            wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
+        },0,1,
+        {
+            wounds: 3
+        });
+        expectWithinPercentage(sim.kills, ATTACKS_COUNT * 0.5 * 0.5 / 2 + ATTACKS_COUNT * 0.5 * 0.5 % 2 + ATTACKS_COUNT * 0.5 * (1/3) / 3, ERROR_MARGIN);     
+    });
+    it('Properly determine kills for attacks that do mortals and variable stats with no overkill possible', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '2',
+        }, 7,{
+            noSplash: true,
+            hit: [] ,
+            wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
+        },0,1,
+        {
+            wounds: 4
+        });
+        expectWithinPercentage(sim.kills, ATTACKS_COUNT * 0.5 * 0.5 / 2 + ATTACKS_COUNT * 0.5 * (1/3) / 4, ERROR_MARGIN);     
+    });
+    it('Properly determine kills for attacks that overkill on every swing', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '5',
+        }, 7,{
+            noSplash: true,
+            hit: [] ,
+            wound: [],          
+        },0,1,
+        {
+            wounds: 4
+        });
+        expectWithinPercentage(sim.kills, ATTACKS_COUNT * 0.5 * 0.5, ERROR_MARGIN);     
+    });  
     it('Properly determine kills for 2 damage attacks on a 3 wound target that splashes', function () {
         sim = new AttackSimulator({
             number: 5,
@@ -447,7 +532,92 @@ describe('AttackSimulator', function () {
             wounds: 3
         });
         expectWithinPercentage(sim.kills, 5, 0.01);     
-    });  
+    });
+    it('Properly determine noSplash kills based on variable stats', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '2',
+        }, 7,{
+            noSplash: false,
+            hit: [] ,
+            wound: [],          
+        },0,1,
+        {
+            wounds: 3
+        });
+        expectWithinPercentage(sim.kills, ATTACKS_COUNT * 0.5 * 0.5 * 2 / 3, ERROR_MARGIN);     
+    }); 
+    it('Properly determine noSplash kills based on variable stats with a save', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 0, 
+            damage: '2',
+        }, 4,{
+            noSplash: false,
+            hit: [] ,
+            wound: [],          
+        },0,1,
+        {
+            wounds: 3
+        });
+        expectWithinPercentage(sim.kills, ATTACKS_COUNT * 0.5 * 0.5 * 0.5 * 2 / 3, ERROR_MARGIN);     
+    }); 
+    it('Properly determine noSplash kills based on variable stats with a save and rend', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 2, 
+            damage: '2',
+        }, 4,{
+            noSplash: false,
+            hit: [] ,
+            wound: [],          
+        },0,1,
+        {
+            wounds: 3
+        });
+        expectWithinPercentage(sim.kills, ATTACKS_COUNT * 0.5 * 0.5 * (5/6) * 2 / 3, ERROR_MARGIN);     
+    });
+    it('Ensure kills matches damage ratioed in noSplash situations', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 2, 
+            damage: '2',
+        }, 4,{
+            noSplash: false,
+            hit: [] ,
+            wound: [],          
+        },0,1,
+        {
+            wounds: 3
+        });
+        expectWithinPercentage(sim.kills, sim.damage / 3, ERROR_MARGIN);     
+    });
+    it('Ensure kills matches damage ratioed in noSplash situations with mortals', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 2, 
+            damage: '2',
+        }, 4,{
+            noSplash: false,
+            hit: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ] ,
+            wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
+        },0,1,
+        {
+            wounds: 3
+        });
+        expectWithinPercentage(sim.kills, sim.damage / 3, ERROR_MARGIN);     
+    });
 });
 
 
