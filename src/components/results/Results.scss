@@ -271,7 +271,7 @@ results {
 
 	kills-graph.bar-graph {
 		float: none;
-		width: 100%;
+		width: calc(100% - 60px);
 		margin-right: 0px;
 	}
 
