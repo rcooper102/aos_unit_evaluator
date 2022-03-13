@@ -398,6 +398,55 @@ describe('AttackSimulator', function () {
         });
         expectWithinPercentage(sim.damage, 7, 0);     
     });  
+    it('Properly determine kills for 2 damage attacks on a 3 wound target', function () {
+        sim = new AttackSimulator({
+            number: 5,
+            hit: 1, 
+            wound: 1, 
+            rend: 0, 
+            damage: '2',
+        }, 7,{
+            hit: [] ,
+            wound: [],          
+        },0,1,
+        {
+            wounds: 3
+        });
+        expectWithinPercentage(sim.kills, 2.66, 0.01);     
+    });  
+    it('Properly determine kills for 2 damage attacks on a 3 wound target that does mortals on 6s to wound', function () {
+        sim = new AttackSimulator({
+            number: 5,
+            hit: 1, 
+            wound: 1, 
+            rend: 0, 
+            damage: '2',
+        }, 7,{
+            hit: [] ,
+            wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [1,2,3,4,5,6], output: '1', stop: false }) ],          
+        },0,1,
+        {
+            wounds: 3
+        });
+        expectWithinPercentage(sim.kills, 2.66 + 5/3, 0.01);     
+    });  
+    it('Properly determine kills for 2 damage attacks on a 3 wound target that splashes', function () {
+        sim = new AttackSimulator({
+            number: 5,
+            hit: 1, 
+            wound: 1, 
+            rend: 0, 
+            damage: '2',
+        }, 7,{
+            splash: true,
+            hit: [] ,
+            wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [1,2,3,4,5,6], output: '1', stop: false }) ],          
+        },0,1,
+        {
+            wounds: 3
+        });
+        expectWithinPercentage(sim.kills, 5, 0.01);     
+    });  
 });
 
 

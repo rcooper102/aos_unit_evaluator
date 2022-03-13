@@ -14,12 +14,14 @@ export class AttackSimulator {
 		return 7;
 	}
 
-	constructor(data, save, buffs = { hit: [], wound: [] }, diseasePoints = 0, normalizedRatio = 1) {
+	constructor(data, save, buffs = { hit: [], wound: [], splash: false }, diseasePoints = 0, normalizedRatio = 1, targetUnit = null) {
 		this.data = data;
 		this.save = save;
 		this.buffs = buffs;
 		this._damage = 0;
+		this._kills = 0;
 		this._mortalWounds = 0;
+		this.targetUnit = targetUnit;
 		const attacks = this.magnitudeRoll(this.data.number);
 		this.diseasePoints = diseasePoints;
 		this.normalizedRatio = normalizedRatio;
@@ -28,6 +30,9 @@ export class AttackSimulator {
 
 	makeAttacks(attacks, canSpawnAttacks = true, autoHit = false, autoWound = false) {
 		let i;
+		if(this.targetUnit) {
+			this.resetWounds();
+		}
 		for(i = 0; i < attacks; i++) {
 			const hit = this.comparisonRoll(this.data.hit, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.hit, canSpawnAttacks, autoHit);
 			if(hit.result) {
@@ -42,10 +47,32 @@ export class AttackSimulator {
 					const damage = hit.damageOverride || wound.damageOverride || this.magnitudeRoll(this.data.damage);
 					if(this.comparisonRoll(this.save + rend, AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
 						this._damage += damage * this.normalizedRatio;
+						if(this.targetUnit && !this.buffs.splash) {
+							for(let i = 0; i < this.normalizedRatio; i++) {
+								this.currentWounds -= damage;
+								if(this.currentWounds <= 0) {
+									this._kills ++;
+									this.resetWounds();
+								}
+							}
+						}
 					}
 				}
 			}
 		}
+
+		if(this.targetUnit) {
+			if(!this.buffs.splash) {
+				this._kills += ((this.targetUnit.wounds - this.currentWounds) / this.targetUnit.wounds);
+				this._kills += this._mortalWounds / this.targetUnit.wounds;
+			} else {
+				this._kills = this._damage / this.targetUnit.wounds;
+			}	
+		}
+	}
+
+	resetWounds(){
+		this.currentWounds = this.targetUnit.wounds || 1;
 	}
 
 	comparisonRoll(difficulty, type, buffs, canSpawnAttacks, auto = false) {
@@ -145,6 +172,10 @@ export class AttackSimulator {
 			return Utils.rollDice(dice);
 		}
 		return 0;
+	}
+
+	get kills() {
+		return this._kills;
 	}
 
 	get damage() {
