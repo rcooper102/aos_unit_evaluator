@@ -77,7 +77,7 @@ export class AttackSimulator {
 		if(!remainingWounds) {
 			this.currentWounds = this.targetUnit.wounds || 1;
 		} else {
-			this.currentWounds = this.targetUnit.wounds * remainingWounds;
+			this.currentWounds = remainingWounds;
 		}
 	}
 

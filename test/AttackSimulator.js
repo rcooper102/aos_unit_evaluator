@@ -431,7 +431,24 @@ describe('AttackSimulator', function () {
             wounds: 3
         });
         expectWithinPercentage(sim.kills, 2.66 + 5/3, 0.01);     
-    });  
+    });
+    it('Properly determine kills when remaining wounds is set', function () {
+        sim = new AttackSimulator({
+            number: 5,
+            hit: 1, 
+            wound: 1, 
+            rend: 0, 
+            damage: '2',
+            options: { noSplash: true },
+        }, 7,{
+            hit: [] ,
+            wound: [],          
+        },0,1,
+        {
+            wounds: 3
+        }, 1);
+        expectWithinPercentage(sim.kills, 3, 0.01);     
+    }); 
     it('Properly determine kills for 2 damage attacks on a 3 wound target with variable stats', function () {
         sim = new AttackSimulator({
             number: ATTACKS_COUNT,

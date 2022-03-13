@@ -19,7 +19,7 @@ export class UnitSimulator extends EventDispatcher {
 			data.attacks.forEach((attack) => {
 				const attackSimulator = new AttackSimulator(attack, save, this.transformBuffs(attack.buffs), this.diseasePoints || 0, this.data['normalizedRatio'] || 1, enemyUnit, (1 - this.killsLeftOver)*enemyUnit.wounds);
 				total += attackSimulator.damage;
-				kills += Math.floor(attackSimulator.kills);
+				kills += Math.floor(attackSimulator.kills)
 				this.killsLeftOver = attackSimulator.kills - Math.floor(attackSimulator.kills);
 				mortalWounds += attackSimulator.mortalWounds;
 				list.push(attackSimulator.damage);
