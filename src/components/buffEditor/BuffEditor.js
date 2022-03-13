@@ -28,6 +28,23 @@ export class BuffEditor extends ModalWindow {
 		}
 	}
 
+	static get OPTIONS_NAMES() {
+		return {
+			DISABLE_SPLASH: "noSplash",
+		}
+	}
+
+	static get OPTIONS() {
+		return [
+			{
+				label: Locale.gen("options-disable-splash"),
+				type: BuffEditor.FIELD_TYPES.TOGGLE_FIELD,
+				name: BuffEditor.OPTIONS_NAMES.DISABLE_SPLASH,
+				default: false,
+			}
+		]
+	}
+
 	static get SCHEMAS() {
 		return {
 			[Buff.TYPES.REROLL]: {
@@ -186,15 +203,35 @@ export class BuffEditor extends ModalWindow {
 
 		this.title = Locale.gen("buff-editor-title");
 
+		this.optionsContainer = new Base();
+		this.optionsContainer.make("options");
+		this.container.addChild(this.optionsContainer);
+
 		this.editor = new Base();
 		this.editor.make("editor");
 		this.container.addChild(this.editor);
 
+		this.container.addClass("buff-editor");
+
+		this.optionFields = {};
+
+		
+		BuffEditor.OPTIONS.forEach((item) => {
+			let header = new Header(4);
+			this.optionsContainer.addChild(header);
+			header.text = item.label;
+
+			let option = new item.type;
+			this.optionsContainer.addChild(option);
+			option.value = item.default;
+			option.addListener(Event.CHANGE, this.onChange, this);
+
+			this.optionFields[item.name] = option;
+		});
+
 		this.navigation = new Base();
 		this.navigation.make("navigation");
 		this.container.addChild(this.navigation);
-
-		this.container.addClass("buff-editor");
 
 		Object.keys(BuffEditor.SCHEMAS).forEach((item) => {
 			const btn = new Base();
@@ -234,8 +271,24 @@ export class BuffEditor extends ModalWindow {
 		}
 	}
 
+	get options() {
+		let ret = {};
+		Object.keys(this.optionFields).forEach((item) => {
+			ret[item] = this.optionFields[item].value;
+		});
+		return ret;
+	}
+
+	set options(target) {
+		Object.keys(target).forEach((item) => {
+			if(this.optionFields[item]) {
+				this.optionFields[item].value = target[item];
+			}
+		});
+	}
+
 	get value() {
-		let ret = []
+		let ret = [];
 		this.fields.forEach((item) => {
 			ret.push(item.value);
 		});
