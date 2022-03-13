@@ -56,6 +56,7 @@ export class Results extends Base {
 
 		if(!normalizedPoints) {
 			this.components.push(new DamageOddsTable(this.data));
+			this.components.push(new DamageOddsTable(this.data, true));
 		}
 
 		this.components.forEach((item) => {
