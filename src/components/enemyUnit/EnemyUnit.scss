@@ -11,16 +11,28 @@ enemy-unit {
 		box-sizing: border-box;
 		background: #999;
 		color: #fff;
+		margin-top: 2px;
 	}
 
 	number-field {
 		width: 80px;
 		float: right;
+		margin-top: 2px;
 
 		input {
 			border-radius: 0px;
 			border: none;
 		}
+	}
+
+	toggle {
+		width: 80px;
+		box-sizing: border-box;
+		margin-right: 0px;
+		height: 28.5px;
+		line-height: 28.5px;
+		padding: 0px;
+		margin-top: 2px;
 	}
 
 	&:after{

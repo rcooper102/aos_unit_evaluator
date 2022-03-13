@@ -7,6 +7,7 @@ export class Attack extends Base {
 	constructor() {
 		super();
 		this.make("attack");
+		this._showBuffs = true;
 		this.build();
 	}
 
@@ -30,6 +31,15 @@ export class Attack extends Base {
 		this.summary.addListener(MouseEvent.CLICK, this.onBuffs, this);
 
 		this.onChange();
+	}
+
+	get showBuffs() {
+		return this._showBuffs;
+	}
+
+	set showBuffs(target) {
+		this._showBuffs = target;
+		this.summary.obj.style.display = target ? "block" : "none";
 	}
 
 	onBuffs() {

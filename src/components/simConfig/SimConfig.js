@@ -110,9 +110,12 @@ export class SimConfig extends Base {
 
 	addUnit(value = null) {
 		const unit = new Unit();
+		unit.enemyUnit = this.enemyUnit;
 		this.addChild(unit);
 		this.units.push(unit);
 		unit.value = value;
+
+
 		unit.addListener(Event.CHANGE, this.onUnitChange, this);
 		unit.addListener(Event.REMOVE, this.onUnitDelete, this);
 		unit.addListener("CLONE", this.onUnitClone, this);

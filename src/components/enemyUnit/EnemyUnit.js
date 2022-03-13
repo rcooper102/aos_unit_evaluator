@@ -1,4 +1,5 @@
 import { NumberField } from "../";
+import { ToggleField } from "../buffEditor/ToggleField.js";
 import { Utils } from "../../utils";
 import "./EnemyUnit.scss";
 
@@ -23,6 +24,16 @@ export class EnemyUnit extends Base {
 		this.wounds.addListener(Event.CHANGE, this.onChange, this);
 		this.addChild(this.wounds);
 		this.wounds.value = EnemyUnit.DEFAULT_WOUNDS;
+
+		this.header = new Header(4);
+		this.header.text = Locale.gen("enemy-unit-noSplash-mode");
+		this.header.title = Locale.gen("enemy-unit-noSplash-mode-title");
+		this.addChild(this.header);
+
+		this.noSplash = new ToggleField()
+		this.noSplash.addListener(Event.CHANGE, this.onChange, this);
+		this.noSplash.title = Locale.gen("enemy-unit-noSplash-mode-title");
+		this.addChild(this.noSplash);
 	}
 
 	onChange(e) {
@@ -33,11 +44,15 @@ export class EnemyUnit extends Base {
 		if(target.wounds) {
 			this.wounds.value = target.wounds || 1;
 		}
+		if(target.noSplash) {
+			this.noSplash.value = target.noSplash || false;
+		}
 	}
 
 	get value() {
 		return {
-			wounds: Number(this.wounds.value) || 1
+			wounds: Number(this.wounds.value) || 1,
+			noSplash: this.noSplash.value,
 		};
 	}
 

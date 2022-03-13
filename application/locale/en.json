@@ -126,6 +126,8 @@
 	"attack-buff-summary-trigger-damage": "<em>{[output]}</em> damage triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.",
 
 	"enemy-unit-wounds": "Enemy Wounds:",
+	"enemy-unit-noSplash-mode": "40k Mode",
+	"enemy-unit-noSplash-mode-title": "40k mode makes it so that all attacks default to preventing overkill damage from splashing to the next target. Note: you can still turn it off on an attack by attack basis if needed.",
 
 	"kills-graph-title": "Enemy Models Slain",
 	"kills-graph-sub-title": "The average number of enemies slain based on the enemy wounds.",
