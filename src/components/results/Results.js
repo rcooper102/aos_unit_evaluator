@@ -11,6 +11,7 @@ import { SaveComparison } from "./SaveComparison.js";
 import { ResultsHeader } from "./ResultsHeader.js";
 import { SaveComparisonTable } from "./SaveComparisonTable.js";
 import { DamageOddsTable } from "./DamageOddsTable.js";
+import { KillsGraph } from "./KillsGraph.js";
 import "./Results.scss";
 
 export class Results extends Base {
@@ -42,6 +43,7 @@ export class Results extends Base {
 			norm,
 			this.saveNav,
 			new Histogram(iterations, highestDamage),
+			new KillsGraph(),
 			new AverageGraph(),
 			new ReliabilityGraph(),			
 			new WhiffGraph(),
