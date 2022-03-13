@@ -39,7 +39,7 @@
 	"save-navigation-label": "Select target's save:",
 	"average-graph-title": "Average Damage",
 	"average-graph-sub-title": "The combined average damage output.",
-	"average-graph-detail": "The average graph is defined as the amount of damage dealt AFTER save rolls have been deducted. This includes final calculations on variable damage and mortal wounds. When mortal wounds are present the bar is split into two tones, the lighter tone reflects damage done by mortal wounds.",
+	"average-graph-detail": "The average graph is defined as the amount of damage dealt AFTER save rolls have been deducted. This includes final calculations on variable damage and mortal wounds. When mortal wounds are present the bar is split into two tones, the lighter tone reflects damage done by mortal wounds. Average damage is based on damage done, not damage realized. (aka wasted damage on overkill when splash is disabled is still counted)",
 	"mortal-wounds-graph-title": "Mortal Wounds",
 	"mortal-wounds-graph-sub-title": "How many mortal wounds, if any, are dealt on average.",
 	"whiff-graph-title": "Whiff Rate",
@@ -125,10 +125,10 @@
 	"attack-buff-summary-trigger-wound": "Autowound triggering on <em>{[trigger]}</em> to hit.", 
 	"attack-buff-summary-trigger-damage": "<em>{[output]}</em> damage triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.",
 
-	"enemy-unit-wounds": "Target Unit Wounds:",
+	"enemy-unit-wounds": "Enemy Wounds:",
 
-	"kills-graph-title": "Enemy Models Killed",
-	"kills-graph-sub-title": "The average number of enemies killed based on the target unit wounds.",
+	"kills-graph-title": "Enemy Models Slain",
+	"kills-graph-sub-title": "The average number of enemies killed based on the enemy wounds.",
 	"kills-graph-detail": "Kills are determined by comparing damage done to the total wound count to determine how many models are killed. If splash is disabled the kill count accounts for no roll over of excess damage. Mortal wound contribution is added after all normal damage is accounted for to emulate fast dice rolling.",
 
 	"kills-comparison-title": "Kills Comparison",
