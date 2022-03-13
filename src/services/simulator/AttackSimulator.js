@@ -14,7 +14,7 @@ export class AttackSimulator {
 		return 7;
 	}
 
-	constructor(data, save, buffs = { hit: [], wound: [], splash: false }, diseasePoints = 0, normalizedRatio = 1, targetUnit = null, remainingWounds = 0) {
+	constructor(data, save, buffs = { hit: [], wound: [] }, diseasePoints = 0, normalizedRatio = 1, targetUnit = null, remainingWounds = 0) {
 		this.data = data;
 		this.save = save;
 		this.buffs = buffs;
@@ -22,6 +22,7 @@ export class AttackSimulator {
 		this._kills = 0;
 		this._mortalWounds = 0;
 		this.targetUnit = targetUnit;
+		this.noSplash = this.data.options && this.data.options.noSplash ? this.data.options.noSplash : false;
 		this.remainingWounds = remainingWounds;
 		const attacks = this.magnitudeRoll(this.data.number);
 		this.diseasePoints = diseasePoints;
@@ -48,7 +49,7 @@ export class AttackSimulator {
 					const damage = hit.damageOverride || wound.damageOverride || this.magnitudeRoll(this.data.damage);
 					if(this.comparisonRoll(this.save + rend, AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
 						this._damage += damage * this.normalizedRatio;
-						if(this.targetUnit && this.buffs.noSplash) {
+						if(this.targetUnit && this.noSplash) {
 							for(let i = 0; i < this.normalizedRatio; i++) {
 								this.currentWounds -= damage;
 								if(this.currentWounds <= 0) {
@@ -63,7 +64,7 @@ export class AttackSimulator {
 		}
 
 		if(this.targetUnit) {
-			if(this.buffs.noSplash) {
+			if(this.noSplash) {
 				this._kills += ((this.targetUnit.wounds - this.currentWounds) / this.targetUnit.wounds);
 				this._kills += this._mortalWounds / this.targetUnit.wounds;
 			} else {

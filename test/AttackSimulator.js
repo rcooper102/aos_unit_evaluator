@@ -405,8 +405,8 @@ describe('AttackSimulator', function () {
             wound: 1, 
             rend: 0, 
             damage: '2',
+            options: { noSplash: true },
         }, 7,{
-            noSplash: true,
             hit: [] ,
             wound: [],          
         },0,1,
@@ -422,8 +422,8 @@ describe('AttackSimulator', function () {
             wound: 1, 
             rend: 0, 
             damage: '2',
+            options: { noSplash: true },
         }, 7,{
-            noSplash: true,
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [1,2,3,4,5,6], output: '1', stop: false }) ],          
         },0,1,
@@ -439,8 +439,8 @@ describe('AttackSimulator', function () {
             wound: 4, 
             rend: 0, 
             damage: '2',
+            options: { noSplash: true },
         }, 7,{
-            noSplash: true,
             hit: [] ,
             wound: [],          
         },0,1,
@@ -456,8 +456,8 @@ describe('AttackSimulator', function () {
             wound: 4, 
             rend: 0, 
             damage: '0',
+            options: { noSplash: true },
         }, 7,{
-            noSplash: true,
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
         },0,1,
@@ -473,8 +473,8 @@ describe('AttackSimulator', function () {
             wound: 4, 
             rend: 0, 
             damage: '2',
+            options: { noSplash: true },
         }, 7,{
-            noSplash: true,
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
         },0,1,
@@ -490,8 +490,8 @@ describe('AttackSimulator', function () {
             wound: 4, 
             rend: 0, 
             damage: '2',
+            options: { noSplash: true },
         }, 7,{
-            noSplash: true,
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
         },0,1,
@@ -507,8 +507,8 @@ describe('AttackSimulator', function () {
             wound: 4, 
             rend: 0, 
             damage: '5',
+            options: { noSplash: true },
         }, 7,{
-            noSplash: true,
             hit: [] ,
             wound: [],          
         },0,1,
@@ -540,8 +540,8 @@ describe('AttackSimulator', function () {
             wound: 4, 
             rend: 0, 
             damage: '2',
+            options: { noSplash: false },
         }, 7,{
-            noSplash: false,
             hit: [] ,
             wound: [],          
         },0,1,
@@ -557,8 +557,8 @@ describe('AttackSimulator', function () {
             wound: 4, 
             rend: 0, 
             damage: '2',
+            options: { noSplash: false },
         }, 4,{
-            noSplash: false,
             hit: [] ,
             wound: [],          
         },0,1,
@@ -574,8 +574,8 @@ describe('AttackSimulator', function () {
             wound: 4, 
             rend: 2, 
             damage: '2',
+            options: { noSplash: false },
         }, 4,{
-            noSplash: false,
             hit: [] ,
             wound: [],          
         },0,1,
@@ -591,8 +591,8 @@ describe('AttackSimulator', function () {
             wound: 4, 
             rend: 2, 
             damage: '2',
+            options: { noSplash: false },
         }, 4,{
-            noSplash: false,
             hit: [] ,
             wound: [],          
         },0,1,
@@ -608,8 +608,8 @@ describe('AttackSimulator', function () {
             wound: 4, 
             rend: 2, 
             damage: '2',
+            options: { noSplash: false },
         }, 4,{
-            noSplash: false,
             hit: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
         },0,1,
