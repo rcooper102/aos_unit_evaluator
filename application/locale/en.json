@@ -137,7 +137,7 @@
 	"kill-odds-table-title": "Slain Enemies Odds",
 	"kill-odds-table-sub-title": "The odds of achieving a certain threshold of slain enemies or more.",
 
-	"options-disable-splash": "Prevent overkill damage from splashing to the next target:"
+	"options-disable-splash": "Prevent overkill damage from splashing to the next target:",
 
-
+	"options-summary-noSplash": "Overkill damage from splashing to the next target: <strong>{[value]}</strong>."
 }
