@@ -9,13 +9,13 @@ export class Simulator extends EventDispatcher {
 		super();
 		Utils.resetRollCount();
 		this.config = config.simulator;
-		this.data = this.normalizePoints(data);
+		this.units = this.normalizePoints(data.units);
 		this.results = {};
 		this.completed = 0;
 		this.progress = {};
 		this.highest = 0;
 		this.config.saves.forEach((item) => {
-			const save = new SaveLevelSimulator(this.data, item, iterations);
+			const save = new SaveLevelSimulator(this.units, item, iterations,data.enemyUnit);
 			save.addListener(Event.COMPLETE, this.onComplete, this);
 			save.addListener(Event.PROGRESS, this.onProgress, this);
 			this.progress[item] = 0;

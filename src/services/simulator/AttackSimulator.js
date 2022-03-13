@@ -14,7 +14,7 @@ export class AttackSimulator {
 		return 7;
 	}
 
-	constructor(data, save, buffs = { hit: [], wound: [], splash: false }, diseasePoints = 0, normalizedRatio = 1, targetUnit = null) {
+	constructor(data, save, buffs = { hit: [], wound: [], splash: false }, diseasePoints = 0, normalizedRatio = 1, targetUnit = null, remainingWounds = 0) {
 		this.data = data;
 		this.save = save;
 		this.buffs = buffs;
@@ -22,6 +22,7 @@ export class AttackSimulator {
 		this._kills = 0;
 		this._mortalWounds = 0;
 		this.targetUnit = targetUnit;
+		this.remainingWounds = remainingWounds;
 		const attacks = this.magnitudeRoll(this.data.number);
 		this.diseasePoints = diseasePoints;
 		this.normalizedRatio = normalizedRatio;
@@ -31,7 +32,7 @@ export class AttackSimulator {
 	makeAttacks(attacks, canSpawnAttacks = true, autoHit = false, autoWound = false) {
 		let i;
 		if(this.targetUnit) {
-			this.resetWounds();
+			this.resetWounds(this.remainingWounds);
 		}
 		for(i = 0; i < attacks; i++) {
 			const hit = this.comparisonRoll(this.data.hit, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.hit, canSpawnAttacks, autoHit);
@@ -71,8 +72,12 @@ export class AttackSimulator {
 		}
 	}
 
-	resetWounds(){
-		this.currentWounds = this.targetUnit.wounds || 1;
+	resetWounds(remainingWounds){
+		if(!remainingWounds) {
+			this.currentWounds = this.targetUnit.wounds || 1;
+		} else {
+			this.currentWounds = this.targetUnit.wounds * remainingWounds;
+		}
 	}
 
 	comparisonRoll(difficulty, type, buffs, canSpawnAttacks, auto = false) {

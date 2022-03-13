@@ -2,7 +2,7 @@ import { UnitSimulator } from "./UnitSimulator.js";
 
 export class SaveLevelSimulator extends EventDispatcher {
 
-	constructor(data, save = 4, iterations = 1) {
+	constructor(data, save = 4, iterations = 1, enemyUnit = { wounds: 1 }) {
 		super();
 		this.data = data;
 		this.save = save;
@@ -11,7 +11,7 @@ export class SaveLevelSimulator extends EventDispatcher {
 		this.highest = 0;
 		this.progress = {};
 		this.data.forEach((unit, i) => {
-			const sim = new UnitSimulator(unit, save, iterations, i);
+			const sim = new UnitSimulator(unit, save, iterations, i, enemyUnit);
 			sim.addListener(Event.COMPLETE, this.onComplete, this);
 			sim.addListener(Event.PROGRESS, this.onProgress, this);
 			this.progress[i] = 0;

@@ -123,5 +123,7 @@
 	"attack-buff-summary-trigger-rend": "<em>{[output]}</em> rend triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.",
 	"attack-buff-summary-trigger-disease": "<em>{[output]}</em> disease points triggering on <em>{[trigger]}</em> to <em>{[type]}</em> that become mortal wounds on a disease roll of <em>{[virulence]}</em>.",
 	"attack-buff-summary-trigger-wound": "Autowound triggering on <em>{[trigger]}</em> to hit.", 
-	"attack-buff-summary-trigger-damage": "<em>{[output]}</em> damage triggering on <em>{[trigger]}</em> to <em>{[type]}</em>." 
+	"attack-buff-summary-trigger-damage": "<em>{[output]}</em> damage triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.",
+
+	"enemy-unit-wounds": "Target Unit Wounds:"
 }

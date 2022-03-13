@@ -1,4 +1,5 @@
 import { Unit } from "../";
+import { EnemyUnit } from "../";
 import { config } from "../../config.js";
 import { UnitLoader } from "../unitLoader/UnitLoader.js";
 import { DataManager } from "../dataManager/DataManager.js";
@@ -24,6 +25,10 @@ export class SimConfig extends Base {
 		description.make("description");
 		description.text = Locale.gen("sim-config-description");
 		this.addChild(description);
+
+		this.enemyUnit = new EnemyUnit();
+		this.addChild(this.enemyUnit);
+		this.enemyUnit.addListener(Event.CHANGE,this.onEnemyUnitChange, this);
 
 		this.createButton = new Base();
 		this.createButton.make("button");
@@ -59,10 +64,10 @@ export class SimConfig extends Base {
 
 		this.units = [];
 
-		if(this.data.length === 0) {
+		if(!this.data.units || this.data.units.length === 0) {
 			this.addUnit();
 		} else {
-			this.data.forEach((item) => {
+			this.data.units.forEach((item) => {
 				this.addUnit(item);
 			});
 			setTimeout(() => {
@@ -70,6 +75,14 @@ export class SimConfig extends Base {
 			},1);
 		}
 
+		if(this.data.enemyUnit) {
+			this.enemyUnit.value = this.data.enemyUnit;
+		}
+
+		this.onUnitChange();
+	}
+
+	onEnemyUnitChange(e) {
 		this.onUnitChange();
 	}
 
@@ -255,7 +268,10 @@ export class SimConfig extends Base {
 	}
 
 	get value() {
-		return this.units.map((item) => item.value);
+		return {
+			units: this.units.map((item) => item.value),
+			enemyUnit: this.enemyUnit.value,
+		};
 	}
 
 	get valid() {
