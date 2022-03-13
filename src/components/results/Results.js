@@ -52,6 +52,8 @@ export class Results extends Base {
 			new DependabilityGraph(),
 			new SaveComparison(this.data),
 			new SaveComparisonTable(this.data),
+			new SaveComparison(this.data, true),
+			new SaveComparisonTable(this.data, true),
 		];
 
 		if(!normalizedPoints) {
