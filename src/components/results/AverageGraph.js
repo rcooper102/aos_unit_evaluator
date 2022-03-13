@@ -14,18 +14,13 @@ export class AverageGraph extends Base {
 		if(this.graph) {
 			this.graph.shutDown();
 		}
-		let highest = 0;
-		data.forEach((item) => {
-			highest = item.highestDamage > highest ? item.highestDamage : highest;
-		});
-
+		
 		const series = data.map((item, i) => {
 			return {
 				value: item.average,
 				inner: item.mortalWounds,
 				color: item.data.color,
 				format: (e) => { return Math.round(e*100)/100 },
-				//scale: highest,
 				name: Utils.generateName(item.data),
 				key: i,
 			};
