@@ -27,7 +27,7 @@ export class UnitSimulator extends EventDispatcher {
 				this.diseasePoints = attackSimulator.diseasePoints;
 			});
 
-			this.kills += this.killsLeftOver;
+			kills += this.killsLeftOver;
 
 			if(total > this.highest) {
 				this.highest = total;
