@@ -141,5 +141,5 @@
 
 	"options-disable-splash": "Prevent overkill damage from splashing to the next target:",
 
-	"options-summary-noSplash": "Prevent overkill damage from splashing: <strong>{[value]}</strong>."
+	"options-summary-noSplash": "Prevent overkill damage from splashing."
 }

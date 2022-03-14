@@ -7,7 +7,6 @@ export class Attack extends Base {
 	constructor() {
 		super();
 		this.make("attack");
-		this._showBuffs = true;
 		this.build();
 	}
 
@@ -31,15 +30,6 @@ export class Attack extends Base {
 		this.summary.addListener(MouseEvent.CLICK, this.onBuffs, this);
 
 		this.onChange();
-	}
-
-	get showBuffs() {
-		return this._showBuffs;
-	}
-
-	set showBuffs(target) {
-		this._showBuffs = target;
-		this.summary.obj.style.display = target ? "block" : "none";
 	}
 
 	onBuffs() {
@@ -156,20 +146,19 @@ export class AttackBuffSummary extends Base {
 
 	refresh() {
 		this.text = "";
-		this.style.display = "none";
 		if(this.options) {
 			Object.keys(this.options).forEach((key) => {
-				this.style.display = "block";
-				const buff = new Base();
-				buff.make("buff");
-				this.addChild(buff);
-				buff.text = Locale.gen(`options-summary-${key}`, { value: this.options[key] });
+				if(this.options[key]) {
+					const buff = new Base();
+					buff.make("buff");
+					this.addChild(buff);
+					buff.text = Locale.gen(`options-summary-${key}`, { value: this.options[key] });
+				}
 			});
 		}
 		if(this.data) {
 			this.data.forEach((item) => {
 				Object.keys(item).forEach((roll) => {
-					this.style.display = "block";
 					const buff = new Base();
 					buff.make("buff");
 					this.addChild(buff);

@@ -76,6 +76,16 @@ export class Unit extends Base {
 
 	set enemyUnit(target) {
 		this._enemyUnit = target;
+		this._enemyUnit.addListener(Event.CHANGE, this.onEnemyUnitChange, this);
+	}
+
+	onEnemyUnitChange(e) {
+		let attack = this.attacks[this.attacks.length - 1]
+
+		attack.value = {
+			...attack.value,
+			options: { noSplash: this.enemyUnit.noSplash.value },
+		}
 	}
 
 	add(value) {
@@ -100,9 +110,7 @@ export class Unit extends Base {
 
 	onAttackChange(e) {
 		if(e.target === this.attacks[this.attacks.length - 1] && e.target.active) {
-			this.attacks[this.attacks.length - 1].showBuffs = true;
 			let attack = this.add();
-			attack.showBuffs = false; 
 		} else if(e.target !== this.attacks[this.attacks.length - 1] && !e.target.active) {
 			this.remove(e.target);
 		}
@@ -143,7 +151,6 @@ export class Unit extends Base {
 			});
 			attack = this.add();
 		}
-		attack.showBuffs = false; 
 		this.onChange();
 	}
 
