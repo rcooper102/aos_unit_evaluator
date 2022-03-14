@@ -398,7 +398,7 @@ results {
 		}
 
 		&:before  {
-			display: none;
+			display: block;
 			width: 100%;
 			margin: 0 auto;
 			background: #333;
@@ -418,7 +418,7 @@ results {
 	}
 
 	&.screenshot-small {
-		&:after, results-header, .bar-graph, .histogram, damage-odds-table {
+		&:after, .bar-graph, .histogram, damage-odds-table {
 			display: none, 
 		}
 	}
