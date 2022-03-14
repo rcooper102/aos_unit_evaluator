@@ -14,7 +14,7 @@
 	"sim-config-save-unit": "Save Profiles",
 	"sim-config-title": "Configure Attacks",
 	"sim-config-manage": "Manage data...",
-	"sim-config-description": "<p>This simulator is designed to simulate real dice rolls based on attack profiles.</p><p>Some buff fields, damage and attacks accept standard dice notation. (\"d3\",\"3\",\"2d3\", etc).</p>",
+	"sim-config-description": "<p>This simulator is designed to simulate real dice rolls based on attack profiles. Some buff fields, damage and attacks accept standard dice notation. (\"d3\",\"3\",\"2d3\", etc).</p>",
 	"sim-config-disclaimer": "<p>This tool is not perfect by any stretch. It isn't capable of simulating every possible attack profile in the game, and its output does not reflect every potential target.</p>",
 	"data-manager-copy": "Copy existing data.",
 	"data-manager-import": "Import",
