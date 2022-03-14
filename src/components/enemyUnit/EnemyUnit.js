@@ -5,8 +5,36 @@ import "./EnemyUnit.scss";
 
 export class EnemyUnit extends Base {
 
-	static get DEFAULT_WOUNDS() {
-		return 1;
+	static get FIELDS() {
+		return {
+			WOUNDS: 'wounds',
+			INVULNERABLE: 'invulnerable',
+			SHRUG: 'shrug',
+		}
+	}
+
+	static get SCHEMA() {
+		return [
+			{
+				name: EnemyUnit.FIELDS.WOUNDS,
+				label: Locale.gen("enemy-unit-wounds"),
+				title: Locale.gen("enemy-unit-wounds-title"),
+				default: 1,
+				size: 2
+			},
+			{
+				name: EnemyUnit.FIELDS.INVULNERABLE,
+				label: Locale.gen("enemy-unit-invulnerable"),
+				title: Locale.gen("enemy-unit-invulnerable-title"),
+				size: 1,
+			},
+			{
+				name: EnemyUnit.FIELDS.SHRUG,
+				label: Locale.gen("enemy-unit-shrug"),
+				title: Locale.gen("enemy-unit-title"),
+				size: 1,
+			}
+		];
 	}
 
 	constructor() {
@@ -16,14 +44,25 @@ export class EnemyUnit extends Base {
 	}
 
 	build() {
-		this.header = new Header(4);
-		this.header.text = Locale.gen("enemy-unit-wounds");
-		this.addChild(this.header);
+		this.fields = {};
+		EnemyUnit.SCHEMA.forEach((item) => {
+			this.header = new Header(4);
+			this.header.text = item.label;
+			this.addChild(this.header);
 
-		this.wounds = new NumberField("", NumberField.TYPES.INTEGER, 2);
-		this.wounds.addListener(Event.CHANGE, this.onChange, this);
-		this.addChild(this.wounds);
-		this.wounds.value = EnemyUnit.DEFAULT_WOUNDS;
+			this.field = new NumberField("", NumberField.TYPES.INTEGER, item.size);
+			this.field.addListener(Event.CHANGE, this.onChange, this);
+			this.addChild(this.field);
+			if(item.default) {
+				this.field.value = item.default;
+			}
+			if(item.title) {
+				this.field.title = item.title;
+				this.header.title = item.title;
+			}
+
+			this.fields[item.name] = this.field;
+		});
 
 		this.header = new Header(4);
 		this.header.text = Locale.gen("enemy-unit-noSplash-mode");
@@ -34,6 +73,7 @@ export class EnemyUnit extends Base {
 		this.noSplash.addListener(Event.CHANGE, this.onChange, this);
 		this.noSplash.title = Locale.gen("enemy-unit-noSplash-mode-title");
 		this.addChild(this.noSplash);
+		this.fields['noSplash'] = this.noSplash;
 	}
 
 	onChange(e) {
@@ -41,19 +81,19 @@ export class EnemyUnit extends Base {
 	}
 
 	set value(target) {
-		if(target.wounds) {
-			this.wounds.value = target.wounds || 1;
-		}
-		if(target.noSplash) {
-			this.noSplash.value = target.noSplash || false;
-		}
+		Object.keys(target).forEach((item) => {
+			if(this.fields[item]){
+				this.fields[item].value = target[item];
+			}
+		});
 	}
 
 	get value() {
-		return {
-			wounds: Number(this.wounds.value) || 1,
-			noSplash: this.noSplash.value,
-		};
+		let ret = {};
+		Object.keys(this.fields).forEach((item) => {
+			ret[item] = this.fields[item].value;
+		});
+		return ret;
 	}
 
 	shutDown() {
