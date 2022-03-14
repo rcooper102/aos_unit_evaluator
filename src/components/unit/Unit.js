@@ -70,10 +70,34 @@ export class Unit extends Base {
 		this.swatch.style.backgroundColor = this._color;
 	}
 
+	get enemyUnit() {
+		return this._enemyUnit;
+	}
+
+	set enemyUnit(target) {
+		this._enemyUnit = target;
+		this._enemyUnit.addListener(Event.CHANGE, this.onEnemyUnitChange, this);
+	}
+
+	onEnemyUnitChange(e) {
+		let attack = this.attacks[this.attacks.length - 1]
+
+		attack.value = {
+			...attack.value,
+			options: { noSplash: this.enemyUnit.noSplash.value },
+		}
+	}
+
 	add(value) {
 		const attack = new Attack();
 		this.addChild(attack);
 		this.attacks.push(attack);
+		if(this.enemyUnit && this.enemyUnit.noSplash.value && !value) {
+			attack.value = {
+				...attack.value,
+				options: { noSplash: this.enemyUnit.noSplash.value },
+			}
+		}
 		attack.value = value;
 		attack.addListener(Event.CHANGE, this.onAttackChange, this);
 		return attack;
@@ -86,7 +110,7 @@ export class Unit extends Base {
 
 	onAttackChange(e) {
 		if(e.target === this.attacks[this.attacks.length - 1] && e.target.active) {
-			this.add();
+			let attack = this.add();
 		} else if(e.target !== this.attacks[this.attacks.length - 1] && !e.target.active) {
 			this.remove(e.target);
 		}
@@ -114,9 +138,10 @@ export class Unit extends Base {
 		}
 	}
 
-	set value(target) {		
+	set value(target) {
+		let attack;	
 		if(!target) {
-			this.add();
+			attack = this.add();
 		} else {
 			this.color = target.color;
 			this.unitPoints.value = target.points || "";
@@ -124,9 +149,8 @@ export class Unit extends Base {
 			target.attacks.forEach((item) => {
 				this.add(item);
 			});
-			this.add();
+			attack = this.add();
 		}
-
 		this.onChange();
 	}
 

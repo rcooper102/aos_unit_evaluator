@@ -5,17 +5,18 @@ import { NumberField } from "../../components/numberField/NumberField";
 
 export class DamageOddsTable extends Base {
 
-	constructor(data) {
+	constructor(data, killsMode = false) {
 		super();
 		this.make("damage-odds-table");
 		this.data = data;
+		this.killsMode = killsMode
 
 		const graphTitle = new Header(4);
-		graphTitle.text = Locale.gen("damage-odds-table-title");
+		graphTitle.text = !killsMode ? Locale.gen("damage-odds-table-title") : Locale.gen("kill-odds-table-title");
 		this.addChild(graphTitle);
 
 		const graphSubTitle = new Paragraph();
-		graphSubTitle.text = Locale.gen("damage-odds-table-sub-title");;
+		graphSubTitle.text = !killsMode ? Locale.gen("damage-odds-table-sub-title") : Locale.gen("kill-odds-table-sub-title");
 		this.addChild(graphSubTitle);
 
 		const control = new Base();
@@ -23,7 +24,7 @@ export class DamageOddsTable extends Base {
 		this.addChild(control);
 
 		const controlLabel = new Label();
-		controlLabel.text = Locale.gen("damage-odds-table-control");;
+		controlLabel.text = Locale.gen("damage-odds-table-control");
 		control.addChild(controlLabel);
 
 		this.input = new NumberField("", NumberField.TYPES.INTEGER, 10);
@@ -78,8 +79,13 @@ export class DamageOddsTable extends Base {
 		const l = unit.results.length;
 		let count = 0;
 		for(i = 0; i < l; i++) {
+			let comparitor = unit.results[i].total;
+			if(this.killsMode) {
+				comparitor = unit.results[i].kills
+			}
 
-			if(unit.results[i].total >= damage) {
+
+			if(comparitor >= damage) {
 				count ++;
 			}
 		}

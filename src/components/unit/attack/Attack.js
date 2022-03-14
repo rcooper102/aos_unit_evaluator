@@ -39,6 +39,7 @@ export class Attack extends Base {
 	onChange(e) {
 		this.dispatch(new Event(Event.CHANGE, this));
 		this.summary.data = this.fields.buffs.value;
+		this.summary.options = this.fields.buffs.options;
 		if(this.active) {
 			this.removeClass("inactive");
 		} else {
@@ -76,7 +77,7 @@ export class Attack extends Base {
 		Object.keys(this.fields).forEach((i) => { 
 			ret[i] = this.fields[i].value;
 		});
-		return ret;
+		return { ...ret, options: this.fields.buffs.options };
 	}
 
 	set value(target) {
@@ -87,7 +88,13 @@ export class Attack extends Base {
 				}
 			});
 		}
+		if(target && target.options) {
+			this.fields.buffs.options = target.options;
+		}
 		this.summary.data = this.fields.buffs.value;
+		if(target && target.options) {
+			this.summary.options = target.options;
+		}
 	}
 
 	shutDown() {
@@ -119,18 +126,39 @@ export class AttackBuffSummary extends Base {
 		this.make("buff-summary");
 	}
 
+	set options(target) {
+		this._options = target;
+		this.refresh();
+	}
+
+	get options() {
+		return this._options;
+	}
+
 	get data() {
 		return this._data;
 	}
 
 	set data(target) {
 		this._data = target;
+		this.refresh();
+	}
+
+	refresh() {
 		this.text = "";
-		this.style.display = "none";
-		if(this._data) {
-			this._data.forEach((item) => {
+		if(this.options) {
+			Object.keys(this.options).forEach((key) => {
+				if(this.options[key]) {
+					const buff = new Base();
+					buff.make("buff");
+					this.addChild(buff);
+					buff.text = Locale.gen(`options-summary-${key}`, { value: this.options[key] });
+				}
+			});
+		}
+		if(this.data) {
+			this.data.forEach((item) => {
 				Object.keys(item).forEach((roll) => {
-					this.style.display = "block";
 					const buff = new Base();
 					buff.make("buff");
 					this.addChild(buff);

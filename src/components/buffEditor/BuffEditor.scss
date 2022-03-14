@@ -1,5 +1,41 @@
 .buff-editor {
 
+	options {
+
+		display: block;
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid #ccc;
+
+		h4 {
+			display: block;
+			float: left;
+			background: #333;
+			color: #FFF;
+			width: calc(100% - 113px);
+			height: 25px;
+			line-height: 25px;
+			margin-bottom: 2px;
+			clear: both;
+			padding-left: 5px;
+			box-sizing: border-box;
+		}
+
+		toggle {
+			display: block;
+			float: right;
+			width: 100px;
+			margin-right: 0px;
+			margin-bottom: 2px;
+		}
+
+		&:after {
+			content: "";
+			display: block;
+			clear: both;
+		}
+	}
+
 	navigation {
 		
 		display: block;

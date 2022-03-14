@@ -4,10 +4,11 @@ import { ResultsTable } from "./ResultsTable";
 
 export class SaveComparisonTable extends Base {
 
-	constructor(data) {
+	constructor(data, killsMode) {
 		super();
 		this.make("save-comparison-table");
 		this.data = data;
+		this.killsMode = killsMode;
 
 
 		this.tableDisplay = new ResultsTable();
@@ -27,7 +28,8 @@ export class SaveComparisonTable extends Base {
 				if(!units[i]) {
 					units[i] = [`<span style='color:${unit.data.color}'>${Utils.generateName(unit.data)}</span>`];
 				}
-				units[i][save-1] = Math.round(unit.average*100)/100;
+				let metric = this.killsMode ? unit.averageKills : unit.average;
+				units[i][save-1] = Math.round(metric*100)/100;
 			});
 		});
 

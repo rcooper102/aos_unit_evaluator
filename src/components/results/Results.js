@@ -11,6 +11,7 @@ import { SaveComparison } from "./SaveComparison.js";
 import { ResultsHeader } from "./ResultsHeader.js";
 import { SaveComparisonTable } from "./SaveComparisonTable.js";
 import { DamageOddsTable } from "./DamageOddsTable.js";
+import { KillsGraph } from "./KillsGraph.js";
 import "./Results.scss";
 
 export class Results extends Base {
@@ -42,6 +43,7 @@ export class Results extends Base {
 			norm,
 			this.saveNav,
 			new Histogram(iterations, highestDamage),
+			new KillsGraph(),
 			new AverageGraph(),
 			new ReliabilityGraph(),			
 			new WhiffGraph(),
@@ -50,10 +52,13 @@ export class Results extends Base {
 			new DependabilityGraph(),
 			new SaveComparison(this.data),
 			new SaveComparisonTable(this.data),
+			new SaveComparison(this.data, true),
+			new SaveComparisonTable(this.data, true),
 		];
 
 		if(!normalizedPoints) {
 			this.components.push(new DamageOddsTable(this.data));
+			this.components.push(new DamageOddsTable(this.data, true));
 		}
 
 		this.components.forEach((item) => {

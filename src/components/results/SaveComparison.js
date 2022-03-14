@@ -5,17 +5,18 @@ const cloneDeep = require('clone-deep');
 
 export class SaveComparison extends Base {
 
-	constructor(data) {
+	constructor(data, killsMode) {
 		super();
 		this.make("histogram");
 		this.data = data;
+		this.killsMode = killsMode;
 
 		const graphTitle = new Header(4);
-		graphTitle.text = Locale.gen("save-comparison-title");
+		graphTitle.text = !this.killsMode ? Locale.gen("save-comparison-title") : Locale.gen("kills-comparison-title");
 		this.addChild(graphTitle);
 
 		const graphSubTitle = new Paragraph();
-		graphSubTitle.text = Locale.gen("save-comparison-sub-title");;
+		graphSubTitle.text = !this.killsMode ? Locale.gen("save-comparison-sub-title") : Locale.gen("kills-comparison-sub-title");
 		this.addChild(graphSubTitle);
 
 		this.chartContainer = new Div();
@@ -99,7 +100,7 @@ export class SaveComparison extends Base {
 				}
 				series[unit.data.color].data.push({
 					x: save,
-					y: unit.average,
+					y: this.killsMode ? unit.averageKills : unit.average,
 				});
 				
 			});

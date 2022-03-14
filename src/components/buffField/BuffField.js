@@ -18,6 +18,7 @@ export class BuffField extends Base {
 
 	onChange() {
 		this._value = this.editor.value;
+		this._options = this.editor.options;
 		this.dispatch(new Event(Event.CHANGE, this));
 	}
 
@@ -26,7 +27,18 @@ export class BuffField extends Base {
 		if(this.value) {
 			this.editor.value = this.value;
 		}
+		if(this.options) {
+			this.editor.options = this.options;
+		}
 		this.editor.addListener(Event.CHANGE, this.onChange, this);
+	}
+
+	get options() {
+		return this._options;
+	}
+
+	set options (target) {
+		this._options = target;
 	}
 
 	get value() {

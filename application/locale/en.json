@@ -1,5 +1,5 @@
 {
-	"app-title": "Attack Simulator",
+	"app-title": "Warhammer Simulator",
 	"app-sub-title": "by <a href='http://relicwargaming.com'>Relic Wargaming</a>",
 	"app-cta": "Run Simulation:",
 	"search-placeholder": "search...",
@@ -14,7 +14,7 @@
 	"sim-config-save-unit": "Save Profiles",
 	"sim-config-title": "Configure Attacks",
 	"sim-config-manage": "Manage data...",
-	"sim-config-description": "<p>This simulator is designed to simulate real dice rolls based on attack profiles.</p><p>Some buff fields, damage and attacks accept standard dice notation. (\"d3\",\"3\",\"2d3\", etc).</p>",
+	"sim-config-description": "<p>This simulator is designed to simulate real dice rolls based on attack profiles. Some buff fields, damage and attacks accept standard dice notation. (\"d3\",\"3\",\"2d3\", etc).</p>",
 	"sim-config-disclaimer": "<p>This tool is not perfect by any stretch. It isn't capable of simulating every possible attack profile in the game, and its output does not reflect every potential target.</p>",
 	"data-manager-copy": "Copy existing data.",
 	"data-manager-import": "Import",
@@ -39,7 +39,7 @@
 	"save-navigation-label": "Select target's save:",
 	"average-graph-title": "Average Damage",
 	"average-graph-sub-title": "The combined average damage output.",
-	"average-graph-detail": "The average graph is defined as the amount of damage dealt AFTER save rolls have been deducted. This includes final calculations on variable damage and mortal wounds. When mortal wounds are present the bar is split into two tones, the lighter tone reflects damage done by mortal wounds.",
+	"average-graph-detail": "The average graph is defined as the amount of damage dealt AFTER save rolls have been deducted. This includes final calculations on variable damage and mortal wounds. When mortal wounds are present the bar is split into two tones, the lighter tone reflects damage done by mortal wounds. Average damage is based on damage done, not damage realized. (aka wasted damage on overkill when splash is disabled is still counted)",
 	"mortal-wounds-graph-title": "Mortal Wounds",
 	"mortal-wounds-graph-sub-title": "How many mortal wounds, if any, are dealt on average.",
 	"whiff-graph-title": "Whiff Rate",
@@ -64,10 +64,10 @@
 	"results-sub-title": "You just rolled {[rolls]} dice.",
 	"results-normalized": "Points normalized to: <strong>{[points]}pts</strong><span>When normalized, unit results are multiplied to the lowest common pts multiplier to create a fair comparison.</span>",
 	"results-normalized-details": "When normalized, all units are multiplied to the lowest common multiplier of their pts costs in order to facilitate a fair comparison. (Note this can often lead to very high normalized points that would never exist in the real world. If you wish to disable points normalization, simply don't input points values for all the units.)", 
-	"buff-add": "Add {[name]} Field",
+	"buff-add": "Add {[name]} Buff",
 	"buff-editor-field-hit": "Triggers By Hit Roll",
 	"buff-editor-field-wound": "Trigger By Wound Roll",
-	"buff-editor-title": "Buff Editor",
+	"buff-editor-title": "Attack Options",
 	"buff-reroll-name": "Reroll",
 	"buff-reroll-description": "Note: The simulator only uses the <strong>first</strong> re-roll effect that it finds for a given roll level",
 	"buff-reroll-dice": "Dice Results To Reroll",
@@ -123,5 +123,23 @@
 	"attack-buff-summary-trigger-rend": "<em>{[output]}</em> rend triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.",
 	"attack-buff-summary-trigger-disease": "<em>{[output]}</em> disease points triggering on <em>{[trigger]}</em> to <em>{[type]}</em> that become mortal wounds on a disease roll of <em>{[virulence]}</em>.",
 	"attack-buff-summary-trigger-wound": "Autowound triggering on <em>{[trigger]}</em> to hit.", 
-	"attack-buff-summary-trigger-damage": "<em>{[output]}</em> damage triggering on <em>{[trigger]}</em> to <em>{[type]}</em>." 
+	"attack-buff-summary-trigger-damage": "<em>{[output]}</em> damage triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.",
+
+	"enemy-unit-wounds": "Enemy Wounds:",
+	"enemy-unit-noSplash-mode": "40k Mode",
+	"enemy-unit-noSplash-mode-title": "40k mode makes it so that all attacks default to preventing overkill damage from splashing to the next target. Note: you can still turn it off on an attack by attack basis if needed.",
+
+	"kills-graph-title": "Enemy Models Slain",
+	"kills-graph-sub-title": "The average number of enemies slain based on the enemy wounds.",
+	"kills-graph-detail": "Slain enemies are determined by comparing damage done to the total wound count to determine how many models are killed. If splash is disabled the kill count accounts for no roll over of excess damage. Mortal wound contribution is added after all normal damage is accounted for to emulate fast dice rolling.",
+
+	"kills-comparison-title": "Slain Enemies Comparison",
+	"kills-comparison-sub-title": "A visual representation of how different save levels impact average slain enemies.",
+
+	"kill-odds-table-title": "Slain Enemies Odds",
+	"kill-odds-table-sub-title": "The odds of achieving a certain threshold of slain enemies or more.",
+
+	"options-disable-splash": "Prevent overkill damage from splashing to the next target:",
+
+	"options-summary-noSplash": "Prevent overkill damage from splashing."
 }

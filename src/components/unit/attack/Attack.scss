@@ -53,7 +53,7 @@ attack {
 	}
 
 	&.inactive {
-		buff-field {
+		buff-field, buff-summary {
 			display: none;
 		}
 	}
