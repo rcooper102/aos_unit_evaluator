@@ -70,6 +70,9 @@ export class ResultsHeader extends Base {
 		if(data.buffs) {
 			buffs = new AttackBuffSummary();
 			buffs.data = data.buffs;
+			if(data.options) {
+				buffs.options = data.options;
+			}
 		}
 
 		return `<attack>
