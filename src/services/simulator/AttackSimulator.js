@@ -47,7 +47,7 @@ export class AttackSimulator {
 				if(wound.result) {
 					const rend = hit.rendOverride || wound.rendOverride || +(this.data.rend);
 					const damage = hit.damageOverride || wound.damageOverride || this.magnitudeRoll(this.data.damage);
-					if(this.comparisonRoll(this.save + rend, AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
+					if(this.comparisonRoll(this.determineSave(this.save, rend), AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
 						this._damage += damage * this.normalizedRatio;
 						if(this.targetUnit && this.noSplash) {
 							for(let i = 0; i < this.normalizedRatio; i++) {
@@ -71,6 +71,14 @@ export class AttackSimulator {
 				this._kills = this._damage / this.targetUnit.wounds;
 			}	
 		}
+	}
+
+	determineSave(save, rend) {
+		let ret = save + rend;
+		if(this.targetUnit && this.targetUnit.invulnerable && ret > this.targetUnit.invulnerable) {
+			ret = this.targetUnit.invulnerable;
+		}
+		return ret;
 	}
 
 	resetWounds(remainingWounds){
