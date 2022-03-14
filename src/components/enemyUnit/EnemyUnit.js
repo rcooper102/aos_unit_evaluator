@@ -20,7 +20,7 @@ export class EnemyUnit extends Base {
 		this.header.text = Locale.gen("enemy-unit-wounds");
 		this.addChild(this.header);
 
-		this.wounds = new NumberField("", NumberField.TYPES.INTEGER, 1);
+		this.wounds = new NumberField("", NumberField.TYPES.INTEGER, 2);
 		this.wounds.addListener(Event.CHANGE, this.onChange, this);
 		this.addChild(this.wounds);
 		this.wounds.value = EnemyUnit.DEFAULT_WOUNDS;
