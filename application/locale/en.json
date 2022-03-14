@@ -126,6 +126,11 @@
 	"attack-buff-summary-trigger-damage": "<em>{[output]}</em> damage triggering on <em>{[trigger]}</em> to <em>{[type]}</em>.",
 
 	"enemy-unit-wounds": "Enemy Wounds:",
+	"enemy-unit-wounds-title": "How many wounds the enemy you are attacking has.",
+	"enemy-unit-invulnerable": "Invulnerable Save:",
+	"enemy-unit-invulnerable-title": "An invulnerable save is purely a 40k concept. This field is effectively just places a limit on how much rend can impact a save. (aka a 5+ invuln means the save can never be reduced below a 5+ regardless of rend)",
+	"enemy-unit-shrug": "Ward / Feel No Pain:",
+	"enemy-unit-shrug-title": "Wards function as a save after the save that applies on a point per point basis and also can prevent mortal wounds.",
 	"enemy-unit-noSplash-mode": "40k Mode",
 	"enemy-unit-noSplash-mode-title": "40k mode makes it so that all attacks default to preventing overkill damage from splashing to the next target. Note: you can still turn it off on an attack by attack basis if needed.",
 

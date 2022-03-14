@@ -635,6 +635,96 @@ describe('AttackSimulator', function () {
         });
         expectWithinPercentage(sim.kills, sim.damage / 3, ERROR_MARGIN);     
     });
+    it('Properly calculate based on an invulnerable save.', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 2, 
+            damage: '2',
+            options: { noSplash: false },
+        }, 5,{
+            hit: [] ,
+            wound: [],          
+        },0,1,
+        {
+            wounds: 3,
+            invulnerable: 5,
+        });
+        expectWithinPercentage(sim.kills, ATTACKS_COUNT * 0.5 * 0.5 * (2/3) * 2 / 3, ERROR_MARGIN);     
+    }); 
+    it('Properly calculate based on an invulnerable save that is not strong enough to matter.', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 2, 
+            damage: '2',
+            options: { noSplash: false },
+        }, 2,{
+            hit: [] ,
+            wound: [],          
+        },0,1,
+        {
+            wounds: 3,
+            invulnerable: 5,
+        });
+        expectWithinPercentage(sim.kills, ATTACKS_COUNT * 0.5 * 0.5 * 0.5 * 2 / 3, ERROR_MARGIN);     
+    });
+    it('Properly calculate kills based on a damage shrug.', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 2, 
+            damage: '2',
+            options: { noSplash: false },
+        }, 5,{
+            hit: [] ,
+            wound: [],          
+        },0,1,
+        {
+            wounds: 3,
+            shrug: 5,
+        });
+        expectWithinPercentage(sim.kills, ATTACKS_COUNT * 0.5 * 0.5 * (2/3) * 2 / 3, ERROR_MARGIN);     
+    });
+    it('Properly calculate kills based on a damage shrug with mortals.', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 1, 
+            wound: 4, 
+            rend: 2, 
+            damage: '0',
+            options: { noSplash: false },
+        }, 5,{
+            hit: [] ,
+            wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
+        },0,1,
+        {
+            wounds: 3,
+            shrug: 5,
+        });
+        expectWithinPercentage(sim.kills, ATTACKS_COUNT * (1/3) * (2/3) / 3, ERROR_MARGIN);     
+    });
+    it('Properly calculate damage based on a damage shrug with mortals.', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 1, 
+            wound: 4, 
+            rend: 2, 
+            damage: '2',
+            options: { noSplash: false },
+        }, 5,{
+            hit: [] ,
+            wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
+        },0,1,
+        {
+            wounds: 3,
+            shrug: 5,
+        });
+        expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * (2/3) * 2 + ATTACKS_COUNT * (1/3) * (2/3), ERROR_MARGIN);     
+    });  
 });
 
 

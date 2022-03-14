@@ -36,6 +36,7 @@ export class AttackSimulator {
 			this.resetWounds(this.remainingWounds);
 		}
 		for(i = 0; i < attacks; i++) {
+			this.currentMortalWounds = 0;
 			const hit = this.comparisonRoll(this.data.hit, AttackSimulator.ROLL_TYPES.POSITIVE, this.buffs.hit, canSpawnAttacks, autoHit);
 			if(hit.result) {
 				let wound;
@@ -46,8 +47,9 @@ export class AttackSimulator {
 				}
 				if(wound.result) {
 					const rend = hit.rendOverride || wound.rendOverride || +(this.data.rend);
-					const damage = hit.damageOverride || wound.damageOverride || this.magnitudeRoll(this.data.damage);
-					if(this.comparisonRoll(this.save + rend, AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
+					let damage = hit.damageOverride || wound.damageOverride || this.magnitudeRoll(this.data.damage);
+					if(this.comparisonRoll(this.determineSave(this.save, rend), AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
+						damage = this.shrugDamage(damage);
 						this._damage += damage * this.normalizedRatio;
 						if(this.targetUnit && this.noSplash) {
 							for(let i = 0; i < this.normalizedRatio; i++) {
@@ -61,6 +63,9 @@ export class AttackSimulator {
 					}
 				}
 			}
+			this.currentMortalWounds = this.shrugDamage(this.currentMortalWounds);
+			this._damage += this.currentMortalWounds;
+			this._mortalWounds += this.currentMortalWounds;
 		}
 
 		if(this.targetUnit) {
@@ -71,6 +76,27 @@ export class AttackSimulator {
 				this._kills = this._damage / this.targetUnit.wounds;
 			}	
 		}
+	}
+
+	shrugDamage(damage) {
+		if(this.targetUnit && this.targetUnit.shrug) {
+			let unshruggedDamage = 0;
+			for(let i = 0; i < damage; i++) {
+				if(this.comparisonRoll(this.targetUnit.shrug, AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
+					unshruggedDamage ++;
+				}
+			}
+			return unshruggedDamage;
+		}
+		return damage;
+	}
+
+	determineSave(save, rend) {
+		let ret = save + rend;
+		if(this.targetUnit && this.targetUnit.invulnerable && ret > this.targetUnit.invulnerable) {
+			ret = this.targetUnit.invulnerable;
+		}
+		return ret;
 	}
 
 	resetWounds(remainingWounds){
@@ -116,9 +142,7 @@ export class AttackSimulator {
 				switch(buff.type) {
 					case Buff.TYPES.TRIGGER_MORTAL:
 						if(buff.data.trigger.indexOf(roll) > -1) {
-							const wounds = this.magnitudeRoll(buff.data.output);
-							this._mortalWounds += wounds * this.normalizedRatio;
-							this._damage += wounds * this.normalizedRatio;
+							this.currentMortalWounds += this.magnitudeRoll(buff.data.output) * this.normalizedRatio;
 							if(buff.data.stop) {
 								result = false;
 							}
@@ -128,9 +152,7 @@ export class AttackSimulator {
 						if(buff.data.trigger.indexOf(roll) > -1) {
 							this.diseasePoints ++;
 							if(buff.data.virulence.indexOf(Utils.rollDice()) > -1 && this.diseasePoints <= (AttackSimulator.MAX_DISEASE*this.normalizedRatio)) {
-								const wounds = this.magnitudeRoll(buff.data.output);
-								this._mortalWounds += wounds  * this.normalizedRatio;
-								this._damage += wounds  * this.normalizedRatio;
+								this.currentMortalWounds += this.magnitudeRoll(buff.data.output)  * this.normalizedRatio;
 							}
 						}
 					break;
