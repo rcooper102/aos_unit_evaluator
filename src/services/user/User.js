@@ -18,8 +18,7 @@ export class User extends EventDispatcher {
 	}
 
 	static get userLevel() {
-		return 1; //Hardcode all access.
-		//return localStorage['AOS_SIM_KEY'] === config.key ? 1 : 0;
+		return localStorage['AOS_SIM_KEY'] === config.key ? 1 : 0;
 	}
 
 	static hasFeature(feature) {

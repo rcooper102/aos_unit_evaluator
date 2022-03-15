@@ -68,6 +68,13 @@ title {
 		width: 85px;
 		cursor:pointer;
 
+		strong {
+			display: block;
+			font-size:12px;
+			font-weight: normal;
+			opacity: 0.8;
+		}
+
 		&.all {
 			background: #EEE;
 			color: #333;
