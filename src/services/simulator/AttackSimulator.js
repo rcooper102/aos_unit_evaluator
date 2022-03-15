@@ -50,14 +50,11 @@ export class AttackSimulator {
 					let damage = hit.damageOverride || wound.damageOverride || this.magnitudeRoll(this.data.damage);
 					if(this.comparisonRoll(this.determineSave(this.save, rend), AttackSimulator.ROLL_TYPES.NEGATIVE).result) {
 						damage = this.shrugDamage(damage);
-						this._damage += damage * this.normalizedRatio;
+						this._damage += damage;
 						if(this.targetUnit && this.noSplash) {
 							for(let i = 0; i < this.normalizedRatio; i++) {
 								this.currentWounds -= damage;
-								if(this.currentWounds <= 0) {
-									this._kills ++;
-									this.resetWounds();
-								}
+								this.checkWounds();
 							}
 						}
 					}
@@ -70,12 +67,32 @@ export class AttackSimulator {
 
 		if(this.targetUnit) {
 			if(this.noSplash) {
-				this._kills += ((this.targetUnit.wounds - this.currentWounds) / this.targetUnit.wounds);
-				this._kills += this._mortalWounds / this.targetUnit.wounds;
+				for(let i = 0; i < this._mortalWounds; i++) {
+					this.currentWounds --;
+					this.checkWounds();
+				}
 			} else {
-				this._kills = this._damage / this.targetUnit.wounds;
+				this._kills = this.reconcileDamage(this._damage);
 			}	
 		}
+
+		//Whole kills + partial kills expressed as decimal.
+		if(this.targetUnit) {
+			this.killsTotal = this._kills + (this.targetUnit.wounds - this.currentWounds) / this.targetUnit.wounds
+		}
+	}
+
+	checkWounds() {
+		if(this.currentWounds <= 0) {
+			this._kills ++;
+			this.resetWounds();
+		}
+	}
+
+	reconcileDamage(damage) {
+		let kills = Math.floor(damage / this.targetUnit.wounds);
+		this.currentWounds = this.targetUnit.wounds - (damage - (kills * this.targetUnit.wounds));
+		return kills;
 	}
 
 	shrugDamage(damage) {

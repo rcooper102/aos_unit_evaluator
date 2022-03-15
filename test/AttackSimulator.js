@@ -413,7 +413,7 @@ describe('AttackSimulator', function () {
         {
             wounds: 3
         });
-        expectWithinPercentage(sim.kills, 2.66, 0.01);     
+        expectWithinPercentage(sim.killsTotal, 2.66, 0.01);     
     });  
     it('Properly determine kills for 2 damage attacks on a 3 wound target that does mortals on 6s to wound', function () {
         sim = new AttackSimulator({
@@ -430,7 +430,7 @@ describe('AttackSimulator', function () {
         {
             wounds: 3
         });
-        expectWithinPercentage(sim.kills, 2.66 + 5/3, 0.01);     
+        expectWithinPercentage(sim.killsTotal, 2.66 + 5/3, 0.01);     
     });
     it('Properly determine kills when remaining wounds is set', function () {
         sim = new AttackSimulator({
