@@ -31,7 +31,7 @@ export class EnemyUnit extends Base {
 			{
 				name: EnemyUnit.FIELDS.SHRUG,
 				label: Locale.gen("enemy-unit-shrug"),
-				title: Locale.gen("enemy-unit-title"),
+				title: Locale.gen("enemy-unit-shrug-title"),
 				size: 1,
 			}
 		];
