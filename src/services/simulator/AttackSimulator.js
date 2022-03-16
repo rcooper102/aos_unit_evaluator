@@ -67,12 +67,9 @@ export class AttackSimulator {
 
 		if(this.targetUnit) {
 			if(this.noSplash) {
-				for(let i = 0; i < this._mortalWounds; i++) {
-					this.currentWounds --;
-					this.checkWounds();
-				}
+				this.reconcileDamage(this._mortalWounds);
 			} else {
-				this._kills = this.reconcileDamage(this._damage);
+				this.reconcileDamage(this._damage);
 			}	
 		}
 
@@ -90,9 +87,10 @@ export class AttackSimulator {
 	}
 
 	reconcileDamage(damage) {
-		let kills = Math.floor(damage / this.targetUnit.wounds);
-		this.currentWounds = this.targetUnit.wounds - (damage - (kills * this.targetUnit.wounds));
-		return kills;
+		for(let i = 0; i < damage; i++) {
+			this.currentWounds --;
+			this.checkWounds();
+		}
 	}
 
 	shrugDamage(damage) {
