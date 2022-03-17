@@ -37,7 +37,7 @@ export class NumberField extends Base {
 	}
 
 	get value() {
-		return this.input.value || this.input.value === 0 ? Number(this.input.value) : "";
+		return this.input.value;
 	}
 
 	set value(target) {
