@@ -126,9 +126,18 @@ export class Unit extends Base {
 		this.dispatch(new Event(Event.CHANGE, this));
 	}
 
+	set id(target) {
+		this._id = target;
+	}
+
+	get id() {
+		return this._id;
+	}
+
 	get value() {
 		return {
 			valid: this.valid,
+			id: this._id,
 			name: this.unitName.value,
 			points: this.unitPoints.value !== "" ? this.unitPoints.value : null,
 			color: this.color,

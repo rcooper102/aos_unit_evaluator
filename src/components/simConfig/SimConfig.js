@@ -12,6 +12,7 @@ export class SimConfig extends Base {
 	constructor() {
 		super();
 		this.make("sim-config");
+		this.key = 0;
 		this.build();
 		window.sim = this;
 	}
@@ -109,13 +110,14 @@ export class SimConfig extends Base {
 	}
 
 	addUnit(value = null) {
+		this.key ++;
 		const unit = new Unit();
+		unit.id = this.key;
 		unit.enemyUnit = this.enemyUnit;
 		this.addChild(unit);
 		this.units.push(unit);
 		unit.value = value;
-
-
+		
 		unit.addListener(Event.CHANGE, this.onUnitChange, this);
 		unit.addListener(Event.REMOVE, this.onUnitDelete, this);
 		unit.addListener("CLONE", this.onUnitClone, this);

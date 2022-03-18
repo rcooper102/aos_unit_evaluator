@@ -21,7 +21,7 @@ export class Results extends Base {
 		super();
 		this.make("results");
 		this._save = null;
-		this.data = data;
+		this.data = this.sortResults(data);
 
 		const count = Utils.bigNumberFormat(data[Object.keys(data)[0]][0].results.length);
 		const rolls = Utils.commaNumberFormat(Utils.rollCount);
@@ -66,6 +66,15 @@ export class Results extends Base {
 				this.addChild(item);
 			}
 		});
+	}
+
+	sortResults(data) {
+		Object.keys(data).forEach((key) => {
+			data[key].sort((a,b) => {
+				return a.data.id > b.data.id ? 1 : -1;
+			});
+		});
+		return data;
 	}
 
 	set save(target) {
