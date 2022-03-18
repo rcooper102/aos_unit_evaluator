@@ -49,7 +49,7 @@ export class Results extends Base {
 			new WhiffGraph(),
 			new PotentialGraph(),
 			new MortalWoundsGraph(),
-			new DependabilityGraph(),
+			// new DependabilityGraph(),
 			new SaveComparison(this.data),
 			new SaveComparisonTable(this.data),
 			new SaveComparison(this.data, true),
