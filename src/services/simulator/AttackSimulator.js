@@ -28,6 +28,22 @@ export class AttackSimulator {
 		this.diseasePoints = diseasePoints;
 		this.normalizedRatio = normalizedRatio;
 		this.makeAttacks(attacks);
+		this.determineKills();
+	}
+
+	determineKills() {
+		if(this.targetUnit) {
+			if(this.noSplash) {
+				this.reconcileDamage(this._mortalWounds);
+			} else {
+				this.reconcileDamage(this._damage);
+			}	
+		}
+
+		//Whole kills + partial kills expressed as decimal.
+		if(this.targetUnit) {
+			this.killsTotal = this._kills + (this.targetUnit.wounds - this.currentWounds) / this.targetUnit.wounds
+		}
 	}
 
 	makeAttacks(attacks, canSpawnAttacks = true, autoHit = false, autoWound = false) {
@@ -63,19 +79,6 @@ export class AttackSimulator {
 			this.currentMortalWounds = this.shrugDamage(this.currentMortalWounds);
 			this._damage += this.currentMortalWounds;
 			this._mortalWounds += this.currentMortalWounds;
-		}
-
-		if(this.targetUnit) {
-			if(this.noSplash) {
-				this.reconcileDamage(this._mortalWounds);
-			} else {
-				this.reconcileDamage(this._damage);
-			}	
-		}
-
-		//Whole kills + partial kills expressed as decimal.
-		if(this.targetUnit) {
-			this.killsTotal = this._kills + (this.targetUnit.wounds - this.currentWounds) / this.targetUnit.wounds
 		}
 	}
 
