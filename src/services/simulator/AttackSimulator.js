@@ -94,7 +94,7 @@ export class AttackSimulator {
 	}
 
 	shrugDamage(damage) {
-		if(this.targetUnit && this.targetUnit.shrug) {
+		if(this.targetUnit && this.targetUnit.shrug && this.data.options && !this.data.options.ignoreShrug) {
 			let unshruggedDamage = 0;
 			for(let i = 0; i < damage; i++) {
 				if(this.comparisonRoll(this.targetUnit.shrug, AttackSimulator.ROLL_TYPES.NEGATIVE).result) {

@@ -725,6 +725,23 @@ describe('AttackSimulator', function () {
         });
         expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * (2/3) * 2 + ATTACKS_COUNT * (1/3) * (2/3), ERROR_MARGIN);     
     });
+    it('Properly ignore invulnerable saves', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 2, 
+            damage: '2',
+            options: { ignoreShrug: true },
+        }, 7,{
+            hit: [] ,
+            wound: [],          
+        },0,
+        {
+            shrug: 4,
+        });
+        expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 0.5 * 2, ERROR_MARGIN);     
+    });
 });
 
 

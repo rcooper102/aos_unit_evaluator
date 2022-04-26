@@ -31,6 +31,7 @@ export class BuffEditor extends ModalWindow {
 	static get OPTIONS_NAMES() {
 		return {
 			DISABLE_SPLASH: "noSplash",
+			IGNORE_SHRUG: "ignoreShrug",
 		}
 	}
 
@@ -40,6 +41,12 @@ export class BuffEditor extends ModalWindow {
 				label: Locale.gen("options-disable-splash"),
 				type: BuffEditor.FIELD_TYPES.TOGGLE_FIELD,
 				name: BuffEditor.OPTIONS_NAMES.DISABLE_SPLASH,
+				default: false,
+			},
+			{
+				label: Locale.gen("options-ignore-shrug"),
+				type: BuffEditor.FIELD_TYPES.TOGGLE_FIELD,
+				name: BuffEditor.OPTIONS_NAMES.IGNORE_SHRUG,
 				default: false,
 			}
 		]
