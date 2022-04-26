@@ -742,6 +742,24 @@ describe('AttackSimulator', function () {
         });
         expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 0.5 * 2, ERROR_MARGIN);     
     });
+    it('Properly ignore invulnerable saves involving mortals.', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 1, 
+            wound: 4, 
+            rend: 2, 
+            damage: '2',
+            options: { noSplash: false, ignoreShrug: true },
+        }, 5,{
+            hit: [] ,
+            wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
+        },0,
+        {
+            wounds: 3,
+            shrug: 5,
+        });
+        expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 2 + ATTACKS_COUNT * (1/3), ERROR_MARGIN);     
+    });
 });
 
 
