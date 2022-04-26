@@ -14,7 +14,7 @@ export class AttackSimulator {
 		return 7;
 	}
 
-	constructor(data, save, buffs = { hit: [], wound: [] }, diseasePoints = 0, normalizedRatio = 1, targetUnit = null, remainingWounds = 0) {
+	constructor(data, save, buffs = { hit: [], wound: [] }, diseasePoints = 0, targetUnit = null, remainingWounds = 0) {
 		this.data = data;
 		this.save = save;
 		this.buffs = buffs;
@@ -26,7 +26,6 @@ export class AttackSimulator {
 		this.remainingWounds = remainingWounds;
 		const attacks = this.magnitudeRoll(this.data.number);
 		this.diseasePoints = diseasePoints;
-		this.normalizedRatio = normalizedRatio;
 		this.makeAttacks(attacks);
 		this.determineKills();
 	}
@@ -68,10 +67,8 @@ export class AttackSimulator {
 						damage = this.shrugDamage(damage);
 						this._damage += damage;
 						if(this.targetUnit && this.noSplash) {
-							for(let i = 0; i < this.normalizedRatio; i++) {
-								this.currentWounds -= damage;
-								this.checkWounds();
-							}
+							this.currentWounds -= damage;
+							this.checkWounds();
 						}
 					}
 				}
@@ -160,7 +157,7 @@ export class AttackSimulator {
 				switch(buff.type) {
 					case Buff.TYPES.TRIGGER_MORTAL:
 						if(buff.data.trigger.indexOf(roll) > -1) {
-							this.currentMortalWounds += this.magnitudeRoll(buff.data.output) * this.normalizedRatio;
+							this.currentMortalWounds += this.magnitudeRoll(buff.data.output);
 							if(buff.data.stop) {
 								result = false;
 							}
@@ -169,8 +166,8 @@ export class AttackSimulator {
 					case Buff.TYPES.TRIGGER_DISEASE:
 						if(buff.data.trigger.indexOf(roll) > -1) {
 							this.diseasePoints ++;
-							if(buff.data.virulence.indexOf(Utils.rollDice()) > -1 && this.diseasePoints <= (AttackSimulator.MAX_DISEASE*this.normalizedRatio)) {
-								this.currentMortalWounds += this.magnitudeRoll(buff.data.output)  * this.normalizedRatio;
+							if(buff.data.virulence.indexOf(Utils.rollDice()) > -1 && this.diseasePoints <= (AttackSimulator.MAX_DISEASE)) {
+								this.currentMortalWounds += this.magnitudeRoll(buff.data.output);
 							}
 						}
 					break;

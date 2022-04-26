@@ -9,15 +9,16 @@ export class UnitSimulator extends EventDispatcher {
 		this.results = [];
 		const thread = new Thread();
 		this.highest = 0;
+		this.normalizedRatio = this.data['normalizedRatio'] || 1;
 		thread.createFor((i) => {
 			let total = 0;
 			let mortalWounds = 0;
 			let list = [];
 			let kills = 0;
-			this.diseasePoints = 0;
 			this.killsLeftOverWounds = 0;
+			this.diseasePoints = 0;
 			data.attacks.forEach((attack) => {
-				const attackSimulator = new AttackSimulator(attack, save, this.transformBuffs(attack.buffs), this.diseasePoints || 0, this.data['normalizedRatio'] || 1, enemyUnit, this.killsLeftOverWounds);
+				const attackSimulator = new AttackSimulator(attack, save, this.transformBuffs(attack.buffs), this.diseasePoints || 0, enemyUnit, this.killsLeftOverWounds);
 				total += attackSimulator.damage;
 				kills += attackSimulator.kills;
 				this.killsLeftOverWounds = attackSimulator.currentWounds;
@@ -29,14 +30,14 @@ export class UnitSimulator extends EventDispatcher {
 
 			kills += (enemyUnit.wounds - this.killsLeftOverWounds) / enemyUnit.wounds;
 
-			if(total > this.highest) {
-				this.highest = total;
+			if(total * this.normalizedRatio > this.highest) {
+				this.highest = total * this.normalizedRatio;
 			}
 			this.results.push({
-				total,
-				list,
-				kills,
-				mortalWounds,
+				total: total * this.normalizedRatio,
+				list: list.map((item) => { return item * this.normalizedRatio; }),
+				kills: kills * this.normalizedRatio,
+				mortalWounds: mortalWounds * this.normalizedRatio,
 			});
 			this.dispatch(new Event(Event.PROGRESS, { unit: id, progress: i/iterations }))
 		}, iterations);

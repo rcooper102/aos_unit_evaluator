@@ -409,7 +409,7 @@ describe('AttackSimulator', function () {
         }, 7,{
             hit: [] ,
             wound: [],          
-        },0,1,
+        },0,
         {
             wounds: 3
         });
@@ -426,7 +426,7 @@ describe('AttackSimulator', function () {
         }, 7,{
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [1,2,3,4,5,6], output: '1', stop: false }) ],          
-        },0,1,
+        },0,
         {
             wounds: 3
         });
@@ -443,7 +443,7 @@ describe('AttackSimulator', function () {
         }, 7,{
             hit: [] ,
             wound: [],          
-        },0,1,
+        },0,
         {
             wounds: 3
         }, 1);
@@ -460,7 +460,7 @@ describe('AttackSimulator', function () {
         }, 7,{
             hit: [] ,
             wound: [],          
-        },0,1,
+        },0,
         {
             wounds: 3
         });
@@ -477,7 +477,7 @@ describe('AttackSimulator', function () {
         }, 7,{
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
-        },0,1,
+        },0,
         {
             wounds: 3
         });
@@ -494,7 +494,7 @@ describe('AttackSimulator', function () {
         }, 7,{
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
-        },0,1,
+        },0,
         {
             wounds: 3
         });
@@ -511,7 +511,7 @@ describe('AttackSimulator', function () {
         }, 7,{
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
-        },0,1,
+        },0,
         {
             wounds: 4
         });
@@ -528,7 +528,7 @@ describe('AttackSimulator', function () {
         }, 7,{
             hit: [] ,
             wound: [],          
-        },0,1,
+        },0,
         {
             wounds: 4
         });
@@ -544,7 +544,7 @@ describe('AttackSimulator', function () {
         }, 7,{
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [1,2,3,4,5,6], output: '1', stop: false }) ],          
-        },0,1,
+        },0,
         {
             wounds: 3
         });
@@ -561,7 +561,7 @@ describe('AttackSimulator', function () {
         }, 7,{
             hit: [] ,
             wound: [],          
-        },0,1,
+        },0,
         {
             wounds: 3
         });
@@ -578,7 +578,7 @@ describe('AttackSimulator', function () {
         }, 4,{
             hit: [] ,
             wound: [],          
-        },0,1,
+        },0,
         {
             wounds: 3
         });
@@ -595,7 +595,7 @@ describe('AttackSimulator', function () {
         }, 4,{
             hit: [] ,
             wound: [],          
-        },0,1,
+        },0,
         {
             wounds: 3
         });
@@ -612,7 +612,7 @@ describe('AttackSimulator', function () {
         }, 4,{
             hit: [] ,
             wound: [],          
-        },0,1,
+        },0,
         {
             wounds: 3
         });
@@ -629,7 +629,7 @@ describe('AttackSimulator', function () {
         }, 4,{
             hit: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
-        },0,1,
+        },0,
         {
             wounds: 3
         });
@@ -646,7 +646,7 @@ describe('AttackSimulator', function () {
         }, 5,{
             hit: [] ,
             wound: [],          
-        },0,1,
+        },0,
         {
             wounds: 3,
             invulnerable: 5,
@@ -664,7 +664,7 @@ describe('AttackSimulator', function () {
         }, 2,{
             hit: [] ,
             wound: [],          
-        },0,1,
+        },0,
         {
             wounds: 3,
             invulnerable: 5,
@@ -682,7 +682,7 @@ describe('AttackSimulator', function () {
         }, 5,{
             hit: [] ,
             wound: [],          
-        },0,1,
+        },0,
         {
             wounds: 3,
             shrug: 5,
@@ -700,7 +700,7 @@ describe('AttackSimulator', function () {
         }, 5,{
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
-        },0,1,
+        },0,
         {
             wounds: 3,
             shrug: 5,
@@ -718,13 +718,13 @@ describe('AttackSimulator', function () {
         }, 5,{
             hit: [] ,
             wound: [ new Buff(Buff.TYPES.TRIGGER_MORTAL, { trigger: [5,6], output: '1', stop: false }) ],          
-        },0,1,
+        },0,
         {
             wounds: 3,
             shrug: 5,
         });
         expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * (2/3) * 2 + ATTACKS_COUNT * (1/3) * (2/3), ERROR_MARGIN);     
-    });  
+    });
 });
 
 
