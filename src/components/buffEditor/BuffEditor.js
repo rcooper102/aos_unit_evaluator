@@ -32,6 +32,7 @@ export class BuffEditor extends ModalWindow {
 		return {
 			DISABLE_SPLASH: "noSplash",
 			IGNORE_SHRUG: "ignoreShrug",
+			IGNORE_INVULN: "ignoreInvuln",
 		}
 	}
 
@@ -47,6 +48,12 @@ export class BuffEditor extends ModalWindow {
 				label: Locale.gen("options-ignore-shrug"),
 				type: BuffEditor.FIELD_TYPES.TOGGLE_FIELD,
 				name: BuffEditor.OPTIONS_NAMES.IGNORE_SHRUG,
+				default: false,
+			},
+			{
+				label: Locale.gen("options-ignore-invuln"),
+				type: BuffEditor.FIELD_TYPES.TOGGLE_FIELD,
+				name: BuffEditor.OPTIONS_NAMES.IGNORE_INVULN,
 				default: false,
 			}
 		]

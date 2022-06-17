@@ -108,7 +108,7 @@ export class AttackSimulator {
 
 	determineSave(save, rend) {
 		let ret = save + rend;
-		if(this.targetUnit && this.targetUnit.invulnerable && ret > this.targetUnit.invulnerable) {
+		if(this.data.options && !this.data.options.ignoreInvuln && this.targetUnit && this.targetUnit.invulnerable && ret > this.targetUnit.invulnerable) {
 			ret = this.targetUnit.invulnerable;
 		}
 		return ret;

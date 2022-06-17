@@ -725,7 +725,7 @@ describe('AttackSimulator', function () {
         });
         expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * (2/3) * 2 + ATTACKS_COUNT * (1/3) * (2/3), ERROR_MARGIN);     
     });
-    it('Properly ignore invulnerable saves', function () {
+    it('Properly ignore ward saves', function () {
         sim = new AttackSimulator({
             number: ATTACKS_COUNT,
             hit: 4, 
@@ -742,7 +742,7 @@ describe('AttackSimulator', function () {
         });
         expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 0.5 * 2, ERROR_MARGIN);     
     });
-    it('Properly ignore invulnerable saves involving mortals.', function () {
+    it('Properly ignore ward saves involving mortals.', function () {
         sim = new AttackSimulator({
             number: ATTACKS_COUNT,
             hit: 1, 
@@ -759,6 +759,23 @@ describe('AttackSimulator', function () {
             shrug: 5,
         });
         expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 2 + ATTACKS_COUNT * (1/3), ERROR_MARGIN);     
+    });
+    it('Properly ignore invulnerable saves', function () {
+        sim = new AttackSimulator({
+            number: ATTACKS_COUNT,
+            hit: 4, 
+            wound: 4, 
+            rend: 2, 
+            damage: '2',
+            options: { ignoreInvuln: true },
+        }, 7,{
+            hit: [] ,
+            wound: [],          
+        },0,
+        {
+            invulnerable: 4,
+        });
+        expectWithinPercentage(sim.damage, ATTACKS_COUNT * 0.5 * 0.5 * 2, ERROR_MARGIN);     
     });
 });
 

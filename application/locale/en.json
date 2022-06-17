@@ -146,7 +146,9 @@
 
 	"options-disable-splash": "Prevent overkill damage from splashing to the next target:",
 
-	"options-ignore-shrug": "Ignore ward/invulnerable saves.",
+	"options-ignore-shrug": "Ignore ward/fnp.",
+	"options-ignore-invuln": "Ignore invulnerable saves.",
 	"options-summary-noSplash": "Prevent overkill damage from splashing.",
-	"options-summary-ignoreShrug": "Ignores invuln/ward saves."
+	"options-summary-ignoreShrug": "Ignores ward/fnp.",
+	"options-summary-ignoreInvuln": "Ignores invulnerable saves."
 }
