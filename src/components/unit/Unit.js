@@ -80,12 +80,12 @@ export class Unit extends Base {
 	}
 
 	onEnemyUnitChange(e) {
-		let attack = this.attacks[this.attacks.length - 1]
-
-		attack.value = {
-			...attack.value,
-			options: { noSplash: this.enemyUnit.noSplash.value },
-		}
+		this.attacks.forEach((attack) => {
+			attack.value = {
+				...attack.value,
+				options: { ...attack.value.options, noSplash: this.enemyUnit.noSplash.value },
+			}
+		});
 	}
 
 	add(value) {
